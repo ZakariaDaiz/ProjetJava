@@ -3,7 +3,8 @@ package modele.ObjetClasses;
 public class ObjetFuturisteFactory implements ObjectFactory {
 
     @Override
-   switch (type) {
+    public Objet createObject(String type) {
+        switch (type) {
             case "epee":
                 return new Equipement("epeeLaser", "Une epee laser", "main", "arme", 10);
             case "hache":
@@ -13,18 +14,15 @@ public class ObjetFuturisteFactory implements ObjectFactory {
             case "baguette":
                 return new Equipement("baguette", "Une baguette futuriste", "main", "arme", 10);
 
-            
+
             case "casque":
                 return new Equipement("casque", "Une casque futuriste", "tete", "armure", 5);
             case "armure":
                 return new Equipement("armure", "Une armure futuriste", "corps", "armure", 15);
             case "bottes":
                 return new Equipement("bottes", "Une bottes futuriste", "pieds", "armure", 10);
-            case "guetres":
-                return new Equipement("guetres", "Une guetres futuriste", "bras", "armure", 10);
-
-            case "potion":
-                return new Potion("potion", "Une potion futuriste", 10);
+            case "jambieres":
+                return new Equipement("jambieres", "Une jambiere futuriste", "jambes", "armure", 10);
             case "potionForce":
                 return new PotionForce("potionForce", "Une potion de force futuriste", 10);
             case "potionDextere":
@@ -41,5 +39,6 @@ public class ObjetFuturisteFactory implements ObjectFactory {
             default:
                 throw new IllegalArgumentException("Type d'objet invalide: " + type);
         }
+    }
 }
 
