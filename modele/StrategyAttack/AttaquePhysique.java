@@ -6,7 +6,15 @@ import java.util.Random;
 
 public class AttaquePhysique implements StrategyAttaque {
 
-    private static final Random random = new Random();
+    private final String nomAttaque;
+
+    public AttaquePhysique() {
+        this.nomAttaque = "Coup de hache";
+    }
+
+    public AttaquePhysique(String nomAttaque) {
+        this.nomAttaque = nomAttaque;
+    }
 
     @Override
     public int calculerDegats(Personnage attaquant, Personnage defenseur) {
@@ -20,6 +28,6 @@ public class AttaquePhysique implements StrategyAttaque {
 
     @Override
     public String getNomAttaque() {
-        return "Attaque physique";
+        return nomAttaque;
     }
 }

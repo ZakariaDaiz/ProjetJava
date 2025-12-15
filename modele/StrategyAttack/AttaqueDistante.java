@@ -6,7 +6,16 @@ import java.util.Random;
 
 public class AttaqueDistante implements StrategyAttaque {
 
-    private static final Random random = new Random();
+    private final String nomAttaque;
+
+    public AttaqueDistante() {
+        this.nomAttaque = "Tir a l'arc";
+    }
+
+    public AttaqueDistante(String nomAttaque) {
+        this.nomAttaque = nomAttaque;
+    }
+
 
     @Override
     public int calculerDegats(Personnage attaquant, Personnage defenseur) {
@@ -20,6 +29,6 @@ public class AttaqueDistante implements StrategyAttaque {
 
     @Override
     public String getNomAttaque() {
-        return "Tir a l'arc";
+        return nomAttaque;
     }
 }
