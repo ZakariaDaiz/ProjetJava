@@ -19,6 +19,11 @@ public abstract class Personnage {
     protected Map<String, Equipement> equipementPorte;
 
 
+    public Personnage() {
+        equipementPorte = new HashMap<>();
+    }
+
+
     public Personnage(String nom, int pvMax, int force, int dexterite,
                       int constitution, int intelligence, StrategyAttaque strategy) {
         this.nom = nom;
