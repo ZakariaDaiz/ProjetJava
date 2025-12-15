@@ -29,6 +29,10 @@ public class Joueur extends Personnage {
         }
     }
 
+    public int seDefendre() {
+        return (constitution + dexterite) /4;
+    }
+
     public void equiper(Equipement eq) {
         equipementPorte.put(eq.getTypeSlot(), eq);
         eq.equiper(this);

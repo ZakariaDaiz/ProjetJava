@@ -53,6 +53,10 @@ public abstract class Personnage {
         }
     }
 
+    public int seDefendre() {
+        return constitution/2;
+    }
+
     public boolean estMort() {
         return pv <= 0;
     }
