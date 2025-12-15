@@ -1,5 +1,7 @@
 package modele.ObjetClasses;
 
+import modele.Personnage;
+
 public class Aliment extends Objet {
 
     protected int pvRendu;

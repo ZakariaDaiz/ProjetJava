@@ -24,12 +24,16 @@ public class ObjetMedievalFactory implements ObjectFactory {
                 return new Equipement("bottes", "Une bottes medieval", "pieds", "armure", 10);
             case "jambieres":
                 return new Equipement("jambieres", "Une jambiere medieval", "jambes", "armure", 10);
+            case "guetres":
+                return new Equipement("guetres", "Une guetres medieval", "bras", "armure", 10);
+
             case "potionForce":
                 return new PotionForce("potionForce", "Une potion de force medieval", 10);
             case "potionDextere":
                 return new PotionDextere("potionDextere", "Une potion de dextere medieval", 10);
             case "potionSoin":
                 return new PotionSoin("potionSoin", "Une potion de soin medieval", 10);
+
 
             case "pomme":
                 return new Aliment("pomme", "Une pomme medieval", 10);

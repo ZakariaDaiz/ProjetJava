@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Equipement;
 import modele.Personnage;
 import modele.StrategyAttack.AttaquePhysique;
 
@@ -15,7 +16,8 @@ public class Alien extends PNJ {
         super.dexterite = 20;
         super.constitution = 5;
         super.intelligence = 0;
-        super.strategy = new AttaquePhysique();
+        super.strategy = new AttaquePhysique("Griffure acide");
         super.equipementPorte = new HashMap<>();
+        equipementPorte.put("",)
     }
 }
