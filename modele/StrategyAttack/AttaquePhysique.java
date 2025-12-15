@@ -1,5 +1,7 @@
 package modele.StrategyAttack;
 
+import modele.Personnage;
+
 import java.util.Random;
 
 public class AttaquePhysique implements StrategyAttaque {

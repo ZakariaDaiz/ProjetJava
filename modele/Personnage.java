@@ -1,5 +1,6 @@
 package modele;
 
+import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.StrategyAttaque;
 
 import java.util.HashMap;
