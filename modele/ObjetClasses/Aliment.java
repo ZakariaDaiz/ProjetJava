@@ -1,4 +1,4 @@
 package modele.ObjetClasses;
 
-public class Aliment {
+public class Aliment extends Objet {
 }

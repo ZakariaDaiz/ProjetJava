@@ -1,4 +1,8 @@
 package modele.ObjetClasses;
 
-public class Objet {
+public abstract class Objet {
+    private String nom;
+    private String description;
+
+    public void utiliserObjet(Personnage cible);
 }

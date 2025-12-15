@@ -1,4 +1,4 @@
 package modele.ObjetClasses;
 
-public class PotionSoin {
+public class PotionSoin extends Potion {
 }
