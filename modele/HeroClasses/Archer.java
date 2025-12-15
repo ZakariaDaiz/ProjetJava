@@ -1,6 +1,5 @@
 package modele.HeroClasses;
 
-import modele.Joueur;
 import modele.StrategyAttack.AttaqueDistante;
 
 public class Archer extends Joueur {

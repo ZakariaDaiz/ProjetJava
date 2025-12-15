@@ -1,6 +1,5 @@
 package modele.HeroClasses;
 
-import modele.Joueur;
 import modele.StrategyAttack.AttaqueMagique;
 
 public class Sorcier extends Joueur {
