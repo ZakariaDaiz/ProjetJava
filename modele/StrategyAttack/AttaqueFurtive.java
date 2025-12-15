@@ -1,7 +1,6 @@
 package modele.StrategyAttack;
 
 import java.util.Random;
-import modele.Personnage;
 
 public class AttaqueFurtive implements StrategyAttaque {
 

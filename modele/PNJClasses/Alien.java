@@ -1,4 +1,6 @@
-package modele;
+package modele.PNJClasses;
+
+import modele.Personnage;
 
 public class Alien extends PNJ{
 

@@ -1,4 +1,4 @@
-package modele;
+package modele.PNJClasses;
 
 public interface PNJFactory {
     public PNJ creerPNJAléatoire()

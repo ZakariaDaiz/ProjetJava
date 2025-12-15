@@ -1,4 +1,6 @@
-package modele;
+package modele.PNJClasses;
 
-public abstract class PNJ extends Personnage{
+import modele.Personnage;
+
+public abstract class PNJ extends Personnage {
 }

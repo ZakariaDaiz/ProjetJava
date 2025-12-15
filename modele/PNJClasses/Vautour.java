@@ -1,4 +1,4 @@
-package modele;
+package modele.PNJClasses;
 
 public class Vautour extends PNJ{
 
