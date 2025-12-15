@@ -1,5 +1,6 @@
 package modele.HeroClasses;
 
+import modele.Joueur;
 import modele.StrategyAttack.AttaquePhysique;
 
 public class Barbare extends Joueur {
