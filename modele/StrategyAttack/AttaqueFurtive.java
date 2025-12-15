@@ -19,9 +19,9 @@ public class AttaqueFurtive implements StrategyAttaque {
 
     @Override
     public int calculerDegats(Personnage attaquant, Personnage defenseur) {
-        int bonus = attaquant.getEquipementPorte().get("Arme").getBonusForce();
+        int bonus = attaquant.getEquipementPorte().get("Arme").getBonus();
         int degatsBruts = attaquant.getForce() + bonus;
-        int reduction = defenseur.getConstitution() / 2;
+        int reduction = defenseur.seDefendre();
 
         int degats = degatsBruts - reduction;
         return Math.max(1, degats);
