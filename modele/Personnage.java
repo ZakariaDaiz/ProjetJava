@@ -69,6 +69,8 @@ public abstract class Personnage {
         return pv;
     }
 
+    public int getPvMax() {return pvMax;}
+
     public int getForce() {
         return force;
     }
@@ -88,4 +90,12 @@ public abstract class Personnage {
     public Map<String, Equipement> getEquipementPorte() {
         return equipementPorte;
     }
+
+    public void setPv(int i) { this.pv=i; }
+
+    public void setDexterite(int i) { this.dexterite=i; }
+
+    public void setForce(int i) {this.force=i;}
 }
+}
+

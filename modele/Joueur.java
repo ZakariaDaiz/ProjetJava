@@ -1,6 +1,9 @@
 package modele;
 
 import java.util.*;
+
+import modele.ObjetClasses.Equipement;
+import modele.ObjetClasses.Objet;
 import modele.StrategyAttack.StrategyAttaque;
 
 public class Joueur extends Personnage {

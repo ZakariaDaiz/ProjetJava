@@ -1,5 +1,7 @@
 package modele.ObjetClasses;
 
+import modele.Personnage;
+
 public class PotionForce extends Objet {
 
     private int force;

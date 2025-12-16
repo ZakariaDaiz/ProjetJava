@@ -13,9 +13,17 @@ public class ObjetMedievalFactory implements ObjectFactory {
             case "arc":
                 return new Equipement("arc", "Un arc medieval", "main", "arme", 20);
             case "baguette":
-                return new Equipement("baguette", "Une baguette medieval", "main", "arme", 10);
+                return new Equipement("baguette", "Une baguette magique", "main", "arme", 10);
+            case "dagues":
+                return new Equipement("dagues", "Des dagues acérées", "main", "arme", 10);
+            case "pieges":
+                return new Equipement("pieges", "Une baguette magique", "main", "arme", 10);
+            case "dents":
+                return new Equipement("dents", "Des dents pointues contaminées par la rage", "main", "arme", 10);
+            case "serres":
+                return new Equipement("serres", "Des serres extrêmement coupantes et pointues", "main", "arme", 10);
 
-            
+
             case "casque":
                 return new Equipement("casque", "Une casque medieval", "tete", "armure", 5);
             case "armure":
@@ -24,13 +32,14 @@ public class ObjetMedievalFactory implements ObjectFactory {
                 return new Equipement("bottes", "Une bottes medieval", "pieds", "armure", 10);
             case "jambieres":
                 return new Equipement("jambieres", "Une jambiere medieval", "jambes", "armure", 10);
-            case "guetres":
-                return new Equipement("guetres", "Une guetres medieval", "bras", "armure", 10);
+            case "bouclier":
+                return new Equipement("bouclier", "Un bouclier en métal", "bras", "armure", 10);
+
 
             case "potionForce":
                 return new PotionForce("potionForce", "Une potion de force medieval", 10);
             case "potionDextere":
-                return new PotionDextere("potionDextere", "Une potion de dextere medieval", 10);
+                return new PotionDexterite("potionDexterite", "Une potion de dexterite medieval", 10);
             case "potionSoin":
                 return new PotionSoin("potionSoin", "Une potion de soin medieval", 10);
 

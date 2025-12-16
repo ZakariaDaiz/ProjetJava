@@ -1,5 +1,23 @@
 package modele.PNJClasses;
 
-public class Gobelin extends PNJ{
+import modele.ObjetClasses.Equipement;
+import modele.ObjetClasses.ObjetMedievalFactory;
+import modele.StrategyAttack.AttaqueFurtive;
+import modele.StrategyAttack.AttaquePhysique;
 
+import java.util.HashMap;
+
+public class Gobelin extends PNJ{
+    public Gobelin() {
+        super.nom = "Gobelin";
+        super.pv = 80;
+        super.pvMax = 120;
+        super.force = 15;
+        super.dexterite = 8;
+        super.constitution = 12;
+        super.intelligence = 0;
+        super.strategy = new AttaqueFurtive();
+        super.equipementPorte = new HashMap<>();
+        equipementPorte.put("arme", (Equipement) factoryMedievealeAcreer.createObject("epee"));
+    }
 }

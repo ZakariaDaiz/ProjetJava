@@ -1,5 +1,7 @@
 package modele.ObjetClasses;
 
+import modele.Personnage;
+
 public class PotionSoin extends Objet {
     
     private int soin;

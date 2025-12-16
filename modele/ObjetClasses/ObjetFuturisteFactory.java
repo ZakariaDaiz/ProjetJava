@@ -4,14 +4,19 @@ public class ObjetFuturisteFactory implements ObjectFactory {
     @Override
     public Objet createObject(String type) {
         switch (type) {
-            case "epee":
-                return new Equipement("epee Laser", "Une epee laser", "main", "arme", 10);
-            case "hache":
+            case "epee laser":
+                return new Equipement("epee laser", "Une epee laser", "main", "arme", 10);
+            case "massue":
                 return new Equipement("massue", "Une massue futuriste", "main", "arme", 15);
-            case "arc":
+            case "pistolaser":
                 return new Equipement("pistolaser", "Pistolaser futuriste", "main", "arme", 20);
             case "baguette":
                 return new Equipement("baguette", "Une baguette futuriste", "main", "arme", 10);
+            case "lance-missile":
+                return new Equipement("lance-missile", "Un lance missile dernier cri", "main", "arme", 10);
+            case "arme a energie":
+                return new Equipement("arme a energie", "Une arme a energie surpuissante", "main", "arme", 10);
+
 
             case "casque":
                 return new Equipement("casque signature thermique", "Un casque equipé d'une vison thermique", "tete", "armure", 5);
@@ -25,7 +30,7 @@ public class ObjetFuturisteFactory implements ObjectFactory {
             case "potionForce":
                 return new PotionForce("potionForce", "Une potion de force futuriste", 10);
             case "potionDextere":
-                return new PotionDextere("potionDextere", "Une potion de dextere futuriste", 10);
+                return new PotionDexterite("potionDexterite", "Une potion de dexterite futuriste", 10);
             case "potionSoin":
                 return new PotionSoin("potionSoin", "Une potion de soin futuriste", 10);
 

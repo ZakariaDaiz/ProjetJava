@@ -14,7 +14,7 @@ public class BossHydreMecha extends PNJ{
         super.dexterite = 20;
         super.constitution = 5;
         super.intelligence = 15;
-        super.strategy = new AttaquePhysique("Coup de poing hydraulique");
+        super.strategy = new AttaquePhysique("Coups de poing hydrauliques");
         StrategyAttaque strategy2 = new AttaqueMagique("Tirs de miniguns");
         super.equipementPorte = new HashMap<>();
     }

@@ -1,5 +1,7 @@
 package modele.ObjetClasses;
 
+import modele.Personnage;
+
 public class Equipement extends Objet {
     private String typeSlot;
     private String typeEquipement;
