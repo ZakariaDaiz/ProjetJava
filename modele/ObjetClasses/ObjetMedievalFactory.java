@@ -17,12 +17,11 @@ public class ObjetMedievalFactory implements ObjectFactory {
             case "dagues":
                 return new Equipement("dagues", "Des dagues acérées", "main", "arme", 10);
             case "pieges":
-                return new Equipement("pieges", "Une baguette magique", "main", "arme", 10);
+                return new Equipement("pieges", "Des pieges à ours", "bras", "arme", 10);
             case "dents":
                 return new Equipement("dents", "Des dents pointues contaminées par la rage", "main", "arme", 10);
             case "serres":
                 return new Equipement("serres", "Des serres extrêmement coupantes et pointues", "main", "arme", 10);
-
 
             case "casque":
                 return new Equipement("casque", "Une casque medieval", "tete", "armure", 5);

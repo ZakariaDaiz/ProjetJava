@@ -18,6 +18,7 @@ public class Gobelin extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueFurtive();
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("arme", (Equipement) factoryMedievealeAcreer.createObject("epee"));
+        equipementPorte.put("main", (Equipement) factoryMedievealeAcreer.createObject("epee"));
+        equipementPorte.put("bras", (Equipement) factoryMedievealeAcreer.createObject("pieges"));
     }
 }
