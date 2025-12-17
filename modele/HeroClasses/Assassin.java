@@ -16,6 +16,8 @@ public class Assassin extends Joueur {
                 8,          // Intelligence
                 new AttaqueFurtive() // Coup de Dague
         );
-        equipementPorte.put("arme", new Equipement("dague émoussé", "une dague abimée par le temps", "main", "arme", 3));
+        Equipement startingEquipement = new Equipement("dague émoussé", "une dague abimée par le temps", "main", "arme", 3);
+        equipementPorte.put("main", startingEquipement );
+        inventaire.put(startingEquipement, 1);
     }
 }

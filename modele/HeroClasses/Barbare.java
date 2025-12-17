@@ -16,6 +16,8 @@ public class Barbare extends Joueur {
                 5,   // Intelligence
                 new AttaquePhysique()
         );
-        equipementPorte.put("arme", new Equipement("Hache ebrechée", "Une hache ayant vu maintes batailles", "main", "arme", 4));
+        Equipement startingEquipement = new Equipement("Hache ebrechée", "Une hache ayant vu maintes batailles", "main", "arme", 4);
+        equipementPorte.put("main", startingEquipement );
+        inventaire.put(startingEquipement, 1);
     }
 }

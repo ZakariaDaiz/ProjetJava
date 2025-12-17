@@ -16,6 +16,8 @@ public class Archer extends Joueur {
                 10,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
-        equipementPorte.put("arme", new Equipement("Arc basique", "Un arc de débutant", "main", "arme", 3));
+        Equipement startingEquipement = new Equipement("Arc basique", "Un arc de débutant", "main", "arme", 3);
+        equipementPorte.put("main", startingEquipement );
+        inventaire.put(startingEquipement, 1);
     }
 }

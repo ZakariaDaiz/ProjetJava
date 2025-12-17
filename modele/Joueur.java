@@ -8,7 +8,7 @@ import modele.StrategyAttack.StrategyAttaque;
 
 public class Joueur extends Personnage {
 
-    private Map<Objet, Integer> inventaire;
+    protected Map<Objet, Integer> inventaire;
 
     public Joueur(String nom, int pvMax, int force, int dexterite,
                   int constitution, int intelligence, StrategyAttaque strategy) {

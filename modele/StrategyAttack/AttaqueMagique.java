@@ -18,7 +18,7 @@ public class AttaqueMagique implements StrategyAttaque {
 
     @Override
     public int calculerDegats(Personnage attaquant, Personnage defenseur) {
-        int bonus = attaquant.getEquipementPorte().get("Arme").getBonus();
+        int bonus = attaquant.getEquipementPorte().get("main").getBonus();
         int degatsBruts = attaquant.getIntelligence() + bonus;
         int reduction = defenseur.getConstitution() / 2;
 

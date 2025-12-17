@@ -49,7 +49,7 @@ public class Donjon {
         for (int i = 0; i < 9; i++) {
             Salle salle = new Salle("Salle numero "+i);
 
-            for(int j = 0; j< (int) (Math.random() * 4); j++){
+            for(int j = 1; j< (int) (Math.random() * 4); j++){
                 PNJ pnj = pnjFactory.creerPNJAleatoire();
                 salle.ajouterPNJ(pnj);
                 int x = (int) (Math.random() * 4);

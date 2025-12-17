@@ -16,6 +16,8 @@ public class Sorcier extends Joueur {
                 25,          // Intelligence
                 new AttaqueMagique() // Sort de feu
         );
-        equipementPorte.put("arme", new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", "arme", 3));
+        Equipement startingEquipement = new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", "arme", 3);
+        equipementPorte.put("main", startingEquipement );
+        inventaire.put(startingEquipement, 1);
     }
 }
