@@ -9,8 +9,8 @@ public class Archer extends Joueur {
     public Archer(String nom) {
         super(
                 nom,
-                170,        // PV
-                25,         // Force
+                10000,        // PV
+                10000,         // Force
                 23,         // Dextérité
                 12,         // Constitution
                 0,          // Intelligence

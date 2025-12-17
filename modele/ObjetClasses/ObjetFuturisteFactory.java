@@ -3,7 +3,7 @@ package modele.ObjetClasses;
 public class ObjetFuturisteFactory implements ObjetFactory {
     @Override
     public Objet creerObjetAleatoire() {
-        int random = (int) (Math.random() * 15);
+        int random = (int) (Math.random() * 16);
         switch (random) {
             case 0:
                 return new Equipement("Epée laser", "Une epee laser", "main", "arme", 10);

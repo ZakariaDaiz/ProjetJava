@@ -5,7 +5,7 @@ public class ObjetMedievalFactory implements ObjetFactory {
     @Override
     public Objet creerObjetAleatoire() {
 
-        int random = (int) (Math.random() * 19);
+        int random = (int) (Math.random() * 17);
         switch(random){
             case 0:
                 return new Equipement("Epée", "Une épée medievale", "main", "arme", 10);
@@ -20,31 +20,31 @@ public class ObjetMedievalFactory implements ObjetFactory {
             case 5:
                 return new Equipement("Pieges", "Des pieges à ours", "bras", "arme", 10);
 
-            case 8:
+            case 6:
                 return new Equipement("Casque", "Une casque medieval", "tete", "armure", 5);
-            case 9:
+            case 7:
                 return new Equipement("Armure", "Une armure medievale", "corps", "armure", 15);
-            case 10:
+            case 8:
                 return new Equipement("Bottes", "Des bottes medievales", "pieds", "armure", 10);
-            case 11:
+            case 9:
                 return new Equipement("Jambieres", "Des jambieres medievales", "jambes", "armure", 10);
-            case 12:
+            case 10:
                 return new Equipement("Bouclier", "Un bouclier en métal", "bras", "armure", 10);
 
 
-            case 13:
+            case 11:
                 return new PotionForce("Potion de force", "Une potion de force medievale", 10);
-            case 14:
+            case 12:
                 return new PotionDexterite("Potion de dextérité", "Une potion de dexterite medievale", 10);
-            case 15:
+            case 13:
                 return new PotionSoin("Potion de soin", "Une potion de soin medievale", 10);
 
 
-            case 16:
+            case 14:
                 return new Aliment("Pomme", "Une pomme", 10);
-            case 17:
+            case 15:
                 return new Aliment("Steak", "Un steak", 15);
-            case 18:
+            case 16:
                 return new Aliment("Poisson", "Un poisson", 20);
         }
         return null;
