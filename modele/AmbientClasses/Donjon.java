@@ -7,6 +7,8 @@ import modele.ThemeClasses.ThemeFactory;
 
 import java.util.List;
 
+import static java.lang.Math.max;
+
 public class Donjon {
 
     protected List<Salle> salles;
@@ -39,39 +41,38 @@ public class Donjon {
     public void setSalleActuelleIndex(int salleActuelleIndex) {
         this.salleActuelleIndex = salleActuelleIndex;
     }
-    
-    public void genererDonjon(ThemeFactory theme) {
 
+    public void genererDonjon(ThemeFactory theme) {
         PNJFactory pnjFactory = theme.creerPNJFactory();
         ObjetFactory objetFactory = theme.creerObjetFactory();
 
-
         for (int i = 0; i < 9; i++) {
-            Salle salle = new Salle("Salle numero "+i);
+            Salle salle = new Salle("Salle numero " + i);
 
-            for(int j = 1; j< (int) (Math.random() * 4); j++){
+            int nbEnnemis = 1 + (int) (Math.random() * 4);
+            for(int j = 0; j < nbEnnemis; j++){
                 PNJ pnj = pnjFactory.creerPNJAleatoire();
                 salle.ajouterPNJ(pnj);
-                int x = (int) (Math.random() * 4);
-                int y = (int) (Math.random() * 4);
+                int x = (int) (Math.random() * 3);
+                int y = (int) (Math.random() * 3);
 
                 while (salle.terrain[x][y] != '#'){
-                    x = (int) (Math.random() * 4);
-                    y = (int) (Math.random() * 4);
+                    x = (int) (Math.random() * 3);
+                    y = (int) (Math.random() * 3);
                 }
                 salle.terrain[x][y] = pnj.getChar();
             }
 
-            for(int j = 0; j<2; j++){
+            for(int j = 0; j < 2; j++){
                 salle.ajouterObjet(objetFactory.creerObjetAleatoire());
-                int x = (int) (Math.random() * 4);
-                int y = (int) (Math.random() * 4);
+                int x = (int) (Math.random() * 3);
+                int y = (int) (Math.random() * 3);
 
                 while (salle.terrain[x][y] != '#'){
-                    x = (int) (Math.random() * 4);
-                    y = (int) (Math.random() * 4);
+                    x = (int) (Math.random() * 3);
+                    y = (int) (Math.random() * 3);
                 }
-                salle.terrain[x][y] ='O';
+                salle.terrain[x][y] = 'O';
             }
 
             salle.terrain[3][2] = '@';
@@ -83,6 +84,6 @@ public class Donjon {
         salleBoss.terrain[2][2] = 'B';
         salleBoss.terrain[3][2] = '@';
         salles.add(salleBoss);
-        
     }
+
 }

@@ -11,7 +11,6 @@ import Ihm.Ihm;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * La classe Controleur gère le déroulement des tours et de l'avancement dans les donjons.
@@ -69,7 +68,7 @@ public class Controleur {
             ihm.afficherInfo("Thème futuriste sélectionné !");
         }
 
-        // --- 4. Menu AVANT d'entrer dans le donjon (conforme au sujet) ---
+        // --- 4. Menu AVANT d'entrer dans le donjon ---
         boolean entrerDonjon = false;
         while (!entrerDonjon) {
             ihm.afficherMenuAvantDonjon();
@@ -77,7 +76,7 @@ public class Controleur {
 
             switch (choixAvant) {
                 case 1:
-                    // Afficher l'inventaire
+                    // Afficher l'inventaire et statistiques
                     ihm.afficherInventaire(joueur.getInventaire());
                     ihm.afficherStatistiques(joueur);
                     break;
@@ -102,50 +101,70 @@ public class Controleur {
             donjon.setSalleActuelle(salleActuelle);
             ihm.afficherDescriptionSalle(salleActuelle);
 
-            // Si des ennemis sont présents, combat obligatoire
-            if (!salleActuelle.estNettoye()) {
-                ihm.afficherAvertissement("Des ennemis vous barrent la route !");
-                boolean victoire = gererCombat(joueur, salleActuelle);
-                if (!victoire) {
+            boolean enCombat = false;
+            boolean ennemisPresents = !salleActuelle.estNettoye();
+
+            // Menu de la salle
+            while (!joueur.estMort() && !enCombat) {
+                ihm.afficherMenuSalle(ennemisPresents);
+                int choixSalle = ihm.saisirChoix();
+
+                switch (choixSalle) {
+                    case 1:
+                        if (ennemisPresents) {
+                            // Le joueur CHOISIT d'attaquer - déclenche le combat
+                            ihm.afficherAvertissement("Vous déclenchez le combat en attaquant les ennemis !");
+                            enCombat = true;
+                        } else {
+                            // Avancer vers la salle suivante
+                            donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
+                            ihm.afficherInfo("Vous avancez vers la salle suivante...");
+                            break;
+                        }
+                        break;
+                    case 2:
+                        // Ramasser un objet
+                        gererLoot(joueur, salleActuelle);
+                        break;
+                    case 3:
+                        // Afficher inventaire
+                        ihm.afficherInventaire(joueur.getInventaire());
+                        gererInventaire(joueur);
+                        break;
+                    case 4:
+                        // Voir statistiques
+                        ihm.afficherStatistiques(joueur);
+                        break;
+                    case 5:
+                        // Quitter
+                        ihm.afficherMessage("Vous quittez le donjon...");
+                        return;
+                    default:
+                        ihm.afficherErreur("Choix invalide !");
+                }
+
+                // Si on a avancé de salle, sortir de la boucle
+                if (choixSalle == 1 && !ennemisPresents) {
+                    break;
+                }
+            }
+
+            // --- Gestion du Combat (déclenché par le joueur) ---
+            if (enCombat) {
+                boolean combatTermine = gererCombat(joueur, salleActuelle);
+
+                if (!combatTermine) {
                     ihm.afficherErreur("GAME OVER - Vous êtes mort...");
                     return;
                 }
-                ihm.afficherSucces("Vous avez vaincu tous les ennemis !");
-            }
 
-            // Menu d'exploration
-            ihm.afficherMenuJeu();
-            int choixJeu = ihm.saisirChoix();
+                ihm.afficherSucces("Vous avez vaincu tous les ennemis de cette salle !");
 
-            switch (choixJeu) {
-                case 1:
-                    // Avancer vers la salle suivante
-                    if (salleActuelle.estNettoye()) {
-                        donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
-                        ihm.afficherInfo("Vous avancez vers la salle suivante...");
-                    } else {
-                        ihm.afficherErreur("Vous ne pouvez pas avancer tant que des ennemis sont présents !");
-                    }
-                    break;
-                case 2:
-                    // Examiner la salle / Ramasser objet
-                    gererLoot(joueur, salleActuelle);
-                    break;
-                case 3:
-                    // Afficher inventaire
-                    ihm.afficherInventaire(joueur.getInventaire());
-                    gererInventaire(joueur);
-                    break;
-                case 4:
-                    // Voir statistiques
-                    ihm.afficherStatistiques(joueur);
-                    break;
-                case 5:
-                    // Quitter
-                    ihm.afficherMessage("Vous quittez le donjon...");
-                    return;
-                default:
-                    ihm.afficherErreur("Choix invalide !");
+                // Avancer automatiquement après avoir vaincu tous les ennemis
+                if (donjon.getSalleActuelleIndex() < 9) {
+                    donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
+                    ihm.afficherInfo("Vous pouvez maintenant avancer...");
+                }
             }
         }
 
@@ -194,7 +213,7 @@ public class Controleur {
 
         switch (choix) {
             case 1:
-                consommerObjet(joueur);
+                consommerObjet(joueur, false);
                 break;
             case 2:
                 equiperObjet(joueur);
@@ -206,8 +225,9 @@ public class Controleur {
 
     /**
      * Consommer un objet (aliment, potion)
+     * @param afficherImpact si true, affiche l'impact sur l'état du joueur
      */
-    private void consommerObjet(Joueur joueur) {
+    private void consommerObjet(Joueur joueur, boolean afficherImpact) {
         List<Objet> consommables = new ArrayList<>();
         for (Objet obj : joueur.getInventaire().keySet()) {
             if (!(obj instanceof Equipement)) {
@@ -228,8 +248,30 @@ public class Controleur {
         int choix = ihm.saisirChoix();
         if (choix > 0 && choix <= consommables.size()) {
             Objet obj = consommables.get(choix - 1);
+
+            // Sauvegarder l'état avant
+            int pvAvant = joueur.getPv();
+            int forceAvant = joueur.getForce();
+            int dexteriteAvant = joueur.getDexterite();
+
             joueur.utiliserObjet(obj);
             ihm.afficherSucces("Vous avez consommé : " + obj.getNom());
+
+            // Afficher l'impact si demandé
+            if (afficherImpact) {
+                System.out.println("\n📊 Impact sur votre état :");
+                if (joueur.getPv() != pvAvant) {
+                    System.out.println("   PV : " + pvAvant + " → " + joueur.getPv() +
+                            " (" + (joueur.getPv() > pvAvant ? "+" : "") + (joueur.getPv() - pvAvant) + ")");
+                }
+                if (joueur.getForce() != forceAvant) {
+                    System.out.println("   Force : " + forceAvant + " → " + joueur.getForce());
+                }
+                if (joueur.getDexterite() != dexteriteAvant) {
+                    System.out.println("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
+                }
+                System.out.println("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+            }
         }
     }
 
@@ -265,39 +307,47 @@ public class Controleur {
 
     /**
      * Gère le système de combat
+     * Les ennemis n'attaquent QUE si le joueur les provoque
+     * Tous les PNJ attaquent si le joueur a attaqué un des PNJ
      */
     private boolean gererCombat(Joueur joueur, Salle salle) {
-        Combat combat = new Combat(joueur, salle.getEnnemies(), salle);
+        boolean combatProvoque = false; // Le joueur a-t-il attaqué ?
 
-        while (!combat.estTerminer()) {
-            ihm.afficherCombat(joueur, salle.getEnnemies());
+        while (!joueur.estMort() && !salle.estNettoye()) {
+            // Afficher l'état du combat
+            ihm.afficherEtatCombat(joueur, salle.getEnnemies());
             ihm.afficherMenuCombat();
             int action = ihm.saisirChoix();
 
             switch (action) {
                 case 1:
-                    // Attaquer
+                    // Attaquer un ennemi
                     attaquerEnnemi(joueur, salle);
+                    combatProvoque = true; // Le joueur a provoqué les ennemis
                     break;
                 case 2:
-                    // Consommer un objet (manger, boire potion)
-                    consommerObjet(joueur);
-                    break;
-                case 3:
-                    // S'équiper avec un objet
-                    equiperObjet(joueur);
+                    // Utiliser un objet (afficher l'impact)
+                    consommerObjet(joueur, true);
                     break;
                 default:
                     ihm.afficherErreur("Action invalide !");
                     continue;
             }
 
-            // Riposte des ennemis
-            if (!salle.estNettoye()) {
+            // Les ennemis ripostent SEULEMENT si le joueur a attaqué
+            if (combatProvoque && !salle.estNettoye()) {
+                ihm.afficherAvertissement("\n⚔ Les ennemis ripostent !");
+
                 for (PNJ ennemi : salle.getEnnemies()) {
                     if (!ennemi.estMort()) {
+                        int pvAvant = joueur.getPv();
                         String attaque = ennemi.attaquer(joueur);
+
+                        // Affichage précis de l'évolution
                         ihm.afficherMessage(attaque);
+                        System.out.println("   Votre état : " + pvAvant + " PV → " + joueur.getPv() + " PV");
+                        System.out.println("   " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+
                         if (joueur.estMort()) {
                             return false;
                         }
@@ -310,7 +360,7 @@ public class Controleur {
     }
 
     /**
-     * Attaquer un ennemi
+     * Attaquer un ennemi - affiche l'évolution précise
      */
     private void attaquerEnnemi(Joueur joueur, Salle salle) {
         List<PNJ> ennemisVivants = new ArrayList<>();
@@ -326,17 +376,24 @@ public class Controleur {
 
         ihm.afficherMessage("Quel ennemi attaquer ?");
         for (int i = 0; i < ennemisVivants.size(); i++) {
-            System.out.println((i + 1) + ". " + ennemisVivants.get(i).getNom() + " (" + ennemisVivants.get(i).getPv() + " PV)");
+            System.out.println((i + 1) + ". " + ennemisVivants.get(i).getNom() +
+                    " (" + ennemisVivants.get(i).getPv() + " PV)");
         }
 
         int choix = ihm.saisirChoix();
         if (choix > 0 && choix <= ennemisVivants.size()) {
             PNJ cible = ennemisVivants.get(choix - 1);
+            int pvAvant = cible.getPv();
+
             String resultat = joueur.attaquer(cible);
+
+            // Affichage précis de l'évolution
             ihm.afficherMessage(resultat);
+            System.out.println("   État de l'ennemi : " + pvAvant + " PV → " + cible.getPv() + " PV");
+            System.out.println("   " + ihm.afficherBarreVie(cible.getPv(), cible.getPvMax()));
 
             if (cible.estMort()) {
-                ihm.afficherSucces(cible.getNom() + " a été vaincu !");
+                ihm.afficherSucces("💀 " + cible.getNom() + " a été vaincu.e !");
                 salle.getEnnemies().remove(cible);
             }
         }

@@ -68,19 +68,18 @@ public class Ihm {
         System.out.println("=".repeat(50));
         System.out.println("Choisissez votre classe :");
         System.out.println("1. Barbare - Puissant guerrier au combat rapproché");
-        System.out.println("   (PV: 150, Force: 20, Dextérité: 10, Constitution: 15, Intelligence: 5)");
+        System.out.println("   (PV: 220, Force: 20, Dextérité: 10, Constitution: 15, Intelligence: 5)");
         System.out.println("2. Sorcier - Maître de la magie");
-        System.out.println("   (PV: 100, Force: 5, Dextérité: 8, Constitution: 10, Intelligence: 25)");
+        System.out.println("   (PV: 160, Force: 5, Dextérité: 8, Constitution: 10, Intelligence: 40)");
         System.out.println("3. Archer - Expert du tir à distance");
-        System.out.println("   (PV: 120, Force: 12, Dextérité: 18, Constitution: 12, Intelligence: 10)");
+        System.out.println("   (PV: 170, Force: 25, Dextérité: 23, Constitution: 12, Intelligence: 0)");
         System.out.println("4. Assassin - Spécialiste des attaques furtives");
-        System.out.println("   (PV: 110, Force: 15, Dextérité: 20, Constitution: 10, Intelligence: 8)");
+        System.out.println("   (PV: 110, Force: 50, Dextérité: 20, Constitution: 10, Intelligence: 0)");
         System.out.println("=".repeat(50));
     }
 
     /**
      * Menu AVANT d'entrer dans le donjon
-     * Conforme au sujet: Afficher inventaire ou Se rendre dans le donjon
      */
     public void afficherMenuAvantDonjon() {
         System.out.println("\n" + "=".repeat(50));
@@ -92,13 +91,19 @@ public class Ihm {
     }
 
     /**
-     * Affiche le menu de jeu (exploration dans le donjon)
+     * Affiche le menu dans une salle (avec choix de combat)
      */
-    public void afficherMenuJeu() {
+    public void afficherMenuSalle(boolean ennemisPresents) {
         System.out.println("\n" + "-".repeat(50));
         System.out.println("Que voulez-vous faire ?");
-        System.out.println("1. Avancer vers la salle suivante");
-        System.out.println("2. Examiner la salle / Ramasser un objet");
+
+        if (ennemisPresents) {
+            System.out.println("1. Attaquer les ennemis (déclencher le combat)");
+        } else {
+            System.out.println("1. Avancer vers la salle suivante");
+        }
+
+        System.out.println("2. Ramasser un objet");
         System.out.println("3. Afficher l'inventaire");
         System.out.println("4. Voir les statistiques");
         System.out.println("5. Quitter le jeu");
@@ -106,23 +111,18 @@ public class Ihm {
     }
 
     /**
-     * Menu de combat avec TOUTES les options du sujet
-     * 1. Attaquer
-     * 2. Consommer un objet (manger pomme, boire potion)
-     * 3. S'équiper avec un objet de l'inventaire
+     * Menu de combat - pendant le combat
      */
     public void afficherMenuCombat() {
         System.out.println("\n" + "-".repeat(50));
-        System.out.println("Actions de combat :");
+        System.out.println("⚔ ACTIONS DE COMBAT :");
         System.out.println("1. Attaquer un ennemi");
-        System.out.println("2. Consommer un objet (manger, boire une potion)");
-        System.out.println("3. S'équiper avec un objet de son inventaire");
+        System.out.println("2. Utiliser un objet (potion, aliment)");
         System.out.println("-".repeat(50));
     }
 
     /**
      * Affiche la description d'une salle avec son terrain
-     * @param salle La salle à décrire
      */
     public void afficherDescriptionSalle(Salle salle) {
         System.out.println("\n" + "=".repeat(50));
@@ -134,10 +134,10 @@ public class Ihm {
 
         // Informations détaillées sur les ennemis
         if (!salle.getEnnemies().isEmpty()) {
-            System.out.println("\n⚔ Ennemis présents :");
+            System.out.println("\n👹 " + ANSI_YELLOW + "Ennemis :" + ANSI_RESET);
             for (PNJ ennemi : salle.getEnnemies()) {
                 if (!ennemi.estMort()) {
-                    System.out.println("   - " + ennemi.getNom() + " (PV: " + ennemi.getPv() + "/" + ennemi.getPvMax() + ")");
+                    System.out.println("   - " + ennemi.getNom() + " " + afficherBarreVie(ennemi.getPv(), ennemi.getPvMax()));
                 }
             }
         }
@@ -151,25 +151,48 @@ public class Ihm {
         }
 
         if (salle.estNettoye()) {
-            System.out.println("\n" + ANSI_GREEN + "✓ La salle est sécurisée." + ANSI_RESET);
+            System.out.println("\n" + ANSI_GREEN + "✓ La salle est sécurisée (aucun ennemi)." + ANSI_RESET);
+        }
+    }
+
+    /**
+     * Affiche l'état du combat en cours
+     */
+    public void afficherEtatCombat(Joueur joueur, List<PNJ> ennemis) {
+        System.out.println("\n" + "╔" + "═".repeat(48) + "╗");
+        System.out.println("║" + ANSI_RED + " ".repeat(16) + "⚔ COMBAT EN COURS ⚔" + " ".repeat(13) + ANSI_RESET + "║");
+        System.out.println("╚" + "═".repeat(48) + "╝");
+
+        // Affichage du joueur
+        System.out.println("\n🗡 " + ANSI_CYAN + "Vous : " + joueur.getNom() + ANSI_RESET);
+        System.out.println("   " + afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+
+        // Affichage des ennemis
+        System.out.println("\n👹 " + ANSI_RED + "Ennemis hostiles :" + ANSI_RESET);
+        int compteur = 1;
+        for (PNJ ennemi : ennemis) {
+            if (!ennemi.estMort()) {
+                System.out.println("   " + compteur + ". " + ennemi.getNom() + " " +
+                        afficherBarreVie(ennemi.getPv(), ennemi.getPvMax()));
+                compteur++;
+            }
         }
     }
 
     /**
      * Affiche le terrain de la salle (grille 4x4) avec couleurs
-     * @param salle La salle dont on veut afficher le terrain
      */
     private void afficherTerrain(Salle salle) {
-        System.out.println("\n┌" + "─".repeat(10) + "┐");
+        System.out.println("\n┌" + "─".repeat(14) + "┐");
         char[][] terrain = salle.getTerrain();
         for (char[] chars : terrain) {
             System.out.print("│ ");
             for (char symbole : chars) {
-                System.out.print(obtenirCouleurSymbole(symbole) + symbole + " " + ANSI_RESET);
+                System.out.print(obtenirCouleurSymbole(symbole) + " " +symbole + " " + ANSI_RESET);
             }
             System.out.println(" │");
         }
-        System.out.println("└" + "─".repeat(10) + "┘");
+        System.out.println("└" + "─".repeat(14) + "┘");
 
         // Légende
         System.out.println("\nLégende : " + ANSI_CYAN + "@" + ANSI_RESET + " = Vous | " +
@@ -184,54 +207,38 @@ public class Ihm {
      */
     private String obtenirCouleurSymbole(char symbole) {
         return switch (symbole) {
-            case '@' -> ANSI_CYAN; // Joueur
-            case 'O' -> ANSI_YELLOW; // Objets
-            case '#' -> ANSI_WHITE; // Cases vides
-            case 'B' -> ANSI_PURPLE; // Boss
-            default -> ANSI_RED; // Ennemis
+            case '@' -> ANSI_CYAN;
+            case 'O' -> ANSI_YELLOW;
+            case '#' -> ANSI_WHITE;
+            case 'B' -> ANSI_PURPLE;
+            default -> ANSI_RED;
         };
-    }
-
-    /**
-     * Affiche l'interface de combat
-     * @param joueur Le joueur
-     * @param ennemis La liste des ennemis
-     */
-    public void afficherCombat(Personnage joueur, List<PNJ> ennemis) {
-        System.out.println("\n" + "╔" + "═".repeat(48) + "╗");
-        System.out.println("║" + ANSI_RED + " ".repeat(18) + "COMBAT !" + " ".repeat(19) + ANSI_RESET + "║");
-        System.out.println("╚" + "═".repeat(48) + "╝");
-
-        // Affichage du joueur
-        System.out.println("\n🗡 " + ANSI_CYAN + "Vous : " + joueur.getNom() + ANSI_RESET);
-        System.out.println("   PV : " + afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
-
-        // Affichage des ennemis
-        System.out.println("\n👹 " + ANSI_RED + "Ennemis :" + ANSI_RESET);
-        for (int i = 0; i < ennemis.size(); i++) {
-            PNJ ennemi = ennemis.get(i);
-            if (!ennemi.estMort()) {
-                System.out.println("   " + (i + 1) + ". " + ennemi.getNom() +
-                        " - PV : " + afficherBarreVie(ennemi.getPv(), ennemi.getPvMax()));
-            }
-        }
     }
 
     /**
      * Affiche une barre de vie colorée
      */
-    private String afficherBarreVie(int pv, int pvMax) {
+    public String afficherBarreVie(int pv, int pvMax) {
         int barreLength = 20;
         int filled = (int) ((double) pv / pvMax * barreLength);
-        String barre = "[" + ANSI_GREEN + "█".repeat(Math.max(0, filled)) +
-                ANSI_RED + "░".repeat(Math.max(0, barreLength - filled)) +
-                ANSI_RESET + "] " + pv + "/" + pvMax;
+
+        String couleur;
+        if (pv > pvMax * 0.6) {
+            couleur = ANSI_GREEN;
+        } else if (pv > pvMax * 0.3) {
+            couleur = ANSI_YELLOW;
+        } else {
+            couleur = ANSI_RED;
+        }
+
+        String barre = "[" + couleur + "█".repeat(Math.max(0, filled)) +
+                ANSI_WHITE + "░".repeat(Math.max(0, barreLength - filled)) +
+                ANSI_RESET + "] " + pv + "/" + pvMax + " PV";
         return barre;
     }
 
     /**
      * Affiche l'inventaire du joueur
-     * @param inventaire Map contenant les objets et leur quantité
      */
     public void afficherInventaire(Map<Objet, Integer> inventaire) {
         System.out.println("\n" + "=".repeat(50));
@@ -256,14 +263,13 @@ public class Ihm {
 
     /**
      * Affiche les statistiques du joueur
-     * @param joueur Le joueur
      */
     public void afficherStatistiques(Joueur joueur) {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("      STATISTIQUES DE " + joueur.getNom().toUpperCase());
         System.out.println("=".repeat(50));
         System.out.println("Classe       : " + joueur.getClass().getSimpleName());
-        System.out.println("Points de Vie: " + joueur.getPv() + "/" + joueur.getPvMax());
+        System.out.println("Points de Vie: " + afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
         System.out.println("\nCaractéristiques :");
         System.out.println("  Force        : " + joueur.getForce());
         System.out.println("  Dextérité    : " + joueur.getDexterite());
@@ -285,7 +291,6 @@ public class Ihm {
 
     /**
      * Affiche un message générique
-     * @param msg Le message à afficher
      */
     public void afficherMessage(String msg) {
         System.out.println("\n>> " + msg);
@@ -321,23 +326,21 @@ public class Ihm {
 
     /**
      * Demande à l'utilisateur de saisir un choix numérique
-     * @return Le choix de l'utilisateur
      */
     public int saisirChoix() {
         System.out.print("\nVotre choix : ");
         try {
             int choix = scanner.nextInt();
-            scanner.nextLine(); // Consommer le retour à la ligne
+            scanner.nextLine();
             return choix;
         } catch (Exception e) {
-            scanner.nextLine(); // Nettoyer le buffer
-            return -1; // Choix invalide
+            scanner.nextLine();
+            return -1;
         }
     }
 
     /**
      * Demande à l'utilisateur de saisir une chaîne de caractères
-     * @return La chaîne saisie par l'utilisateur
      */
     public String saisirChaine() {
         System.out.print("\nVotre saisie : ");
@@ -345,7 +348,7 @@ public class Ihm {
     }
 
     /**
-     * Ferme le scanner (à appeler à la fin du programme)
+     * Ferme le scanner
      */
     public void fermer() {
         scanner.close();

@@ -9,11 +9,11 @@ public class Archer extends Joueur {
     public Archer(String nom) {
         super(
                 nom,
-                120,        // PV
-                12,         // Force
-                18,         // Dextérité
+                170,        // PV
+                25,         // Force
+                23,         // Dextérité
                 12,         // Constitution
-                10,          // Intelligence
+                0,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
         Equipement startingEquipement = new Equipement("Arc basique", "Un arc de débutant", "main", "arme", 3);
