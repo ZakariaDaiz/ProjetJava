@@ -22,4 +22,8 @@ public class SoldatCybernetique extends PNJ{
         equipementPorte.put("jambes", new Equipement("Exo-jambieres", "Renforcement mecanique des jambes", "jambes", "armure", 5));
         equipementPorte.put("corps", new Equipement("Plastron en nanocarbone", "Armure legere et resistante", "corps", "armure", 10));
     }
+
+    public char getChar(){
+        return 'C';
+    }
 }

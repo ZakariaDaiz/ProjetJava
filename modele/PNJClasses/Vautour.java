@@ -19,4 +19,8 @@ public class Vautour extends PNJ{
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("arme", new Equipement("Serres acerees", "Des griffes tranchantes comme des rasoirs", "main", "arme", 10));
     }
+
+    public char getChar(){
+        return 'V';
+    }
 }

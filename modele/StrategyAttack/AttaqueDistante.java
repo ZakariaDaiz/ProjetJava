@@ -9,7 +9,7 @@ public class AttaqueDistante implements StrategyAttaque {
     private final String nomAttaque;
 
     public AttaqueDistante() {
-        this.nomAttaque = "Tir a l'arc";
+        this.nomAttaque = "Attaque à distance";
     }
 
     public AttaqueDistante(String nomAttaque) {

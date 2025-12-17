@@ -9,7 +9,7 @@ public class AttaquePhysique implements StrategyAttaque {
     private final String nomAttaque;
 
     public AttaquePhysique() {
-        this.nomAttaque = "Coup de hache";
+        this.nomAttaque = "Attaque au corps à corps";
     }
 
     public AttaquePhysique(String nomAttaque) {

@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueFurtive;
 
 public class Assassin extends Joueur {
@@ -15,5 +16,6 @@ public class Assassin extends Joueur {
                 8,          // Intelligence
                 new AttaqueFurtive() // Coup de Dague
         );
+        equipementPorte.put("arme", new Equipement("dague émoussé", "une dague abimée par le temps", "main", "arme", 3));
     }
 }

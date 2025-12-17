@@ -9,7 +9,7 @@ public class AttaqueFurtive implements StrategyAttaque {
     private final String nomAttaque;
 
     public AttaqueFurtive() {
-        this.nomAttaque = "Coup de dague";
+        this.nomAttaque = "attaque furtive";
     }
 
     public AttaqueFurtive(String nomAttaque) {

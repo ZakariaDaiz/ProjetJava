@@ -20,4 +20,8 @@ public class Gobelin extends PNJ{
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Dagues", "Des dagues rouillées et ebrechées", "main", "arme", 10));
         }
+
+    public char getChar(){
+        return 'G';
+    }
 }

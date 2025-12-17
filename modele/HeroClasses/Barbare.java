@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 
 public class Barbare extends Joueur {
@@ -15,5 +16,6 @@ public class Barbare extends Joueur {
                 5,   // Intelligence
                 new AttaquePhysique()
         );
+        equipementPorte.put("arme", new Equipement("Hache ebrecghée", "Une hache ayant vu maintes batailles", "main", "arme", 4));
     }
 }

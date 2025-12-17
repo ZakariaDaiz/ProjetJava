@@ -13,4 +13,12 @@ public abstract class Objet {
     public void utiliser(Personnage cible){
 
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

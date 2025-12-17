@@ -9,7 +9,7 @@ public class AttaqueMagique implements StrategyAttaque {
     private final String nomAttaque;
 
     public AttaqueMagique() {
-        this.nomAttaque = "Sort de feu";
+        this.nomAttaque = "Attaque magique";
     }
 
     public AttaqueMagique(String nomAttaque) {

@@ -20,4 +20,8 @@ public class Sorciere extends PNJ {
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("arme", new Equipement("Baguette sombre", "Une baguette emanant une noirceur rare", "main", "arme", 10));
     }
+
+    public char getChar(){
+        return 'S';
+    }
 }

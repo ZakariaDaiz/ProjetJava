@@ -41,6 +41,10 @@ public class Salle {
         return objetsAuSol;
     }
 
+    public char[][] getTerrain() {
+        return terrain;
+    }
+
     public String getDescription() {
         return description;
     }

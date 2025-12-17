@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
 
 public class Archer extends Joueur {
@@ -15,5 +16,6 @@ public class Archer extends Joueur {
                 10,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
+        equipementPorte.put("arme", new Equipement("Arc basique", "Un arc de débutant", "main", "arme", 3));
     }
 }

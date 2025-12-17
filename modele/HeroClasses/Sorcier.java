@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueMagique;
 
 public class Sorcier extends Joueur {
@@ -15,5 +16,6 @@ public class Sorcier extends Joueur {
                 25,          // Intelligence
                 new AttaqueMagique() // Sort de feu
         );
+        equipementPorte.put("arme", new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", "arme", 3));
     }
 }

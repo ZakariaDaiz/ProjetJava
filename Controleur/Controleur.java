@@ -40,7 +40,7 @@ public class Controleur {
 
         // Création du joueur via la factory
         Joueur joueur = (Joueur) heroFactory.creerPersonnage(classeChoisie, nom);
-        ihm.afficherMessage("Personnage créé : " + joueur.getDescriptionClasse());
+        ihm.afficherMessage("Personnage créé : " + heroFactory.getDescriptionClasse(classeChoisie));
 
         // --- 2. Choix du Thème ---
         // On suppose que l'IHM renvoie 1 pour Médiéval, 2 pour Futuriste
@@ -67,10 +67,10 @@ public class Controleur {
 
             // Récupérer la salle actuelle
             // Note: Il faudra peut-être ajouter une méthode getSalles() dans Donjon ou utiliser l'index
-            Salle salleActuelle = donjon.getSalles().get(donjon.getSalleActuelleIndex());
+            Salle salleActuelle = donjon.getSalleActuelle();
             donjon.setSalleActuelle(salleActuelle);
 
-            ihm.afficherSalle(salleActuelle); // Affiche description, ennemis, objets
+            ihm.afficherDescriptionSalle(salleActuelle); // Affiche description, ennemis, objets
 
             // --- Phase de Combat ---
             if (!salleActuelle.estNettoye()) {
@@ -122,7 +122,7 @@ public class Controleur {
 
         // Boucle du combat
         while (!combat.estTerminer()) {
-            ihm.afficherEtatCombat(joueur, salle.getEnnemies());
+            ihm.afficherCombat(joueur, salle.getEnnemies());
 
             // --- Tour du Joueur ---
             // 1. Attaquer ou 2. Inventaire

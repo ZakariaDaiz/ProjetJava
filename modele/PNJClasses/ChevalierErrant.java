@@ -21,5 +21,9 @@ public class ChevalierErrant extends PNJ {
         equipementPorte.put("main", new Equipement("epee", "épée tranchante","main","arme",15));
         equipementPorte.put("bras", new Equipement("bouclier","bouclier en métal","bras","armure",15));
     }
+
+    public char getChar(){
+        return 'C';
+    }
 }
 

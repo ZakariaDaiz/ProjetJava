@@ -19,4 +19,8 @@ public class RatEnrage extends PNJ{
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Dents pointues", "Des dents jaunies porteuses de maladies", "main", "arme", 10));
     }
+
+    public char getChar(){
+        return 'r';
+    }
 }

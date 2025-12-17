@@ -19,4 +19,8 @@ public class DroneCombat extends PNJ{
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Lance-missile tactique", "Un module lance-missile compact", "main", "arme", 10));
     }
+
+    public char getChar(){
+        return 'D';
+    }
 }
