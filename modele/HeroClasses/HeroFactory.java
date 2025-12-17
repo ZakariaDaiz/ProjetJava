@@ -2,22 +2,18 @@ package modele.HeroClasses;
 
 import modele.Personnage;
 
-public class HeroFactory  {
+public class HeroFactory {
 
     public Personnage creerPersonnage(String classe, String nom) {
         switch (classe.toLowerCase()) {
             case "barbare":
                 return new Barbare(nom);
-
             case "sorcier":
                 return new Sorcier(nom);
-
             case "archer":
                 return new Archer(nom);
-
             case "assassin":
                 return new Assassin(nom);
-
             default:
                 throw new IllegalArgumentException("Classe de héros inconnue : " + classe);
         }
@@ -27,31 +23,41 @@ public class HeroFactory  {
         return new String[]{"barbare", "sorcier", "archer", "assassin"};
     }
 
-
+    /**
+     * Retourne la description complète d'une classe avec ses stats DYNAMIQUES
+     * @param classe Le nom de la classe
+     * @return La description formatée avec les stats réelles
+     */
     public String getDescriptionClasse(String classe) {
+        // Créer une instance temporaire pour récupérer les vraies stats
+        Personnage perso = creerPersonnage(classe, "temp");
+
+        String description = "";
+
         switch (classe.toLowerCase()) {
             case "barbare":
-                return "Barbare - Guerrier puissant\n" +
-                        "  PV: 150 | Force: 20 | Dextérité: 10 | Constitution: 15 | Intelligence: 5\n" +
-                        "  Attaque: Coup de hache";
-
+                description = "Barbare - Puissant guerrier au combat rapproché";
+                break;
             case "sorcier":
-                return "Sorcier - Maître de la magie\n" +
-                        "  PV: 100 | Force: 5 | Dextérité: 8 | Constitution: 10 | Intelligence: 25\n" +
-                        "  Attaque: Sort de feu";
-
+                description = "Sorcier - Maître de la magie";
+                break;
             case "archer":
-                return "Archer - Tireur d'élite\n" +
-                        "  PV: 120 | Force: 12 | Dextérité: 18 | Constitution: 12 | Intelligence: 10\n" +
-                        "  Attaque: Tir à l'arc";
-
+                description = "Archer - Expert du tir à distance";
+                break;
             case "assassin":
-                return "Assassin - Combattant furtif\n" +
-                        "  PV: 110 | Force: 15 | Dextérité: 20 | Constitution: 10 | Intelligence: 8\n" +
-                        "  Attaque: Coup de dague furtif";
-
+                description = "Assassin - Spécialiste des attaques furtives";
+                break;
             default:
                 return "Classe inconnue";
         }
+
+        // Ajouter les stats dynamiques
+        description += "\n   (PV: " + perso.getPvMax() +
+                ", Force: " + perso.getForce() +
+                ", Dextérité: " + perso.getDexterite() +
+                ", Constitution: " + perso.getConstitution() +
+                ", Intelligence: " + perso.getIntelligence() + ")";
+
+        return description;
     }
 }

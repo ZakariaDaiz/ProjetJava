@@ -42,7 +42,7 @@ public class Controleur {
         ihm.afficherMessage("Entrez le nom de votre héros :");
         String nom = ihm.saisirChaine();
 
-        ihm.afficherMenuCreation();
+        ihm.afficherMenuCreation(heroFactory);
         int choixClasse = ihm.saisirChoix();
 
         String[] classes = heroFactory.getClassesDisponibles();
@@ -171,6 +171,7 @@ public class Controleur {
         if (!joueur.estMort()) {
             ihm.afficherSucces("VICTOIRE ! Vous avez terminé le donjon !");
         }
+
     }
 
     /**

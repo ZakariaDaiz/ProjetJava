@@ -1,6 +1,7 @@
 package Ihm;
 
 import modele.AmbientClasses.Salle;
+import modele.HeroClasses.HeroFactory;
 import modele.ObjetClasses.Equipement;
 import modele.ObjetClasses.Objet;
 import modele.PNJClasses.PNJ;
@@ -52,7 +53,7 @@ public class Ihm {
      */
     public void afficherMenuPrincipal() {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("         BIENVENUE DANS LE DONJON");
+        System.out.println("             BIENVENUE DANS LE DONJON");
         System.out.println("=".repeat(50));
         System.out.println("1. Nouvelle partie");
         System.out.println("2. Quitter");
@@ -60,21 +61,19 @@ public class Ihm {
     }
 
     /**
-     * Affiche le menu de création de personnage
+     * Affiche le menu de création de personnage avec stats dynamiques
+     * @param hero La factory pour créer des instances temporaires
      */
-    public void afficherMenuCreation() {
+
+    public void afficherMenuCreation(HeroFactory hero) {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("        CRÉATION DE PERSONNAGE");
+        System.out.println("              CRÉATION DE PERSONNAGE");
         System.out.println("=".repeat(50));
         System.out.println("Choisissez votre classe :");
-        System.out.println("1. Barbare - Puissant guerrier au combat rapproché");
-        System.out.println("   (PV: 220, Force: 20, Dextérité: 10, Constitution: 15, Intelligence: 5)");
-        System.out.println("2. Sorcier - Maître de la magie");
-        System.out.println("   (PV: 160, Force: 5, Dextérité: 8, Constitution: 10, Intelligence: 40)");
-        System.out.println("3. Archer - Expert du tir à distance");
-        System.out.println("   (PV: 170, Force: 25, Dextérité: 23, Constitution: 12, Intelligence: 0)");
-        System.out.println("4. Assassin - Spécialiste des attaques furtives");
-        System.out.println("   (PV: 110, Force: 50, Dextérité: 20, Constitution: 10, Intelligence: 0)");
+        System.out.println("1 - " + hero.getDescriptionClasse("barbare"));
+        System.out.println("2 - " + hero.getDescriptionClasse("sorcier"));
+        System.out.println("3 - " + hero.getDescriptionClasse("archer"));
+        System.out.println("4 - " + hero.getDescriptionClasse("assassin"));
         System.out.println("=".repeat(50));
     }
 
