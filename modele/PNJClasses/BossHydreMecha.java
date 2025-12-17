@@ -38,4 +38,3 @@ public class BossHydreMecha extends PNJ{
                 + " et inflige " + degats + " dégâts à " + cible.getNom();
     }
 }
-}

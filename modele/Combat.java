@@ -33,5 +33,4 @@ public class Combat {
         return joueur.estMort() || salleActuelle.estNettoye();
     }
 
-    
 }
