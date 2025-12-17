@@ -61,6 +61,14 @@ public class Donjon {
 
             for(int j = 0; j<4; j++){
                 salle.ajouterObjet(objetFactory.creerObjetAleatoire());
+                int x = (int) (Math.random() * 4);
+                int y = (int) (Math.random() * 4);
+
+                while (salle.terrain[x][y] != '#'){
+                    x = (int) (Math.random() * 4);
+                    y = (int) (Math.random() * 4);
+                }
+                salle.terrain[x][y] ='O';
             }
 
             salle.terrain[4][2] = '@';
