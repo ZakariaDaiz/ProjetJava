@@ -5,7 +5,7 @@ public class ObjetMedievalFactory implements ObjetFactory {
     @Override
     public Objet creerObjetAleatoire() {
 
-        int random = (int) (Math.random() * 17);
+        int random = (int) (Math.random() * 18);
         switch(random){
             case 0:
                 return new Equipement("Epée", "Une épée medievale", "main", "arme", 10);
@@ -33,18 +33,20 @@ public class ObjetMedievalFactory implements ObjetFactory {
 
 
             case 11:
-                return new PotionForce("Potion de force", "Une potion de force medievale", 10);
+                return new PotionForce("Potion de force", "Augmente la force de +5 pour 3 tours");
             case 12:
-                return new PotionDexterite("Potion de dextérité", "Une potion de dexterite medievale", 10);
+                return new PotionResistance("Potion de Résistance", "Réduit les dégâts subis de 20% pour 2 tours");
             case 13:
+                return new PotionDexterite("Potion de dextérité", "Une potion de dexterite medievale", 10);
+            case 14:
                 return new PotionSoin("Potion de soin", "Une potion de soin medievale", 10);
 
 
-            case 14:
-                return new Aliment("Pomme", "Une pomme", 10);
             case 15:
-                return new Aliment("Steak", "Un steak", 15);
+                return new Aliment("Pomme", "Une pomme", 10);
             case 16:
+                return new Aliment("Steak", "Un steak", 15);
+            case 17:
                 return new Aliment("Poisson", "Un poisson", 20);
         }
         return null;

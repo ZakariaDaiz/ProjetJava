@@ -28,7 +28,7 @@ public class ObjetFuturisteFactory implements ObjetFactory {
                 return new Equipement("Jambieres", "Des jambieres futuristes", "jambes", "armure", 10);
 
             case 10:
-                return new PotionForce("Potion de force", "Une potion de force futuriste", 10);
+                return new PotionForce("Potion de force", "Une potion de force futuriste");
             case 11:
                 return new PotionDexterite("Potion de dexterite", "Une potion de dexterite futuriste", 10);
             case 12:

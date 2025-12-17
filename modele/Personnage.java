@@ -12,16 +12,19 @@ public abstract class Personnage {
     protected int pv;
     protected int pvMax;
     protected int force;
+    protected int forceBase; // NOUVEAU : force sans bonus
     protected int dexterite;
     protected int constitution;
     protected int intelligence;
     protected StrategyAttaque strategy;
     protected Map<String, Equipement> equipementPorte;
 
+    protected int toursForce = 0;
+    protected int toursResistance = 0;
+
     public Personnage() {
         equipementPorte = new HashMap<>();
     }
-
 
     public Personnage(String nom, int pvMax, int force, int dexterite,
                       int constitution, int intelligence, StrategyAttaque strategy) {
@@ -29,6 +32,7 @@ public abstract class Personnage {
         this.pvMax = pvMax;
         this.pv = pvMax;
         this.force = force;
+        this.forceBase = force; // NOUVEAU : sauvegarder la force de base
         this.dexterite = dexterite;
         this.constitution = constitution;
         this.intelligence = intelligence;
@@ -47,10 +51,18 @@ public abstract class Personnage {
                 + " et inflige " + degats + " dégâts à " + cible.getNom();
     }
 
-
-
+    /**
+     * MODIFIÉ : Prend en compte la résistance
+     */
     public void subirDegats(int degats) {
-        pv -= degats;
+        int degatsFinaux = degats;
+
+        // Appliquer la réduction si résistance active
+        if (toursResistance > 0) {
+            degatsFinaux = (int) (degats * 0.8); // 20% de réduction
+        }
+
+        pv -= degatsFinaux;
         if (pv < 0) {
             pv = 0;
         }
@@ -64,6 +76,70 @@ public abstract class Personnage {
         return pv <= 0;
     }
 
+    /**
+     * NOUVEAU : Applique boost de force pour 3 tours
+     */
+    public void appliquerBoostForce() {
+        if (toursForce == 0) {
+            force += 5;
+        }
+        toursForce = 3;
+    }
+
+    /**
+     * NOUVEAU : Applique résistance pour 2 tours
+     */
+    public void appliquerResistance() {
+        if (toursResistance == 0) {
+            constitution = (int) (constitution*1.2);
+        }
+        toursResistance = 2;
+    }
+
+    /**
+     * NOUVEAU : Met à jour les effets (appelé à chaque tour)
+     * @return Message des effets expirés
+     */
+    public String mettreAJourEffets() {
+        String message = "";
+
+        // Boost de force
+        if (toursForce > 0) {
+            toursForce--;
+            if (toursForce == 0) {
+                force -= 5; // Retirer le bonus
+                message += "Boost de Force expiré. ";
+            }
+        }
+
+        // Résistance
+        if (toursResistance > 0) {
+            toursResistance--;
+            if (toursResistance == 0) {
+                message += "Résistance expirée. ";
+            }
+        }
+
+        return message;
+    }
+
+    /**
+     * NOUVEAU : Retourne une description des effets actifs
+     */
+    public String getEffetsActifs() {
+        String effets = "";
+
+        if (toursForce > 0) {
+            effets += "Boost de Force (" + toursForce + " tour(s)) ";
+        }
+        if (toursResistance > 0) {
+            effets += "Résistance (" + toursResistance + " tour(s)) ";
+        }
+
+        return effets.isEmpty() ? "Aucun effet actif" : effets;
+    }
+
+    // Getters
     public String getNom() {
         return nom;
     }
@@ -72,7 +148,9 @@ public abstract class Personnage {
         return pv;
     }
 
-    public int getPvMax() {return pvMax;}
+    public int getPvMax() {
+        return pvMax;
+    }
 
     public int getForce() {
         return force;
@@ -94,11 +172,23 @@ public abstract class Personnage {
         return equipementPorte;
     }
 
-    public void setPv(int i) { this.pv=i; }
+    public void setPv(int i) {
+        this.pv = i;
+    }
 
-    public void setDexterite(int i) { this.dexterite=i; }
+    public void setDexterite(int i) {
+        this.dexterite = i;
+    }
 
-    public void setForce(int i) {this.force=i;}
+    public void setForce(int i) {
+        this.force = i;
+    }
+
+    public int getToursBoostForce() {
+        return toursForce;
+    }
+
+    public int getToursResistance() {
+        return toursResistance;
+    }
 }
-
-

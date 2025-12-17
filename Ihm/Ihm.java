@@ -285,6 +285,13 @@ public class Ihm {
                 System.out.println("  " + entry.getKey() + " : " + eq.getNom() + " (Bonus: +" + eq.getBonus() + ")");
             }
         }
+
+        // Affichage des effets
+        if (joueur.getToursBoostForce() > 0 || joueur.getToursResistance() > 0) {
+            System.out.println("\n✨ Effets actifs :");
+            System.out.println("  " + joueur.getEffetsActifs());
+        }
+
         System.out.println("=".repeat(50));
     }
 

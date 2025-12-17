@@ -254,6 +254,7 @@ public class Controleur {
             int pvAvant = joueur.getPv();
             int forceAvant = joueur.getForce();
             int dexteriteAvant = joueur.getDexterite();
+            int constitutionAvant = joueur.getConstitution();
 
             joueur.utiliserObjet(obj);
             ihm.afficherSucces("Vous avez consommé : " + obj.getNom());
@@ -270,6 +271,9 @@ public class Controleur {
                 }
                 if (joueur.getDexterite() != dexteriteAvant) {
                     System.out.println("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
+                }
+                if (joueur.getConstitution() != constitutionAvant) {
+                        System.out.println("   Constitution : " + constitutionAvant + " → " + joueur.getConstitution());
                 }
                 System.out.println("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
             }
@@ -312,22 +316,25 @@ public class Controleur {
      * Tous les PNJ attaquent si le joueur a attaqué un des PNJ
      */
     private boolean gererCombat(Joueur joueur, Salle salle) {
-        boolean combatProvoque = false; // Le joueur a-t-il attaqué ?
+        boolean combatProvoque = false;
 
         while (!joueur.estMort() && !salle.estNettoye()) {
-            // Afficher l'état du combat
             ihm.afficherEtatCombat(joueur, salle.getEnnemies());
+
+            // Afficher les effets actifs
+            if (joueur.getToursBoostForce() > 0 || joueur.getToursResistance() > 0) {
+                ihm.afficherInfo("✨ Effets actifs : " + joueur.getEffetsActifs());
+            }
+
             ihm.afficherMenuCombat();
             int action = ihm.saisirChoix();
 
             switch (action) {
                 case 1:
-                    // Attaquer un ennemi
                     attaquerEnnemi(joueur, salle);
-                    combatProvoque = true; // Le joueur a provoqué les ennemis
+                    combatProvoque = true;
                     break;
                 case 2:
-                    // Utiliser un objet (afficher l'impact)
                     consommerObjet(joueur, true);
                     break;
                 default:
@@ -335,7 +342,13 @@ public class Controleur {
                     continue;
             }
 
-            // Les ennemis ripostent SEULEMENT si le joueur a attaqué
+            // Mettre à jour les effets du joueur
+            String effetsExpires = joueur.mettreAJourEffets();
+            if (!effetsExpires.isEmpty()) {
+                ihm.afficherAvertissement(effetsExpires);
+            }
+
+            // Les ennemis ripostent
             if (combatProvoque && !salle.estNettoye()) {
                 ihm.afficherAvertissement("\n⚔ Les ennemis ripostent !");
 
@@ -344,7 +357,6 @@ public class Controleur {
                         int pvAvant = joueur.getPv();
                         String attaque = ennemi.attaquer(joueur);
 
-                        // Affichage précis de l'évolution
                         ihm.afficherMessage(attaque);
                         System.out.println("   Votre état : " + pvAvant + " PV → " + joueur.getPv() + " PV");
                         System.out.println("   " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
