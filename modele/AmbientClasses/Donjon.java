@@ -53,24 +53,24 @@ public class Donjon {
             for(int j = 0; j < nbEnnemis; j++){
                 PNJ pnj = pnjFactory.creerPNJAleatoire();
                 salle.ajouterPNJ(pnj);
-                int x = (int) (Math.random() * 3);
-                int y = (int) (Math.random() * 3);
+                int x = (int) (Math.random() * 4);
+                int y = (int) (Math.random() * 4);
 
                 while (salle.terrain[x][y] != '#'){
-                    x = (int) (Math.random() * 3);
-                    y = (int) (Math.random() * 3);
+                    x = (int) (Math.random() * 4);
+                    y = (int) (Math.random() * 4);
                 }
                 salle.terrain[x][y] = pnj.getChar();
             }
 
             for(int j = 0; j < 2; j++){
                 salle.ajouterObjet(objetFactory.creerObjetAleatoire());
-                int x = (int) (Math.random() * 3);
-                int y = (int) (Math.random() * 3);
+                int x = (int) (Math.random() * 4);
+                int y = (int) (Math.random() * 4);
 
                 while (salle.terrain[x][y] != '#'){
-                    x = (int) (Math.random() * 3);
-                    y = (int) (Math.random() * 3);
+                    x = (int) (Math.random() * 4);
+                    y = (int) (Math.random() * 4);
                 }
                 salle.terrain[x][y] = 'O';
             }
