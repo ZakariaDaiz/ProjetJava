@@ -38,7 +38,6 @@ public class Joueur extends Personnage {
 
     public void equiper(Equipement eq) {
         equipementPorte.put(eq.getTypeSlot(), eq);
-        eq.equiper(this);
     }
 
     public Map<Objet, Integer> getInventaire() {

@@ -14,12 +14,16 @@ public class Equipement extends Objet {
         this.stat = stat;
     }
 
-    public int getStat() {
+    public int getBonus() {
         return stat;
     }
 
     public void utiliser(Personnage cible) {
     
         System.out.println("Tu peux pas utiliser un equipement, tu dois l'equiper!");
+    }
+
+    public String getTypeSlot() {
+        return typeSlot;
     }
 }

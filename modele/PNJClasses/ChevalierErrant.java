@@ -3,6 +3,8 @@ package modele.PNJClasses;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 import modele.ObjetClasses.ObjetMedievalFactory;
+import modele.ThemeClasses.ThemeMedievalFactory;
+
 import java.util.HashMap;
 
 public class ChevalierErrant extends PNJ {
@@ -16,7 +18,7 @@ public class ChevalierErrant extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Coup d'épée");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", (Equipement) factoryMedievealeAcreer.createObject("epee"));
+        equipementPorte.put("main", new Equipement("epee"));
         equipementPorte.put("bras", (Equipement) factoryMedievealeAcreer.createObject("bouclier"));
     }
 }

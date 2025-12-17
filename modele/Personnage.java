@@ -97,5 +97,5 @@ public abstract class Personnage {
 
     public void setForce(int i) {this.force=i;}
 }
-}
+
 
