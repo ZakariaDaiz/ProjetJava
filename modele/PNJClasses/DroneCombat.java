@@ -17,6 +17,6 @@ public class DroneCombat extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tir de missile");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", (Equipement) factoryFuturisteAcreer.createObject("lance-missile"));
+        equipementPorte.put("main", new Equipement("Lance-missile tactique", "Un module lance-missile compact", "main", "arme", 10));
     }
 }

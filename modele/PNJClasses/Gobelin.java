@@ -16,9 +16,8 @@ public class Gobelin extends PNJ{
         super.dexterite = 8;
         super.constitution = 12;
         super.intelligence = 0;
-        super.strategy = new AttaqueFurtive();
+        super.strategy = new AttaqueFurtive("Coup de dague");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", (Equipement) factoryMedievealeAcreer.createObject("epee"));
-        equipementPorte.put("bras", (Equipement) factoryMedievealeAcreer.createObject("pieges"));
-    }
+        equipementPorte.put("main", new Equipement("Dagues", "Des dagues rouillées et ebrechées", "main", "arme", 10));
+        }
 }

@@ -18,5 +18,6 @@ public class Alien extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Griffure acide");
         super.equipementPorte = new HashMap<>();
+        equipementPorte.put("main", new Equipement("Griffes Toxiques", "Des griffes empoisonnées", "main", "arme", 15));
     }
 }

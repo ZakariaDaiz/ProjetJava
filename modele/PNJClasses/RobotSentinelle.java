@@ -6,7 +6,7 @@ import modele.StrategyAttack.AttaqueFurtive;
 
 import java.util.HashMap;
 
-public class RobotSentinelle extends PNJ{
+public class RobotSentinelle extends PNJ {
     public RobotSentinelle() {
         super.nom = "RobotSentinelle";
         super.pv = 110;
@@ -17,6 +17,6 @@ public class RobotSentinelle extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tirs de lasers");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", (Equipement) factoryFuturisteAcreer.createObject("pistolaser"));
+        equipementPorte.put("main", new Equipement("Pistolaser V1", "Pistolet laser de securite standard", "main", "arme", 20));
     }
 }
