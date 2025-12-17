@@ -16,13 +16,16 @@ public class Donjon {
     
     public Donjon(List<Salle> salles, ThemeFactory theme) {
         this.salles = salles;
-        this.salleActuelle = salles.get(0);
         this.salleActuelleIndex = 0;
         this.theme = theme;
     }
     
     public Salle getSalleActuelle() {
         return salleActuelle;
+    }
+
+    public Salle getNextSalle() {
+        return salles.get(salleActuelleIndex++);
     }
     
     public void setSalleActuelle(Salle salleActuelle) {
@@ -59,7 +62,7 @@ public class Donjon {
                 salle.terrain[x][y] = pnj.getChar();
             }
 
-            for(int j = 0; j<4; j++){
+            for(int j = 0; j<2; j++){
                 salle.ajouterObjet(objetFactory.creerObjetAleatoire());
                 int x = (int) (Math.random() * 4);
                 int y = (int) (Math.random() * 4);
@@ -71,14 +74,14 @@ public class Donjon {
                 salle.terrain[x][y] ='O';
             }
 
-            salle.terrain[4][2] = '@';
+            salle.terrain[3][2] = '@';
             salles.add(salle);
         }
 
         Salle salleBoss = new Salle("Salle Boss");
         salleBoss.ajouterPNJ(pnjFactory.creerPNJBoss());
         salleBoss.terrain[2][2] = 'B';
-        salleBoss.terrain[4][2] = '@';
+        salleBoss.terrain[3][2] = '@';
         salles.add(salleBoss);
         
     }

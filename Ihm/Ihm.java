@@ -52,7 +52,7 @@ public class Ihm {
      */
     public void afficherMenuPrincipal() {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("       BIENVENUE DANS LE DONJON");
+        System.out.println("         BIENVENUE DANS LE DONJON");
         System.out.println("=".repeat(50));
         System.out.println("1. Nouvelle partie");
         System.out.println("2. Quitter");
@@ -64,7 +64,7 @@ public class Ihm {
      */
     public void afficherMenuCreation() {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("       CRÉATION DE PERSONNAGE");
+        System.out.println("        CRÉATION DE PERSONNAGE");
         System.out.println("=".repeat(50));
         System.out.println("Choisissez votre classe :");
         System.out.println("1. Barbare - Puissant guerrier au combat rapproché");
@@ -79,16 +79,44 @@ public class Ihm {
     }
 
     /**
-     * Affiche le menu de jeu (exploration)
+     * Menu AVANT d'entrer dans le donjon
+     * Conforme au sujet: Afficher inventaire ou Se rendre dans le donjon
+     */
+    public void afficherMenuAvantDonjon() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("         AVANT D'ENTRER DANS LE DONJON");
+        System.out.println("=".repeat(50));
+        System.out.println("1. Afficher l'inventaire du personnage");
+        System.out.println("2. Se rendre dans le donjon pour se battre");
+        System.out.println("=".repeat(50));
+    }
+
+    /**
+     * Affiche le menu de jeu (exploration dans le donjon)
      */
     public void afficherMenuJeu() {
         System.out.println("\n" + "-".repeat(50));
         System.out.println("Que voulez-vous faire ?");
         System.out.println("1. Avancer vers la salle suivante");
-        System.out.println("2. Examiner la salle");
-        System.out.println("3. Gérer l'inventaire");
+        System.out.println("2. Examiner la salle / Ramasser un objet");
+        System.out.println("3. Afficher l'inventaire");
         System.out.println("4. Voir les statistiques");
         System.out.println("5. Quitter le jeu");
+        System.out.println("-".repeat(50));
+    }
+
+    /**
+     * Menu de combat avec TOUTES les options du sujet
+     * 1. Attaquer
+     * 2. Consommer un objet (manger pomme, boire potion)
+     * 3. S'équiper avec un objet de l'inventaire
+     */
+    public void afficherMenuCombat() {
+        System.out.println("\n" + "-".repeat(50));
+        System.out.println("Actions de combat :");
+        System.out.println("1. Attaquer un ennemi");
+        System.out.println("2. Consommer un objet (manger, boire une potion)");
+        System.out.println("3. S'équiper avec un objet de son inventaire");
         System.out.println("-".repeat(50));
     }
 
@@ -109,7 +137,7 @@ public class Ihm {
             System.out.println("\n⚔ Ennemis présents :");
             for (PNJ ennemi : salle.getEnnemies()) {
                 if (!ennemi.estMort()) {
-                    System.out.println("  - " + ennemi.getNom() + " (PV: " + ennemi.getPv() + "/" + ennemi.getPvMax() + ")");
+                    System.out.println("   - " + ennemi.getNom() + " (PV: " + ennemi.getPv() + "/" + ennemi.getPvMax() + ")");
                 }
             }
         }
@@ -118,7 +146,7 @@ public class Ihm {
         if (!salle.getObjetsAuSol().isEmpty()) {
             System.out.println("\n✦ Objets au sol :");
             for (Objet objet : salle.getObjetsAuSol()) {
-                System.out.println("  - " + objet.getNom() + " : " + objet.getDescription());
+                System.out.println("   - " + objet.getNom() + " : " + objet.getDescription());
             }
         }
 
@@ -128,14 +156,12 @@ public class Ihm {
     }
 
     /**
-     * Affiche le terrain de la salle (grille 5x5) avec couleurs
+     * Affiche le terrain de la salle (grille 4x4) avec couleurs
      * @param salle La salle dont on veut afficher le terrain
      */
     private void afficherTerrain(Salle salle) {
-        System.out.println("\n┌" + "─".repeat(22) + "┐");
-
+        System.out.println("\n┌" + "─".repeat(10) + "┐");
         char[][] terrain = salle.getTerrain();
-
         for (char[] chars : terrain) {
             System.out.print("│ ");
             for (char symbole : chars) {
@@ -143,14 +169,13 @@ public class Ihm {
             }
             System.out.println(" │");
         }
-
-        System.out.println("└" + "─".repeat(22) + "┘");
+        System.out.println("└" + "─".repeat(10) + "┘");
 
         // Légende
-        System.out.println("\nLégende : " + ANSI_CYAN + "@" + ANSI_RESET + " = Vous  " +
-                ANSI_RED + "Lettres" + ANSI_RESET + " = Ennemis  " +
-                ANSI_YELLOW + "O" + ANSI_RESET + " = Objets  " +
-                ANSI_PURPLE + "B" + ANSI_RESET + " = Boss  " +
+        System.out.println("\nLégende : " + ANSI_CYAN + "@" + ANSI_RESET + " = Vous | " +
+                ANSI_RED + "Lettres" + ANSI_RESET + " = Ennemis | " +
+                ANSI_YELLOW + "O" + ANSI_RESET + " = Objets | " +
+                ANSI_PURPLE + "B" + ANSI_RESET + " = Boss | " +
                 ANSI_WHITE + "#" + ANSI_RESET + " = Vide");
     }
 
@@ -159,16 +184,11 @@ public class Ihm {
      */
     private String obtenirCouleurSymbole(char symbole) {
         return switch (symbole) {
-            case '@' -> // Joueur
-                    ANSI_PURPLE+ANSI_CYAN;
-            case 'O' -> // Objets
-                    ANSI_BLUE_BACKGROUND+ANSI_YELLOW;
-            case '#' -> // Cases vides
-                    ANSI_PURPLE_BACKGROUND+ANSI_WHITE;
-            case 'B' -> // Boss
-                    ANSI_GREEN_BACKGROUND+ANSI_PURPLE;
-            default -> // Ennemis (toutes les autres lettres)
-                    ANSI_BLACK_BACKGROUND+ANSI_RED;
+            case '@' -> ANSI_CYAN; // Joueur
+            case 'O' -> ANSI_YELLOW; // Objets
+            case '#' -> ANSI_WHITE; // Cases vides
+            case 'B' -> ANSI_PURPLE; // Boss
+            default -> ANSI_RED; // Ennemis
         };
     }
 
@@ -184,8 +204,7 @@ public class Ihm {
 
         // Affichage du joueur
         System.out.println("\n🗡 " + ANSI_CYAN + "Vous : " + joueur.getNom() + ANSI_RESET);
-        System.out.println("   PV : " + joueur.getPv() + "/" + joueur.getPvMax());
-        System.out.println(joueur.getPv());
+        System.out.println("   PV : " + afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
 
         // Affichage des ennemis
         System.out.println("\n👹 " + ANSI_RED + "Ennemis :" + ANSI_RESET);
@@ -193,17 +212,21 @@ public class Ihm {
             PNJ ennemi = ennemis.get(i);
             if (!ennemi.estMort()) {
                 System.out.println("   " + (i + 1) + ". " + ennemi.getNom() +
-                        " - PV : " + ennemi.getPv() + "/" + ennemi.getPvMax());
-                System.out.println(ennemi.getPv());
+                        " - PV : " + afficherBarreVie(ennemi.getPv(), ennemi.getPvMax()));
             }
         }
+    }
 
-        System.out.println("\n" + "-".repeat(50));
-        System.out.println("Actions :");
-        System.out.println("1. Attaquer un ennemi");
-        System.out.println("2. Utiliser un objet");
-        System.out.println("3. Se défendre");
-        System.out.println("-".repeat(50));
+    /**
+     * Affiche une barre de vie colorée
+     */
+    private String afficherBarreVie(int pv, int pvMax) {
+        int barreLength = 20;
+        int filled = (int) ((double) pv / pvMax * barreLength);
+        String barre = "[" + ANSI_GREEN + "█".repeat(Math.max(0, filled)) +
+                ANSI_RED + "░".repeat(Math.max(0, barreLength - filled)) +
+                ANSI_RESET + "] " + pv + "/" + pvMax;
+        return barre;
     }
 
     /**
@@ -212,7 +235,7 @@ public class Ihm {
      */
     public void afficherInventaire(Map<Objet, Integer> inventaire) {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("       INVENTAIRE");
+        System.out.println("              INVENTAIRE");
         System.out.println("=".repeat(50));
 
         if (inventaire.isEmpty()) {
@@ -228,11 +251,6 @@ public class Ihm {
                 index++;
             }
         }
-
-        System.out.println("=".repeat(50));
-        System.out.println("1. Utiliser un objet");
-        System.out.println("2. Équiper un objet (si équipement)");
-        System.out.println("3. Retour");
         System.out.println("=".repeat(50));
     }
 
@@ -242,15 +260,26 @@ public class Ihm {
      */
     public void afficherStatistiques(Joueur joueur) {
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("       STATISTIQUES DE " + joueur.getNom().toUpperCase());
+        System.out.println("      STATISTIQUES DE " + joueur.getNom().toUpperCase());
         System.out.println("=".repeat(50));
-        System.out.println("Classe : " + joueur.getClass().getSimpleName());
-        System.out.println("Points de Vie : " + joueur.getPv() + "/" + joueur.getPvMax());
+        System.out.println("Classe       : " + joueur.getClass().getSimpleName());
+        System.out.println("Points de Vie: " + joueur.getPv() + "/" + joueur.getPvMax());
         System.out.println("\nCaractéristiques :");
-        System.out.println("  Force : " + joueur.getForce());
-        System.out.println("  Dextérité : " + joueur.getDexterite());
+        System.out.println("  Force        : " + joueur.getForce());
+        System.out.println("  Dextérité    : " + joueur.getDexterite());
         System.out.println("  Constitution : " + joueur.getConstitution());
         System.out.println("  Intelligence : " + joueur.getIntelligence());
+
+        // Affichage équipement
+        System.out.println("\nÉquipement porté :");
+        if (joueur.getEquipementPorte().isEmpty()) {
+            System.out.println("  Aucun équipement");
+        } else {
+            for (Map.Entry<String, Equipement> entry : joueur.getEquipementPorte().entrySet()) {
+                Equipement eq = entry.getValue();
+                System.out.println("  " + entry.getKey() + " : " + eq.getNom() + " (Bonus: +" + eq.getBonus() + ")");
+            }
+        }
         System.out.println("=".repeat(50));
     }
 

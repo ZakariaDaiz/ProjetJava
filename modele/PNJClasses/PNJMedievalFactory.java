@@ -15,7 +15,7 @@ public class PNJMedievalFactory implements PNJFactory {
         else if (random < 75) {
             return new Vautour();
         }
-        else if (random < 90) {
+        else if (random <= 100) {
             return new RatEnrage();
         }
         return null;

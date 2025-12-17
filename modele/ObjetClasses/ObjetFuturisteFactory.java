@@ -16,16 +16,16 @@ public class ObjetFuturisteFactory implements ObjetFactory {
             case 4:
                 return new Equipement("lance-missile", "Un lance missile dernier cri", "main", "arme", 10);
             case 5:
-                return new Equipement("arme a energie", "Une arme a energie surpuissante", "main", "arme", 10);
+                return new Equipement("arme a energie", "Une arme à energie surpuissante", "main", "arme", 10);
 
             case 6:
                 return new Equipement("casque signature thermique", "Un casque equipé d'une vison thermique", "tete", "armure", 5);
             case 7:
                 return new Equipement("exosquelette", "Une armure ultra-resistante", "corps", "armure", 15);
             case 8:
-                return new Equipement("bottes à reaction", "Des bottes futuriste permettant de voler bas", "pieds", "armure", 10);
+                return new Equipement("bottes à reaction", "Des bottes futuristes permettant de voler bas", "pieds", "armure", 10);
             case 9:
-                return new Equipement("jambieres", "Des jambieres futuriste", "jambes", "armure", 10);
+                return new Equipement("jambieres", "Des jambieres futuristes", "jambes", "armure", 10);
 
             case 10:
                 return new PotionForce("potionForce", "Une potion de force futuriste", 10);

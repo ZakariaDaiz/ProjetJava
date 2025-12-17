@@ -8,7 +8,7 @@ public class ObjetMedievalFactory implements ObjetFactory {
         int random = (int) (Math.random() * 19);
         switch(random){
             case 0:
-                return new Equipement("epee", "Une epee medieval", "main", "arme", 10);
+                return new Equipement("epee", "Une épée medievale", "main", "arme", 10);
             case 1:
                 return new Equipement("hache", "Une hache medieval", "main", "arme", 15);
             case 2:
@@ -27,29 +27,29 @@ public class ObjetMedievalFactory implements ObjetFactory {
             case 8:
                 return new Equipement("casque", "Une casque medieval", "tete", "armure", 5);
             case 9:
-                return new Equipement("armure", "Une armure medieval", "corps", "armure", 15);
+                return new Equipement("armure", "Une armure medievale", "corps", "armure", 15);
             case 10:
-                return new Equipement("bottes", "Une bottes medieval", "pieds", "armure", 10);
+                return new Equipement("bottes", "Des bottes medievales", "pieds", "armure", 10);
             case 11:
-                return new Equipement("jambieres", "Une jambiere medieval", "jambes", "armure", 10);
+                return new Equipement("jambieres", "Des jambieres medievales", "jambes", "armure", 10);
             case 12:
                 return new Equipement("bouclier", "Un bouclier en métal", "bras", "armure", 10);
 
 
             case 13:
-                return new PotionForce("potionForce", "Une potion de force medieval", 10);
+                return new PotionForce("potionForce", "Une potion de force medievale", 10);
             case 14:
-                return new PotionDexterite("potionDexterite", "Une potion de dexterite medieval", 10);
+                return new PotionDexterite("potionDexterite", "Une potion de dexterite medievale", 10);
             case 15:
-                return new PotionSoin("potionSoin", "Une potion de soin medieval", 10);
+                return new PotionSoin("potionSoin", "Une potion de soin medievale", 10);
 
 
             case 16:
-                return new Aliment("pomme", "Une pomme medieval", 10);
+                return new Aliment("pomme", "Une pomme", 10);
             case 17:
-                return new Aliment("steak", "Un steak medieval", 15);
+                return new Aliment("steak", "Un steak", 15);
             case 18:
-                return new Aliment("poisson", "Un poisson medieval", 20);
+                return new Aliment("poisson", "Un poisson", 20);
         }
         return null;
     }
