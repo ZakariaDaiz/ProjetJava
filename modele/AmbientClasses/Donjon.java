@@ -1,6 +1,7 @@
 package modele.AmbientClasses;
 
 import modele.ObjetClasses.ObjetFactory;
+import modele.PNJClasses.PNJ;
 import modele.PNJClasses.PNJFactory;
 import modele.ThemeClasses.ThemeFactory;
 
@@ -41,19 +42,35 @@ public class Donjon {
         PNJFactory pnjFactory = theme.creerPNJFactory();
         ObjetFactory objetFactory = theme.creerObjetFactory();
 
-        for (int i = 0; i < 5; i++) {
+
+        for (int i = 0; i < 9; i++) {
             Salle salle = new Salle("Salle numero "+i);
-            for(int j = 0; j<4; j++){
-                salle.ajouterPNJ(pnjFactory.creerPNJAleatoire());
+
+            for(int j = 0; j< (int) (Math.random() * 4); j++){
+                PNJ pnj = pnjFactory.creerPNJAleatoire();
+                salle.ajouterPNJ(pnj);
+                int x = (int) (Math.random() * 4);
+                int y = (int) (Math.random() * 4);
+
+                while (salle.terrain[x][y] != '#'){
+                    x = (int) (Math.random() * 4);
+                    y = (int) (Math.random() * 4);
+                }
+                salle.terrain[x][y] = pnj.getChar();
             }
+
             for(int j = 0; j<4; j++){
                 salle.ajouterObjet(objetFactory.creerObjetAleatoire());
             }
+
+            salle.terrain[4][2] = '@';
             salles.add(salle);
         }
 
         Salle salleBoss = new Salle("Salle Boss");
         salleBoss.ajouterPNJ(pnjFactory.creerPNJBoss());
+        salleBoss.terrain[2][2] = 'B';
+        salleBoss.terrain[4][2] = '@';
         salles.add(salleBoss);
         
     }

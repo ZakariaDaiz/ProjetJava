@@ -20,4 +20,8 @@ public class Alien extends PNJ {
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Griffes Toxiques", "Des griffes empoisonnées", "main", "arme", 15));
     }
+
+    public char getChar(){
+        return 'A';
+    }
 }

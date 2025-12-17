@@ -18,7 +18,6 @@ public abstract class Personnage {
     protected StrategyAttaque strategy;
     protected Map<String, Equipement> equipementPorte;
 
-
     public Personnage() {
         equipementPorte = new HashMap<>();
     }
@@ -35,6 +34,10 @@ public abstract class Personnage {
         this.intelligence = intelligence;
         this.strategy = strategy;
         this.equipementPorte = new HashMap<>();
+    }
+
+    public char getChar(){
+        return '@';
     }
 
     public String attaquer(Personnage cible) {

@@ -4,18 +4,24 @@ public class PNJMedievalFactory implements PNJFactory {
     
     @Override
     public PNJ creerPNJAleatoire() {
-        int random = (int) (Math.random() * 5);
-        switch (random) {
-            case 0:
-                return new Gobelin();
-            case 1:
-                return new RatEnrage();
-            case 2:
-                return new Sorciere();
-            case 3:
-                return new Vautour();
-            case 4:
-                return new ChevalierErrant();
+        int random = (int) (Math.random() * 100);
+
+        if (random < 30) {
+            return new ChevalierErrant();
         }
+        else if (random < 55) {
+            return new Sorciere();
+        }
+        else if (random < 75) {
+            return new Vautour();
+        }
+        else if (random < 90) {
+            return new RatEnrage();
+        }
+        return null;
+    }
+
+    public PNJ creerPNJBoss() {
+        return new BossDragon();
     }
 }

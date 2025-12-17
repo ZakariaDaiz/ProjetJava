@@ -11,11 +11,18 @@ public class Salle {
     protected List<PNJ> ennemies;
     protected List<Objet> objetsAuSol;
     protected String description;
+    protected char[][] terrain = new char[4][4];
 
     public Salle(String description) {
         this.description = description;
         this.ennemies = new ArrayList<>();
         this.objetsAuSol = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                terrain[i][j] = '#';
+            }
+        }
     }
 
     public void ajouterPNJ(PNJ pnj) {
@@ -41,4 +48,6 @@ public class Salle {
     public boolean estNettoye() {
         return ennemies.isEmpty();
     }
+
+
 }
