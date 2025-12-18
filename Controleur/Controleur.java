@@ -203,7 +203,7 @@ public class Controleur {
             }
             
             // Demander si le joueur veut rejouer directement ou retourner au menu
-            ihm.afficherMessage("\nAppuyez sur Entrée pour retourner au menu principal...");
+            ihm.afficherMessage("\nAppuyez sur n'importe quelle touche pour retourner au menu principal...");
             ihm.saisirChaine();
         }
     }
