@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class Controleur {
 
-    private Ihm ihm;
-    private HeroFactory heroFactory;
+    private final Ihm ihm;
+    private final HeroFactory heroFactory;
 
     public Controleur(Ihm ihm) {
         this.ihm = ihm;
@@ -30,8 +30,13 @@ public class Controleur {
      */
     public void jouerPartie() {
         // --- 1. Menu Principal ---
-        ihm.afficherMenuPrincipal();
-        int choixMenu = ihm.saisirChoix();
+
+        int choixMenu = 0;
+
+        while(choixMenu!=1 && choixMenu!=2 ) {
+            ihm.afficherMenuPrincipal();
+            choixMenu=ihm.saisirChoix();
+        }
 
         if (choixMenu == 2) {
             ihm.afficherMessage("Au revoir !");
@@ -46,9 +51,9 @@ public class Controleur {
         int choixClasse = ihm.saisirChoix();
 
         String[] classes = heroFactory.getClassesDisponibles();
-        if (choixClasse < 1 || choixClasse > classes.length) {
+        while (choixClasse < 1 || choixClasse > classes.length) {
             ihm.afficherErreur("Choix invalide !");
-            return;
+            choixClasse = ihm.saisirChoix();
         }
 
         String classeChoisie = classes[choixClasse - 1];
@@ -58,6 +63,11 @@ public class Controleur {
         // --- 3. Choix du Thème ---
         ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
         int choixTheme = ihm.saisirChoix();
+
+        while(choixTheme!=1 && choixTheme!=2 ) {
+            ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
+            choixTheme=ihm.saisirChoix();
+        }
 
         ThemeFactory themeFactory;
         if (choixTheme == 1) {
@@ -71,8 +81,13 @@ public class Controleur {
         // --- 4. Menu AVANT d'entrer dans le donjon ---
         boolean entrerDonjon = false;
         while (!entrerDonjon) {
-            ihm.afficherMenuAvantDonjon();
-            int choixAvant = ihm.saisirChoix();
+            int choixAvant = 0;
+
+            while(choixAvant!=1 && choixAvant!=2 ) {
+                ihm.afficherMenuAvantDonjon();
+                choixAvant=ihm.saisirChoix();
+            }
+
 
             switch (choixAvant) {
                 case 1:
@@ -107,7 +122,12 @@ public class Controleur {
             // Menu de la salle
             while (!joueur.estMort() && !enCombat) {
                 ihm.afficherMenuSalle(ennemisPresents);
-                int choixSalle = ihm.saisirChoix();
+                int choixSalle = 0;
+
+
+                while( choixSalle<1 || choixSalle >5 ) {
+                    choixSalle=ihm.saisirChoix();
+                }
 
                 switch (choixSalle) {
                     case 1:
@@ -192,12 +212,15 @@ public class Controleur {
         ihm.afficherMessage("Quel objet voulez-vous ramasser ? (0 pour annuler)");
         int choix = ihm.saisirChoix();
 
-        if (choix > 0 && choix <= salle.getObjetsAuSol().size()) {
-            Objet obj = salle.getObjetsAuSol().get(choix - 1);
-            joueur.prendreObjet(obj);
-            salle.getObjetsAuSol().remove(obj);
-            ihm.afficherSucces("Objet ramassé : " + obj.getNom());
+        while (choix < 1 || choix > salle.getObjetsAuSol().size()) {
+            ihm.afficherErreur("Choix invalide !");
+            choix = ihm.saisirChoix();
         }
+
+        Objet obj = salle.getObjetsAuSol().get(choix - 1);
+        joueur.prendreObjet(obj);
+        salle.getObjetsAuSol().remove(obj);
+        ihm.afficherSucces("Objet ramassé : " + obj.getNom());
     }
 
     /**
@@ -210,7 +233,11 @@ public class Controleur {
         }
 
         ihm.afficherMessage("Que voulez-vous faire ?\n1. Consommer un objet\n2. Équiper un objet\n3. Retour");
-        int choix = ihm.saisirChoix();
+        int choix = 0;
+
+        while(choix != 1 && choix != 2) {
+            choix=ihm.saisirChoix();
+        }
 
         switch (choix) {
             case 1:
@@ -219,8 +246,6 @@ public class Controleur {
             case 2:
                 equiperObjet(joueur);
                 break;
-            case 3:
-                return;
         }
     }
 
@@ -228,7 +253,7 @@ public class Controleur {
      * Consommer un objet (aliment, potion)
      * @param afficherImpact si true, affiche l'impact sur l'état du joueur
      */
-    private void consommerObjet(Joueur joueur, boolean afficherImpact) {
+    private boolean consommerObjet(Joueur joueur, boolean afficherImpact) {
         List<Objet> consommables = new ArrayList<>();
         for (Objet obj : joueur.getInventaire().keySet()) {
             if (!(obj instanceof Equipement)) {
@@ -237,47 +262,51 @@ public class Controleur {
         }
 
         if (consommables.isEmpty()) {
-            ihm.afficherMessage("Vous n'avez aucun objet consommable.");
-            return;
+            ihm.afficherAvertissement("Vous n'avez aucun objet consommable.");
+            return false;
         }
 
-        ihm.afficherMessage("Objets consommables :");
-        for (int i = 0; i < consommables.size(); i++) {
-            System.out.println((i + 1) + ". " + consommables.get(i).getNom());
+
+        int choix = -1;
+
+        while (choix < 0 || choix > consommables.size()) {
+            ihm.afficherMessage("Objets consommables :");
+            for (int i = 0; i < consommables.size(); i++) {
+                System.out.println((i + 1) + ". " + consommables.get(i).getNom());
+            }
+            choix = ihm.saisirChoix();
         }
 
-        int choix = ihm.saisirChoix();
-        if (choix > 0 && choix <= consommables.size()) {
             Objet obj = consommables.get(choix - 1);
 
-            // Sauvegarder l'état avant
-            int pvAvant = joueur.getPv();
-            int forceAvant = joueur.getForce();
-            int dexteriteAvant = joueur.getDexterite();
-            int constitutionAvant = joueur.getConstitution();
+        // Sauvegarder l'état avant
+        int pvAvant = joueur.getPv();
+        int forceAvant = joueur.getForce();
+        int dexteriteAvant = joueur.getDexterite();
+        int constitutionAvant = joueur.getConstitution();
 
-            joueur.utiliserObjet(obj);
-            ihm.afficherSucces("Vous avez consommé : " + obj.getNom());
+        joueur.utiliserObjet(obj);
+        ihm.afficherSucces("Vous avez consommé : " + obj.getNom());
 
-            // Afficher l'impact si demandé
-            if (afficherImpact) {
-                System.out.println("\n📊 Impact sur votre état :");
-                if (joueur.getPv() != pvAvant) {
-                    System.out.println("   PV : " + pvAvant + " → " + joueur.getPv() +
-                            " (" + (joueur.getPv() > pvAvant ? "+" : "") + (joueur.getPv() - pvAvant) + ")");
-                }
-                if (joueur.getForce() != forceAvant) {
-                    System.out.println("   Force : " + forceAvant + " → " + joueur.getForce());
-                }
-                if (joueur.getDexterite() != dexteriteAvant) {
-                    System.out.println("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
-                }
-                if (joueur.getConstitution() != constitutionAvant) {
-                        System.out.println("   Constitution : " + constitutionAvant + " → " + joueur.getConstitution());
-                }
-                System.out.println("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+        // Afficher l'impact si demandé
+        if (afficherImpact) {
+            System.out.println("\n📊 Impact sur votre état :");
+            if (joueur.getPv() != pvAvant) {
+                System.out.println("   PV : " + pvAvant + " → " + joueur.getPv() +
+                        " (" + (joueur.getPv() > pvAvant ? "+" : "") + (joueur.getPv() - pvAvant) + ")");
             }
+            if (joueur.getForce() != forceAvant) {
+                System.out.println("   Force : " + forceAvant + " → " + joueur.getForce());
+            }
+            if (joueur.getDexterite() != dexteriteAvant) {
+                System.out.println("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
+            }
+            if (joueur.getConstitution() != constitutionAvant) {
+                    System.out.println("   Constitution : " + constitutionAvant + " → " + joueur.getConstitution());
+            }
+            System.out.println("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
         }
+        return true;
     }
 
     /**
@@ -296,18 +325,22 @@ public class Controleur {
             return;
         }
 
-        ihm.afficherMessage("Équipements disponibles :");
-        for (int i = 0; i < equipements.size(); i++) {
-            Equipement eq = equipements.get(i);
-            System.out.println((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
+
+
+        int choix = -1;
+
+        while (choix < 0 || choix > equipements.size()) {
+            ihm.afficherMessage("Équipements disponibles :");
+            for (int i = 0; i < equipements.size(); i++) {
+                Equipement eq = equipements.get(i);
+                System.out.println((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
+            }
+            choix = ihm.saisirChoix();
         }
 
-        int choix = ihm.saisirChoix();
-        if (choix > 0 && choix <= equipements.size()) {
-            Equipement eq = equipements.get(choix - 1);
-            joueur.equiper(eq);
-            ihm.afficherSucces("Vous avez équipé : " + eq.getNom());
-        }
+        Equipement eq = equipements.get(choix - 1);
+        joueur.equiper(eq);
+        ihm.afficherSucces("Vous avez équipé : " + eq.getNom());
     }
 
     /**
@@ -329,13 +362,24 @@ public class Controleur {
             ihm.afficherMenuCombat();
             int action = ihm.saisirChoix();
 
+            while (action != 1 && action != 2) {
+                ihm.afficherErreur("choix invalide !");
+                action = ihm.saisirChoix();
+            }
+
+
+
             switch (action) {
                 case 1:
                     attaquerEnnemi(joueur, salle);
                     combatProvoque = true;
                     break;
                 case 2:
-                    consommerObjet(joueur, true);
+                    if(!consommerObjet(joueur, true)) {
+                        ihm.afficherAvertissement("L'attaque est la seule option !");
+                        attaquerEnnemi(joueur, salle);
+                        combatProvoque = true;
+                    };
                     break;
                 default:
                     ihm.afficherErreur("Action invalide !");
@@ -387,28 +431,31 @@ public class Controleur {
             return;
         }
 
-        ihm.afficherMessage("Quel ennemi attaquer ?");
-        for (int i = 0; i < ennemisVivants.size(); i++) {
-            System.out.println((i + 1) + ". " + ennemisVivants.get(i).getNom() +
-                    " (" + ennemisVivants.get(i).getPv() + " PV)");
+
+        int choix = -1;
+
+        while (choix < 1 || choix > ennemisVivants.size()) {
+            ihm.afficherMessage("Quel ennemi attaquer ?");
+            for (int i = 0; i < ennemisVivants.size(); i++) {
+                System.out.println((i + 1) + ". " + ennemisVivants.get(i).getNom() +
+                        " (" + ennemisVivants.get(i).getPv() + " PV)");
+            }
+            choix = ihm.saisirChoix();
         }
 
-        int choix = ihm.saisirChoix();
-        if (choix > 0 && choix <= ennemisVivants.size()) {
-            PNJ cible = ennemisVivants.get(choix - 1);
-            int pvAvant = cible.getPv();
+        PNJ cible = ennemisVivants.get(choix - 1);
+        int pvAvant = cible.getPv();
 
-            String resultat = joueur.attaquer(cible);
+        String resultat = joueur.attaquer(cible);
 
-            // Affichage précis de l'évolution
-            ihm.afficherMessage(resultat);
-            System.out.println("   État de l'ennemi : " + pvAvant + " PV → " + cible.getPv() + " PV");
-            System.out.println("   " + ihm.afficherBarreVie(cible.getPv(), cible.getPvMax()));
+        // Affichage précis de l'évolution
+        ihm.afficherMessage(resultat);
+        System.out.println("   État de l'ennemi : " + pvAvant + " PV → " + cible.getPv() + " PV");
+        System.out.println("   " + ihm.afficherBarreVie(cible.getPv(), cible.getPvMax()));
 
-            if (cible.estMort()) {
-                ihm.afficherSucces("💀 " + cible.getNom() + " a été vaincu.e !");
-                salle.getEnnemies().remove(cible);
-            }
+        if (cible.estMort()) {
+            ihm.afficherSucces("💀 " + cible.getNom() + " a été vaincu.e !");
+            salle.getEnnemies().remove(cible);
         }
     }
 }
