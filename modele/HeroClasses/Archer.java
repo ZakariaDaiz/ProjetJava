@@ -10,7 +10,7 @@ public class Archer extends Joueur {
         super(
                 nom,
                 100,        // PV
-                25,         // Force
+                20,         // Force
                 23,         // Dextérité
                 12,         // Constitution
                 0,          // Intelligence

@@ -37,7 +37,7 @@ public class BossDragon extends PNJ{
         int degats = strat.calculerDegats(this, cible);
         cible.subirDegats(degats);
 
-        return nom + " utilise " + strat
+        return nom + " utilise " + strat.getNomAttaque()
                 + " et inflige " + degats + " dégâts à " + cible.getNom();
     }
 }

@@ -220,7 +220,7 @@ public class Controleur {
         ihm.afficherMessage("Objets disponibles :");
         for (int i = 0; i < salle.getObjetsAuSol().size(); i++) {
             Objet obj = salle.getObjetsAuSol().get(i);
-            System.out.println((i + 1) + ". " + obj.getNom() + " - " + obj.getDescription());
+            ihm.afficherMessage((i + 1) + ". " + obj.getNom() + " - " + obj.getDescription());
         }
 
         ihm.afficherMessage("Quel objet voulez-vous ramasser ? (0 pour annuler)");
@@ -286,7 +286,7 @@ public class Controleur {
         while (choix < 0 || choix > consommables.size()) {
             ihm.afficherMessage("Objets consommables :");
             for (int i = 0; i < consommables.size(); i++) {
-                System.out.println((i + 1) + ". " + consommables.get(i).getNom());
+                ihm.afficherMessage((i + 1) + ". " + consommables.get(i).getNom());
             }
             choix = ihm.saisirChoix();
         }
@@ -304,21 +304,21 @@ public class Controleur {
 
         // Afficher l'impact si demandé
         if (afficherImpact) {
-            System.out.println("\n📊 Impact sur votre état :");
+            ihm.afficherMessage("\n📊 Impact sur votre état :");
             if (joueur.getPv() != pvAvant) {
-                System.out.println("   PV : " + pvAvant + " → " + joueur.getPv() +
+                ihm.afficherMessage("   PV : " + pvAvant + " → " + joueur.getPv() +
                         " (" + (joueur.getPv() > pvAvant ? "+" : "") + (joueur.getPv() - pvAvant) + ")");
             }
             if (joueur.getForce() != forceAvant) {
-                System.out.println("   Force : " + forceAvant + " → " + joueur.getForce());
+                ihm.afficherMessage("   Force : " + forceAvant + " → " + joueur.getForce());
             }
             if (joueur.getDexterite() != dexteriteAvant) {
-                System.out.println("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
+                ihm.afficherMessage("   Dextérité : " + dexteriteAvant + " → " + joueur.getDexterite());
             }
             if (joueur.getConstitution() != constitutionAvant) {
-                    System.out.println("   Constitution : " + constitutionAvant + " → " + joueur.getConstitution());
+                ihm.afficherMessage("   Constitution : " + constitutionAvant + " → " + joueur.getConstitution());
             }
-            System.out.println("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+            ihm.afficherMessage("   État actuel : " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
         }
         return true;
     }
@@ -345,7 +345,7 @@ public class Controleur {
             ihm.afficherMessage("Équipements disponibles :");
             for (int i = 0; i < equipements.size(); i++) {
                 Equipement eq = equipements.get(i);
-                System.out.println((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
+                ihm.afficherMessage((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
             }
             choix = ihm.saisirChoix();
         }
@@ -405,6 +405,7 @@ public class Controleur {
             }
 
             // Les ennemis ripostent
+            // Les ennemis ripostent
             if (combatProvoque && !salle.estNettoye()) {
                 ihm.afficherAvertissement("\n⚔ Les ennemis ripostent !");
 
@@ -414,8 +415,8 @@ public class Controleur {
                         String attaque = ennemi.attaquer(joueur);
 
                         ihm.afficherMessage(attaque);
-                        System.out.println("   Votre état : " + pvAvant + " PV → " + joueur.getPv() + " PV");
-                        System.out.println("   " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
+                        ihm.afficherMessage("   Votre état : " + pvAvant + " PV → " + joueur.getPv() + " PV");
+                        ihm.afficherMessage("   " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
 
                         if (joueur.estMort()) {
                             return false;
@@ -449,7 +450,7 @@ public class Controleur {
         while (choix < 1 || choix > ennemisVivants.size()) {
             ihm.afficherMessage("Quel ennemi attaquer ?");
             for (int i = 0; i < ennemisVivants.size(); i++) {
-                System.out.println((i + 1) + ". " + ennemisVivants.get(i).getNom() +
+                ihm.afficherMessage((i + 1) + ". " + ennemisVivants.get(i).getNom() +
                         " (" + ennemisVivants.get(i).getPv() + " PV)");
             }
             choix = ihm.saisirChoix();
@@ -462,8 +463,8 @@ public class Controleur {
 
         // Affichage précis de l'évolution
         ihm.afficherMessage(resultat);
-        System.out.println("   État de l'ennemi : " + pvAvant + " PV → " + cible.getPv() + " PV");
-        System.out.println("   " + ihm.afficherBarreVie(cible.getPv(), cible.getPvMax()));
+        ihm.afficherMessage("   État de l'ennemi : " + pvAvant + " PV → " + cible.getPv() + " PV");
+        ihm.afficherMessage("   " + ihm.afficherBarreVie(cible.getPv(), cible.getPvMax()));
 
         if (cible.estMort()) {
             ihm.afficherSucces("💀 " + cible.getNom() + " a été vaincu.e !");
