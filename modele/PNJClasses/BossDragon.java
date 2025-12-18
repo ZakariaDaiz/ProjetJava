@@ -20,7 +20,7 @@ public class BossDragon extends PNJ{
         super.constitution = 5;
         super.intelligence = 15;
         super.strategy = new AttaquePhysique("Griffure du brasier");
-        StrategyAttaque strategy2 = new AttaqueMagique("Souffle de feu");
+        strategy2 = new AttaqueMagique("Souffle de feu");
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Coeur enflammé du dragon", "Puissance volcanique venant des tréfonds de volcans lointains", "main", "arme", 20));
 
@@ -34,7 +34,7 @@ public class BossDragon extends PNJ{
             strat= strategy2;
         }
 
-        int degats = strategy.calculerDegats(this, cible);
+        int degats = strat.calculerDegats(this, cible);
         cible.subirDegats(degats);
 
         return nom + " utilise " + strat

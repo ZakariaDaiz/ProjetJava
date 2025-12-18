@@ -3,7 +3,7 @@ package modele.ObjetClasses;
 public class ObjetFuturisteFactory implements ObjetFactory {
     @Override
     public Objet creerObjetAleatoire() {
-        int random = (int) (Math.random() * 16);
+        int random = (int) (Math.random() * 17);
         switch (random) {
             case 0:
                 return new Equipement("Epée laser", "Une epee laser", "main", "arme", 10);
@@ -30,15 +30,17 @@ public class ObjetFuturisteFactory implements ObjetFactory {
             case 10:
                 return new PotionForce("Potion de force", "Une potion de force futuriste");
             case 11:
-                return new PotionDexterite("Potion de dexterite", "Une potion de dexterite futuriste", 10);
+                return new PotionDexterite("Potion de dexterite", "Une potion de dexterite futuriste");
             case 12:
                 return new PotionSoin("Potion de soin", "Une potion de soin futuriste", 10);
-
             case 13:
-                return new Aliment("Pomme", "Une pomme futuriste", 10);
+                return new PotionResistance("Potion de resistance", "Une potion de resistance futuriste");
+
             case 14:
-                return new Aliment("Steak", "Un steak futuriste", 15);
+                return new Aliment("Pomme", "Une pomme futuriste", 10);
             case 15:
+                return new Aliment("Steak", "Un steak futuriste", 15);
+            case 16:
                 return new Aliment("Poisson", "Un poisson futuriste", 20);
         }
         return null;

@@ -18,7 +18,7 @@ public class BossHydreMecha extends PNJ{
         super.constitution = 5;
         super.intelligence = 15;
         super.strategy = new AttaquePhysique("Coups de poing hydrauliques");
-        StrategyAttaque strategy2 = new AttaqueMagique("Tirs de miniguns");
+        strategy2 = new AttaqueMagique("Tirs de miniguns");
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("Noyau d'energie", "Amat d'energie lui permettant d'utiliser ses differentes attaques", "main", "arme", 15));
     }
@@ -31,7 +31,7 @@ public class BossHydreMecha extends PNJ{
             strat= strategy2;
         }
 
-        int degats = strategy.calculerDegats(this, cible);
+        int degats = strat.calculerDegats(this, cible);
         cible.subirDegats(degats);
 
         return nom + " utilise " + strat

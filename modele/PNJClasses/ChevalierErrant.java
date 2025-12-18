@@ -19,7 +19,7 @@ public class ChevalierErrant extends PNJ {
         super.strategy = new AttaquePhysique("Coup d'épée");
         super.equipementPorte = new HashMap<>();
         equipementPorte.put("main", new Equipement("epee", "épée tranchante","main","arme",15));
-        equipementPorte.put("bras", new Equipement("bouclier","bouclier en métal","bras","armure",15));
+        equipementPorte.put("corps", new Equipement("bouclier","bouclier en métal","corps","armure",15));
     }
 
     public char getChar(){

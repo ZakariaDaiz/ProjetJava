@@ -37,6 +37,7 @@ public class Joueur extends Personnage {
     }
 
     public void equiper(Equipement eq) {
+        // Mettre l'objet dans le slot
         equipementPorte.put(eq.getTypeSlot(), eq);
     }
 

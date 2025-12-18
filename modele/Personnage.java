@@ -12,7 +12,7 @@ public abstract class Personnage {
     protected int pv;
     protected int pvMax;
     protected int force;
-    protected int forceBase; // NOUVEAU : force sans bonus
+    protected int forceBase;
     protected int dexterite;
     protected int constitution;
     protected int intelligence;
@@ -21,6 +21,7 @@ public abstract class Personnage {
 
     protected int toursForce = 0;
     protected int toursResistance = 0;
+    protected int toursDexterite = 0;
 
     public Personnage() {
         equipementPorte = new HashMap<>();
@@ -32,7 +33,7 @@ public abstract class Personnage {
         this.pvMax = pvMax;
         this.pv = pvMax;
         this.force = force;
-        this.forceBase = force; // NOUVEAU : sauvegarder la force de base
+        this.forceBase = force;
         this.dexterite = dexterite;
         this.constitution = constitution;
         this.intelligence = intelligence;
@@ -51,15 +52,13 @@ public abstract class Personnage {
                 + " et inflige " + degats + " dégâts à " + cible.getNom();
     }
 
-    /**
-     * MODIFIÉ : Prend en compte la résistance
-     */
+
     public void subirDegats(int degats) {
         int degatsFinaux = degats;
 
         // Appliquer la réduction si résistance active
         if (toursResistance > 0) {
-            degatsFinaux = (int) (degats * 0.8); // 20% de réduction
+            degatsFinaux = (int) (degats * 0.8); 
         }
 
         pv -= degatsFinaux;
@@ -76,9 +75,6 @@ public abstract class Personnage {
         return pv <= 0;
     }
 
-    /**
-     * NOUVEAU : Applique boost de force pour 3 tours
-     */
     public void appliquerBoostForce() {
         if (toursForce == 0) {
             force += 5;
@@ -86,9 +82,7 @@ public abstract class Personnage {
         toursForce = 3;
     }
 
-    /**
-     * NOUVEAU : Applique résistance pour 2 tours
-     */
+
     public void appliquerResistance() {
         if (toursResistance == 0) {
             constitution = (int) (constitution*1.2);
@@ -96,10 +90,14 @@ public abstract class Personnage {
         toursResistance = 2;
     }
 
-    /**
-     * NOUVEAU : Met à jour les effets (appelé à chaque tour)
-     * @return Message des effets expirés
-     */
+    public void appliquerDexterite() {
+        if (toursDexterite == 0) {
+            dexterite = (int) (dexterite*1.3);
+        }
+        toursDexterite = 3;
+    }
+
+    
     public String mettreAJourEffets() {
         String message = "";
 
@@ -120,12 +118,18 @@ public abstract class Personnage {
             }
         }
 
+        // Dexterite
+        if (toursDexterite > 0) {
+            toursDexterite--;
+            if (toursDexterite == 0) {
+                message += "Dèxterite expirée. ";
+            }
+        }
+
         return message;
     }
 
-    /**
-     * NOUVEAU : Retourne une description des effets actifs
-     */
+    
     public String getEffetsActifs() {
         String effets = "";
 
@@ -134,6 +138,9 @@ public abstract class Personnage {
         }
         if (toursResistance > 0) {
             effets += "Résistance (" + toursResistance + " tour(s)) ";
+        }
+        if (toursDexterite > 0) {
+            effets += "Dèxterotè (" + toursDexterite + " tour(s)) ";
         }
 
         return effets.isEmpty() ? "Aucun effet actif" : effets;
@@ -190,5 +197,9 @@ public abstract class Personnage {
 
     public int getToursResistance() {
         return toursResistance;
+    }
+
+    public int getToursDexterite() {
+        return toursDexterite;
     }
 }

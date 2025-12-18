@@ -49,6 +49,8 @@ public class Donjon {
         for (int i = 0; i < 9; i++) {
             Salle salle = new Salle("Salle numero " + i);
 
+            salle.terrain[3][2] = '@';
+
             int nbEnnemis = 1 + (int) (Math.random() * 4);
             for(int j = 0; j < nbEnnemis; j++){
                 PNJ pnj = pnjFactory.creerPNJAleatoire();
@@ -75,7 +77,6 @@ public class Donjon {
                 salle.terrain[x][y] = 'O';
             }
 
-            salle.terrain[3][2] = '@';
             salles.add(salle);
         }
 

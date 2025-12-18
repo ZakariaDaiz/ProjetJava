@@ -37,7 +37,7 @@ public class ObjetMedievalFactory implements ObjetFactory {
             case 12:
                 return new PotionResistance("Potion de Résistance", "Réduit les dégâts subis de 20% pour 2 tours");
             case 13:
-                return new PotionDexterite("Potion de dextérité", "Une potion de dexterite medievale", 10);
+                return new PotionDexterite("Potion de dextérité", "Une potion de dexterite medievale");
             case 14:
                 return new PotionSoin("Potion de soin", "Une potion de soin medievale", 10);
 

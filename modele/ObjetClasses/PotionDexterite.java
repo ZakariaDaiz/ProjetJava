@@ -4,14 +4,12 @@ import modele.Personnage;
 
 public class PotionDexterite extends Objet {
 
-    private int dexterite;
 
-    public PotionDexterite(String nom, String description, int dexterite) {
+    public PotionDexterite(String nom, String description) {
         super(nom, description);
-        this.dexterite = dexterite;
     }
 
     public void utiliser(Personnage cible) {
-        cible.setDexterite(cible.getDexterite() + dexterite);
+        cible.appliquerDexterite();;
     }
 }

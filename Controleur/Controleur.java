@@ -29,169 +29,183 @@ public class Controleur {
      * Boucle principale du jeu.
      */
     public void jouerPartie() {
-        // --- 1. Menu Principal ---
+        while (true) {
+            //Menu Principal
+            int choixMenu = 0;
 
-        int choixMenu = 0;
+            while(choixMenu!=1 && choixMenu!=2 ) {
+                ihm.afficherMenuPrincipal();
+                choixMenu=ihm.saisirChoix();
+            }
 
-        while(choixMenu!=1 && choixMenu!=2 ) {
-            ihm.afficherMenuPrincipal();
-            choixMenu=ihm.saisirChoix();
-        }
+            if (choixMenu == 2) {
+                ihm.afficherMessage("Au revoir !");
+                return;
+            }
 
-        if (choixMenu == 2) {
-            ihm.afficherMessage("Au revoir !");
-            return;
-        }
+            //Création du Personnage
+            ihm.afficherMessage("Entrez le nom de votre héros :");
+            String nom = ihm.saisirChaine();
 
-        // --- 2. Création du Personnage ---
-        ihm.afficherMessage("Entrez le nom de votre héros :");
-        String nom = ihm.saisirChaine();
+            ihm.afficherMenuCreation(heroFactory);
+            int choixClasse = ihm.saisirChoix();
 
-        ihm.afficherMenuCreation(heroFactory);
-        int choixClasse = ihm.saisirChoix();
+            String[] classes = heroFactory.getClassesDisponibles();
+            while (choixClasse < 1 || choixClasse > classes.length) {
+                ihm.afficherErreur("Choix invalide !");
+                choixClasse = ihm.saisirChoix();
+            }
 
-        String[] classes = heroFactory.getClassesDisponibles();
-        while (choixClasse < 1 || choixClasse > classes.length) {
-            ihm.afficherErreur("Choix invalide !");
-            choixClasse = ihm.saisirChoix();
-        }
+            String classeChoisie = classes[choixClasse - 1];
+            Joueur joueur = (Joueur) heroFactory.creerPersonnage(classeChoisie, nom);
+            ihm.afficherSucces("Personnage créé : " + joueur.getNom() + " (" + classeChoisie + ")");
 
-        String classeChoisie = classes[choixClasse - 1];
-        Joueur joueur = (Joueur) heroFactory.creerPersonnage(classeChoisie, nom);
-        ihm.afficherSucces("Personnage créé : " + joueur.getNom() + " (" + classeChoisie + ")");
-
-        // --- 3. Choix du Thème ---
-        ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
-        int choixTheme = ihm.saisirChoix();
-
-        while(choixTheme!=1 && choixTheme!=2 ) {
+            //Choix du Thème
             ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
-            choixTheme=ihm.saisirChoix();
-        }
+            int choixTheme = ihm.saisirChoix();
 
-        ThemeFactory themeFactory;
-        if (choixTheme == 1) {
-            themeFactory = new ThemeMedievalFactory();
-            ihm.afficherInfo("Thème médiéval sélectionné !");
-        } else {
-            themeFactory = new ThemeFuturisteFactory();
-            ihm.afficherInfo("Thème futuriste sélectionné !");
-        }
-
-        // --- 4. Menu AVANT d'entrer dans le donjon ---
-        boolean entrerDonjon = false;
-        while (!entrerDonjon) {
-            int choixAvant = 0;
-
-            while(choixAvant!=1 && choixAvant!=2 ) {
-                ihm.afficherMenuAvantDonjon();
-                choixAvant=ihm.saisirChoix();
+            while(choixTheme!=1 && choixTheme!=2 ) {
+                ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
+                choixTheme=ihm.saisirChoix();
             }
 
-
-            switch (choixAvant) {
-                case 1:
-                    // Afficher l'inventaire et statistiques
-                    ihm.afficherInventaire(joueur.getInventaire());
-                    ihm.afficherStatistiques(joueur);
-                    break;
-                case 2:
-                    // Se rendre dans le donjon
-                    entrerDonjon = true;
-                    ihm.afficherSucces("Vous entrez dans le donjon...");
-                    break;
-                default:
-                    ihm.afficherErreur("Choix invalide !");
+            ThemeFactory themeFactory;
+            if (choixTheme == 1) {
+                themeFactory = new ThemeMedievalFactory();
+                ihm.afficherInfo("Thème médiéval sélectionné !");
+            } else {
+                themeFactory = new ThemeFuturisteFactory();
+                ihm.afficherInfo("Thème futuriste sélectionné !");
             }
-        }
 
-        // --- 5. Génération du Donjon ---
-        Donjon donjon = new Donjon(new ArrayList<>(), themeFactory);
-        donjon.genererDonjon(themeFactory);
-        ihm.afficherSucces("Donjon généré ! 10 salles vous attendent.");
+            //Menu AVANT d'entrer dans le donjon
+            boolean entrerDonjon = false;
+            while (!entrerDonjon) {
+                int choixAvant = 0;
 
-        // --- 6. Boucle Principale du Jeu ---
-        while (!joueur.estMort() && donjon.getSalleActuelleIndex() < 10) {
-            Salle salleActuelle = donjon.getNextSalle();
-            donjon.setSalleActuelle(salleActuelle);
-            ihm.afficherDescriptionSalle(salleActuelle);
-
-            boolean enCombat = false;
-            boolean ennemisPresents = !salleActuelle.estNettoye();
-
-            // Menu de la salle
-            while (!joueur.estMort() && !enCombat) {
-                ihm.afficherMenuSalle(ennemisPresents);
-                int choixSalle = 0;
-
-
-                while( choixSalle<1 || choixSalle >5 ) {
-                    choixSalle=ihm.saisirChoix();
+                while(choixAvant!=1 && choixAvant!=2 ) {
+                    ihm.afficherMenuAvantDonjon();
+                    choixAvant=ihm.saisirChoix();
                 }
 
-                switch (choixSalle) {
+
+                switch (choixAvant) {
                     case 1:
-                        if (ennemisPresents) {
-                            // Le joueur CHOISIT d'attaquer - déclenche le combat
-                            ihm.afficherAvertissement("Vous déclenchez le combat en attaquant les ennemis !");
-                            enCombat = true;
-                        } else {
-                            // Avancer vers la salle suivante
-                            donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
-                            ihm.afficherInfo("Vous avancez vers la salle suivante...");
-                            break;
-                        }
-                        break;
-                    case 2:
-                        // Ramasser un objet
-                        gererLoot(joueur, salleActuelle);
-                        break;
-                    case 3:
-                        // Afficher inventaire
+                        // Afficher l'inventaire et statistiques
                         ihm.afficherInventaire(joueur.getInventaire());
-                        gererInventaire(joueur);
-                        break;
-                    case 4:
-                        // Voir statistiques
                         ihm.afficherStatistiques(joueur);
                         break;
-                    case 5:
-                        // Quitter
-                        ihm.afficherMessage("Vous quittez le donjon...");
-                        return;
+                    case 2:
+                        // Se rendre dans le donjon
+                        entrerDonjon = true;
+                        ihm.afficherSucces("Vous entrez dans le donjon...");
+                        break;
                     default:
                         ihm.afficherErreur("Choix invalide !");
                 }
+            }
 
-                // Si on a avancé de salle, sortir de la boucle
-                if (choixSalle == 1 && !ennemisPresents) {
+            //Génération du Donjon
+            Donjon donjon = new Donjon(new ArrayList<>(), themeFactory);
+            donjon.genererDonjon(themeFactory);
+            ihm.afficherSucces("Donjon généré ! 10 salles vous attendent.");
+
+            //Boucle Principale du Jeu
+            boolean abandon = false;
+            while (!joueur.estMort() && donjon.getSalleActuelleIndex() < 10) {
+                Salle salleActuelle = donjon.getNextSalle();
+                donjon.setSalleActuelle(salleActuelle);
+                ihm.afficherDescriptionSalle(salleActuelle);
+
+                boolean enCombat = false;
+                boolean ennemisPresents = !salleActuelle.estNettoye();
+
+                // Menu de la salle
+                while (!joueur.estMort() && !enCombat) {
+                    ihm.afficherMenuSalle(ennemisPresents);
+                    int choixSalle = 0;
+
+
+                    while( choixSalle<1 || choixSalle >5 ) {
+                        choixSalle=ihm.saisirChoix();
+                    }
+
+                    switch (choixSalle) {
+                        case 1:
+                            if (ennemisPresents) {
+                                // Attaquer les ennemis
+                                ihm.afficherAvertissement("Vous déclenchez le combat en attaquant les ennemis !");
+                                enCombat = true;
+                            } else {
+                                // Avancer vers la salle suivante
+                                donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
+                                ihm.afficherInfo("Vous avancez vers la salle suivante...");
+                                break;
+                            }
+                            break;
+                        case 2:
+                            // Ramasser un objet
+                            gererLoot(joueur, salleActuelle);
+                            break;
+                        case 3:
+                            // Afficher inventaire
+                            ihm.afficherInventaire(joueur.getInventaire());
+                            gererInventaire(joueur);
+                            break;
+                        case 4:
+                            // Voir statistiques
+                            ihm.afficherStatistiques(joueur);
+                            break;
+                        case 5:
+                            // Quitter
+                            ihm.afficherMessage("Vous quittez le donjon...");
+                            abandon = true;
+                            break; 
+                        default:
+                            ihm.afficherErreur("Choix invalide !");
+                    }
+
+                    // Si on a avancé de salle ou abandonné, sortir de la boucle
+                    if (abandon || (choixSalle == 1 && !ennemisPresents)) {
+                        break;
+                    }
+                }
+                
+                if (abandon) {
                     break;
                 }
+
+                //Gestion du Combat
+                if (enCombat) {
+                    boolean combatTermine = gererCombat(joueur, salleActuelle);
+
+                    if (!combatTermine) {
+                        ihm.afficherErreur("GAME OVER - Vous êtes mort...");
+                        break; // Sort du jeu, retourne au menu principal
+                    }
+
+                    ihm.afficherSucces("Vous avez vaincu tous les ennemis de cette salle !");
+
+                    // Avancer automatiquement après avoir vaincu tous les ennemis
+                    if (donjon.getSalleActuelleIndex() < 9) {
+                        donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
+                        ihm.afficherInfo("Vous pouvez maintenant avancer...");
+                    }
+                }
+            }
+            
+            if (abandon) {
+                 continue; // Retour au menu principal
             }
 
-            // --- Gestion du Combat (déclenché par le joueur) ---
-            if (enCombat) {
-                boolean combatTermine = gererCombat(joueur, salleActuelle);
-
-                if (!combatTermine) {
-                    ihm.afficherErreur("GAME OVER - Vous êtes mort...");
-                    return;
-                }
-
-                ihm.afficherSucces("Vous avez vaincu tous les ennemis de cette salle !");
-
-                // Avancer automatiquement après avoir vaincu tous les ennemis
-                if (donjon.getSalleActuelleIndex() < 9) {
-                    donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
-                    ihm.afficherInfo("Vous pouvez maintenant avancer...");
-                }
+            if (!joueur.estMort()) {
+                ihm.afficherSucces("VICTOIRE ! Vous avez terminé le donjon !");
             }
+            
+            // Demander si le joueur veut rejouer directement ou retourner au menu
+            ihm.afficherMessage("\nAppuyez sur Entrée pour retourner au menu principal...");
+            ihm.saisirChaine();
         }
-
-        if (!joueur.estMort()) {
-            ihm.afficherSucces("VICTOIRE ! Vous avez terminé le donjon !");
-        }
-
     }
 
     /**
@@ -324,8 +338,6 @@ public class Controleur {
             ihm.afficherMessage("Vous n'avez aucun équipement à porter.");
             return;
         }
-
-
 
         int choix = -1;
 
