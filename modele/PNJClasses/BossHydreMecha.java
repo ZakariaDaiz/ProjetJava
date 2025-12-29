@@ -20,7 +20,7 @@ public class BossHydreMecha extends PNJ{
         super.strategy = new AttaquePhysique("Coups de poing hydrauliques");
         strategy2 = new AttaqueMagique("Tirs de miniguns");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Noyau d'energie", "Amat d'energie lui permettant d'utiliser ses differentes attaques", "main", "arme", 15));
+        equiper(new Equipement("Noyau d'energie", "Amat d'energie lui permettant d'utiliser ses differentes attaques", "main",  15));
     }
     public String attaquer(Personnage cible) {
         StrategyAttaque strat;

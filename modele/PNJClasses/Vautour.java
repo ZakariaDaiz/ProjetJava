@@ -17,7 +17,7 @@ public class Vautour extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Attaque en piqué");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Serres acerees", "Des griffes tranchantes comme des rasoirs", "main", "arme", 10));
+        equiper(new Equipement("Serres acerees", "Des griffes tranchantes comme des rasoirs", "main",  10));
     }
 
     public char getChar(){

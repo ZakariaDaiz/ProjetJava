@@ -22,7 +22,7 @@ public class BossDragon extends PNJ{
         super.strategy = new AttaquePhysique("Griffure du brasier");
         strategy2 = new AttaqueMagique("Souffle de feu");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Coeur enflammé du dragon", "Puissance volcanique venant des tréfonds de volcans lointains", "main", "arme", 20));
+        equiper( new Equipement("Coeur enflammé du dragon", "Puissance volcanique venant des tréfonds de volcans lointains", "main",  20));
 
     }
     public String attaquer(Personnage cible) {

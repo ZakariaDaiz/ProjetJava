@@ -15,7 +15,7 @@ public class RatZombie extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Morsure infectieuse");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Dents pointues", "Des dents zombifiées porteuses de maladies", "main", "arme", 10));
+        equiper(new Equipement("Dents pointues", "Des dents zombifiées porteuses de maladies", "main", 10));
     }
 
     public char getChar(){

@@ -16,9 +16,9 @@ public class Archer extends Joueur {
                 0,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
-        Equipement armePrincipale = new Equipement("Arc basique", "Un arc de débutant", "main", "arme", 15);
-        Equipement armurePrincipale = new Equipement("Cotte de mailles","Une cotte de mailles pas très protectif","corps", "armure",6);
-        Equipement bottes = new Equipement("Bottes légères", "Pour courir vite", "pieds", "armure", 2);
+        Equipement armePrincipale = new Equipement("Arc basique", "Un arc de débutant", "main", 15);
+        Equipement armurePrincipale = new Equipement("Cotte de mailles","Une cotte de mailles pas très protectif","corps", 6);
+        Equipement bottes = new Equipement("Bottes légères", "Pour courir vite", "pieds",  2);
 
         equiper(armePrincipale);
         equiper(armurePrincipale);

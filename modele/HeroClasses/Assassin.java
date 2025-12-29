@@ -16,9 +16,9 @@ public class Assassin extends Joueur {
                 0,          // Intelligence
                 new AttaqueFurtive() // Coup de Dague
         );
-        Equipement startingEquipement = new Equipement("dague émoussé", "une dague abimée par le temps", "main", "arme", 20);
-        Equipement armureCuir = new Equipement("Armure de cuir", "Légère et silencieuse", "corps", "armure", 4);
-        Equipement cape = new Equipement("Cape de l'ombre", "Permet de se fondre dans la nuit", "dos", "armure", 2);
+        Equipement startingEquipement = new Equipement("dague émoussé", "une dague abimée par le temps", "main",  20);
+        Equipement armureCuir = new Equipement("Armure de cuir", "Légère et silencieuse", "corps",  4);
+        Equipement cape = new Equipement("Cape de l'ombre", "Permet de se fondre dans la nuit", "dos",  2);
 
         equiper(startingEquipement);
         equiper(armureCuir);

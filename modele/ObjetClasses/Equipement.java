@@ -4,13 +4,11 @@ import modele.Personnage;
 
 public class Equipement extends Objet {
     private String typeSlot;
-    private String typeEquipement;
     private int stat;
 
-    public Equipement(String nom, String description, String typeSlot, String typeEquipement, int stat) {
+    public Equipement(String nom, String description, String typeSlot, int stat) {
         super(nom, description);
         this.typeSlot = typeSlot;
-        this.typeEquipement = typeEquipement;
         this.stat = stat;
     }
 

@@ -16,10 +16,10 @@ public class Barbare extends Joueur {
                 5,   // Intelligence
                 new AttaquePhysique()
         );
-        Equipement startingEquipement = new Equipement("Hache ebrechée", "Une hache ayant vu maintes batailles", "main", "arme", 30);
-        Equipement armurePrincipale = new Equipement("Armure de fer","Une armure de fer très protectif","corps", "armure",10);
-        Equipement casque = new Equipement("Casque à cornes", "Un casque effrayant", "tete", "armure", 5);
-        Equipement bottes = new Equipement("Bottes de cuir", "Des bottes de cuir", "pieds", "armure", 5);
+        Equipement startingEquipement = new Equipement("Hache ebrechée", "Une hache ayant vu maintes batailles", "main",  30);
+        Equipement armurePrincipale = new Equipement("Armure de fer","Une armure de fer très protectif","corps", 10);
+        Equipement casque = new Equipement("Casque à cornes", "Un casque effrayant", "tete",  5);
+        Equipement bottes = new Equipement("Bottes de cuir", "Des bottes de cuir", "pieds",  5);
 
         equiper(startingEquipement);
         equiper(armurePrincipale);

@@ -18,7 +18,7 @@ public class Gobelin extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueFurtive("Coup de dague");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Dagues", "Des dagues rouillées et ebrechées", "main", "arme", 10));
+        equiper( new Equipement("Dagues", "Des dagues rouillées et ebrechées", "main",  10));
         }
 
     public char getChar(){

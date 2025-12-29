@@ -17,8 +17,8 @@ public class Sorcier extends Joueur {
 
                 new AttaqueMagique() // Sort de feu
         );
-        Equipement startingEquipement = new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", "arme", 30);
-        Equipement chapeau = new Equipement("Chapeau pointu", "Un chapeau de sorcier classique", "tete", "armure", 2);
+        Equipement startingEquipement = new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", 30);
+        Equipement chapeau = new Equipement("Chapeau pointu", "Un chapeau de sorcier classique", "tete",  2);
 
         equiper(startingEquipement);
         equiper(chapeau);

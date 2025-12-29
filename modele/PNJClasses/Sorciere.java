@@ -18,7 +18,7 @@ public class Sorciere extends PNJ {
         super.intelligence = 10;
         super.strategy = new AttaqueDistante("Lancer de sort");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Baguette sombre", "Une baguette emanant une noirceur rare", "main", "arme", 10));
+        equiper( new Equipement("Baguette sombre", "Une baguette emanant une noirceur rare", "main",  10));
     }
 
     public char getChar(){

@@ -16,7 +16,7 @@ public class SorciereVaudou extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Attaque Ouija");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Table Ouija", "Un outile permettant de jeter des malédictions", "main", "arme", 10));
+        equiper( new Equipement("Table Ouija", "Un outile permettant de jeter des malédictions", "main",  10));
     }
 
     public char getChar(){ return 'S'; }

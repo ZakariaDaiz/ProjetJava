@@ -20,7 +20,7 @@ public class BossZombie extends PNJ{
         super.strategy = new AttaquePhysique("Morsure nécrotique");
         strategy2 = new AttaqueMagique("Cri d'épouvante");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Griffes putrides", "Ongles décomposés suintant un poison mortel", "main", "arme", 15));
+        equiper(new Equipement("Griffes putrides", "Ongles décomposés suintant un poison mortel", "main",  15));
     }
     public String attaquer(Personnage cible) {
         StrategyAttaque strat;

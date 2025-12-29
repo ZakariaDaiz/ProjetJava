@@ -8,28 +8,28 @@ public class ObjetMedievalFactory implements ObjetFactory {
         int random = (int) (Math.random() * 18);
         switch(random){
             case 0:
-                return new Equipement("Epée", "Une épée medievale", "main", "arme", 10);
+                return new Equipement("Epée", "Une épée medievale", "main",  10);
             case 1:
-                return new Equipement("Hache", "Une hache medieval", "main", "arme", 15);
+                return new Equipement("Hache", "Une hache medieval", "main",  15);
             case 2:
-                return new Equipement("Arc", "Un arc medieval", "main", "arme", 20);
+                return new Equipement("Arc", "Un arc medieval", "main",  20);
             case 3:
-                return new Equipement("Baguette", "Une baguette magique", "main", "arme", 10);
+                return new Equipement("Baguette", "Une baguette magique", "main",  10);
             case 4:
-                return new Equipement("Dagues", "Des dagues acérées", "main", "arme", 10);
+                return new Equipement("Dagues", "Des dagues acérées", "main",  10);
             case 5:
-                return new Equipement("Pieges", "Des pieges à ours", "bras", "arme", 10);
+                return new Equipement("Pieges", "Des pieges à ours", "bras",  10);
 
             case 6:
-                return new Equipement("Casque", "Une casque medieval", "tete", "armure", 5);
+                return new Equipement("Casque", "Une casque medieval", "tete",  5);
             case 7:
-                return new Equipement("Armure", "Une armure medievale", "corps", "armure", 15);
+                return new Equipement("Armure", "Une armure medievale", "corps",  15);
             case 8:
-                return new Equipement("Bottes", "Des bottes medievales", "pieds", "armure", 10);
+                return new Equipement("Bottes", "Des bottes medievales", "pieds",  10);
             case 9:
-                return new Equipement("Jambieres", "Des jambieres medievales", "jambes", "armure", 10);
+                return new Equipement("Jambieres", "Des jambieres medievales", "jambes", 10);
             case 10:
-                return new Equipement("Bouclier", "Un bouclier en métal", "bras", "armure", 10);
+                return new Equipement("Bouclier", "Un bouclier en métal", "bras",  10);
 
 
             case 11:

@@ -15,7 +15,7 @@ public class RatEnrage extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Morsure de rage");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Dents pointues", "Des dents jaunies porteuses de maladies", "main", "arme", 10));
+        equiper( new Equipement("Dents pointues", "Des dents jaunies porteuses de maladies", "main",  10));
     }
 
     public char getChar(){

@@ -15,7 +15,7 @@ public class ZombieMutile extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Griffure infectieuse");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Ongles", "Des ongles porteurs du virus zombie", "main", "arme", 10));
+        equiper(new Equipement("Ongles", "Des ongles porteurs du virus zombie", "main",  10));
     }
 
     public char getChar(){

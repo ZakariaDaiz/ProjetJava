@@ -17,7 +17,7 @@ public class RobotSentinelle extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tirs de lasers");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Pistolaser V1", "Pistolet laser de securite standard", "main", "arme", 20));
+        equiper(new Equipement("Pistolaser V1", "Pistolet laser de securite standard", "main", 20));
     }
 
     public char getChar(){
