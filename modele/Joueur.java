@@ -36,11 +36,6 @@ public class Joueur extends Personnage {
         return (constitution + dexterite) /4;
     }
 
-    public void equiper(Equipement eq) {
-        // Mettre l'objet dans le slot
-        equipementPorte.put(eq.getTypeSlot(), eq);
-    }
-
     public Map<Objet, Integer> getInventaire() {
         return inventaire;
     }

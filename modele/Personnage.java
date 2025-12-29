@@ -5,6 +5,7 @@ import modele.StrategyAttack.StrategyAttaque;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class Personnage {
 
@@ -43,6 +44,25 @@ public abstract class Personnage {
 
     public char getChar(){
         return '@';
+    }
+
+    public void equiper(Equipement eq) {
+        // Mettre l'objet dans le slot
+        if(!Objects.equals(eq.getTypeSlot(), "main")) {
+            if(!equipementPorte.containsKey(eq.getTypeSlot())) {
+                equipementPorte.put(eq.getTypeSlot(), eq);
+                constitution+=eq.getBonus();
+            }
+            else {
+                constitution-=equipementPorte.get(eq.getTypeSlot()).getBonus();
+                equipementPorte.put(eq.getTypeSlot(), eq);
+                constitution+=eq.getBonus();
+            }
+        }
+        else {
+            equipementPorte.put(eq.getTypeSlot(), eq);
+        }
+
     }
 
     public String attaquer(Personnage cible) {
@@ -128,6 +148,8 @@ public abstract class Personnage {
 
         return message;
     }
+
+
 
     
     public String getEffetsActifs() {

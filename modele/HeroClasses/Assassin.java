@@ -20,9 +20,9 @@ public class Assassin extends Joueur {
         Equipement armureCuir = new Equipement("Armure de cuir", "Légère et silencieuse", "corps", "armure", 4);
         Equipement cape = new Equipement("Cape de l'ombre", "Permet de se fondre dans la nuit", "dos", "armure", 2);
 
-        equipementPorte.put("main", startingEquipement);
-        equipementPorte.put("corps", armureCuir);
-        equipementPorte.put("dos", cape);
+        equiper(startingEquipement);
+        equiper(armureCuir);
+        equiper(cape);
 
         inventaire.put(startingEquipement, 1);
         inventaire.put(armureCuir, 1);

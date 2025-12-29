@@ -20,9 +20,9 @@ public class Archer extends Joueur {
         Equipement armurePrincipale = new Equipement("Cotte de mailles","Une cotte de mailles pas très protectif","corps", "armure",6);
         Equipement bottes = new Equipement("Bottes légères", "Pour courir vite", "pieds", "armure", 2);
 
-        equipementPorte.put("main", armePrincipale);
-        equipementPorte.put("corps", armurePrincipale);
-        equipementPorte.put("pieds", bottes);
+        equiper(armePrincipale);
+        equiper(armurePrincipale);
+        equiper(bottes);
 
         inventaire.put(armePrincipale, 1);
         inventaire.put(armurePrincipale, 1);

@@ -9,7 +9,7 @@ public class Barbare extends Joueur {
     public Barbare(String nom) {
         super(
                 nom,
-                220, // PV
+                2200, // PV
                 20,  // Force
                 10,  // Dextérité
                 15,  // Constitution
@@ -21,10 +21,10 @@ public class Barbare extends Joueur {
         Equipement casque = new Equipement("Casque à cornes", "Un casque effrayant", "tete", "armure", 5);
         Equipement bottes = new Equipement("Bottes de cuir", "Des bottes de cuir", "pieds", "armure", 5);
 
-        equipementPorte.put("main", startingEquipement);
-        equipementPorte.put("corps", armurePrincipale);
-        equipementPorte.put("tete", casque);
-        equipementPorte.put("pieds", bottes);
+        equiper(startingEquipement);
+        equiper(armurePrincipale);
+        equiper(casque);
+        equiper(bottes);
 
         inventaire.put(startingEquipement, 1);
         inventaire.put(armurePrincipale, 1);

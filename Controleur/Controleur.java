@@ -344,8 +344,11 @@ public class Controleur {
         while (choix < 0 || choix > equipements.size()) {
             ihm.afficherMessage("Équipements disponibles :");
             for (int i = 0; i < equipements.size(); i++) {
-                Equipement eq = equipements.get(i);
-                ihm.afficherMessage((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
+                if(!joueur.getEquipementPorte().containsValue(equipements.get(i))) {
+                    Equipement eq = equipements.get(i);
+                    ihm.afficherMessage((i + 1) + ". " + eq.getNom() + " (Slot: " + eq.getTypeSlot() + ", Bonus: +" + eq.getBonus() + ")");
+                }
+
             }
             choix = ihm.saisirChoix();
         }
