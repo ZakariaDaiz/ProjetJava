@@ -23,7 +23,7 @@ public class ChevalierErrant extends PNJ {
     }
 
     public char getChar(){
-        return 'C';
+        return 'E';
     }
 }
 
