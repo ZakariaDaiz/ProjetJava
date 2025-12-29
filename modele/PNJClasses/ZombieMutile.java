@@ -4,21 +4,21 @@ import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 import java.util.HashMap;
 
-public class RatEnrage extends PNJ{
-    public RatEnrage() {
-        super.nom = "RatEnrage";
+public class ZombieMutile extends PNJ{
+    public ZombieMutile() {
+        super.nom = "Zombie Mutilé";
         super.pv = 120;
         super.pvMax = 120;
         super.force = 15;
         super.dexterite = 8;
         super.constitution = 12;
         super.intelligence = 0;
-        super.strategy = new AttaquePhysique("Morsure de rage");
+        super.strategy = new AttaquePhysique("Griffure infectieuse");
         super.equipementPorte = new HashMap<>();
-        equipementPorte.put("main", new Equipement("Dents pointues", "Des dents jaunies porteuses de maladies", "main", "arme", 10));
+        equipementPorte.put("main", new Equipement("Ongles", "Des ongles porteurs du virus zombie", "main", "arme", 10));
     }
 
     public char getChar(){
-        return 'r';
+        return 'Z';
     }
 }

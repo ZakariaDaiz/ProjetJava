@@ -407,8 +407,6 @@ public class Controleur {
                 ihm.afficherAvertissement(effetsExpires);
             }
 
-            // Les ennemis ripostent
-            // Les ennemis ripostent
             if (combatProvoque && !salle.estNettoye()) {
                 ihm.afficherAvertissement("\n⚔ Les ennemis ripostent !");
 
