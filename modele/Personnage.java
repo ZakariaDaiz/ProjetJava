@@ -1,5 +1,6 @@
 package modele;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.StrategyAttaque;
 
@@ -18,8 +19,9 @@ public abstract class Personnage {
     protected int constitution;
     protected int intelligence;
     protected StrategyAttaque strategy;
+    protected StrategyAttaque startingStrategy;
     protected Map<String, Equipement> equipementPorte;
-
+    protected Arme arme;
     protected int toursForce = 0;
     protected int toursResistance = 0;
     protected int toursDexterite = 0;
@@ -39,6 +41,7 @@ public abstract class Personnage {
         this.constitution = constitution;
         this.intelligence = intelligence;
         this.strategy = strategy;
+        this.startingStrategy = strategy;
         this.equipementPorte = new HashMap<>();
     }
 
@@ -61,14 +64,24 @@ public abstract class Personnage {
         }
         else {
             equipementPorte.put(eq.getTypeSlot(), eq);
+            arme = (Arme) eq;
+            strategy = ((Arme) eq).getStrategyAttaque();
         }
 
     }
+
 
     public String attaquer(Personnage cible) {
         int degats = strategy.calculerDegats(this, cible);
         cible.subirDegats(degats);
         return nom + " utilise " + strategy.getNomAttaque()
+                + " et inflige " + degats + " dégâts à " + cible.getNom();
+    }
+
+    public String attaquerStartingStrategy(Personnage cible) {
+        int degats = startingStrategy.calculerDegats(this, cible);
+        cible.subirDegats(degats);
+        return nom + " utilise " + startingStrategy.getNomAttaque()
                 + " et inflige " + degats + " dégâts à " + cible.getNom();
     }
 
@@ -150,8 +163,10 @@ public abstract class Personnage {
     }
 
 
+    public Arme getArme() {
+        return arme;
+    }
 
-    
     public String getEffetsActifs() {
         String effets = "";
 
@@ -215,6 +230,14 @@ public abstract class Personnage {
 
     public int getToursBoostForce() {
         return toursForce;
+    }
+
+    public StrategyAttaque getStartingStrategy() {
+        return startingStrategy;
+    }
+
+    public StrategyAttaque getStrategy() {
+        return strategy;
     }
 
     public int getToursResistance() {

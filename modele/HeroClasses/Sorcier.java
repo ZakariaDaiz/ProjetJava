@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueMagique;
 
@@ -17,7 +18,7 @@ public class Sorcier extends Joueur {
 
                 new AttaqueMagique() // Sort de feu
         );
-        Equipement startingEquipement = new Equipement("Baton en bouleau", "une baguette fragile en bouleau", "main", 30);
+        Equipement startingEquipement = new Arme("Baton en bouleau", "une baguette fragile en bouleau", "main", 30, strategy);
         Equipement chapeau = new Equipement("Chapeau pointu", "Un chapeau de sorcier classique", "tete",  2);
 
         equiper(startingEquipement);

@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.ObjetClasses.ObjetMedievalFactory;
 import modele.StrategyAttack.AttaqueFurtive;
@@ -18,7 +19,7 @@ public class Gobelin extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueFurtive("Coup de dague");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("Dagues", "Des dagues rouillées et ebrechées", "main",  10));
+        equiper( new Arme("Dagues", "Des dagues rouillées et ebrechées", "main",  10, strategy));
         }
 
     public char getChar(){

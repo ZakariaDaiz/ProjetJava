@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class ZombieMutile extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Griffure infectieuse");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Ongles", "Des ongles porteurs du virus zombie", "main",  10));
+        equiper(new Arme("Ongles", "Des ongles porteurs du virus zombie", "main",  10, strategy));
     }
 
     public char getChar(){

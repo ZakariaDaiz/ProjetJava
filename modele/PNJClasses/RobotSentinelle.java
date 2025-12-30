@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
 import modele.StrategyAttack.AttaqueFurtive;
@@ -17,7 +18,7 @@ public class RobotSentinelle extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tirs de lasers");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Pistolaser V1", "Pistolet laser de securite standard", "main", 20));
+        equiper(new Arme("Pistolaser V1", "Pistolet laser de securite standard", "main", 20, strategy));
     }
 
     public char getChar(){

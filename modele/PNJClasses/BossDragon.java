@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.Personnage;
 import modele.StrategyAttack.AttaqueMagique;
@@ -22,7 +23,7 @@ public class BossDragon extends PNJ{
         super.strategy = new AttaquePhysique("Griffure du brasier");
         strategy2 = new AttaqueMagique("Souffle de feu");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("Coeur enflammé du dragon", "Puissance volcanique venant des tréfonds de volcans lointains", "main",  20));
+        equiper( new Arme("Coeur enflammé du dragon", "Puissance volcanique venant des tréfonds de volcans lointains", "main",  20, strategy)); //A MODIFIERRRRRR
 
     }
     public String attaquer(Personnage cible) {

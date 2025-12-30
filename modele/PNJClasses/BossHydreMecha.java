@@ -1,4 +1,5 @@
 package modele.PNJClasses;
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.Personnage;
 import modele.StrategyAttack.AttaqueMagique;
@@ -20,7 +21,7 @@ public class BossHydreMecha extends PNJ{
         super.strategy = new AttaquePhysique("Coups de poing hydrauliques");
         strategy2 = new AttaqueMagique("Tirs de miniguns");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Noyau d'energie", "Amat d'energie lui permettant d'utiliser ses differentes attaques", "main",  15));
+        equiper(new Arme("Noyau d'energie", "Amat d'energie lui permettant d'utiliser ses differentes attaques", "main",  15, strategy)); //A MODIFIERRRRRR
     }
     public String attaquer(Personnage cible) {
         StrategyAttaque strat;

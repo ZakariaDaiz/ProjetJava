@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
 
@@ -17,7 +18,7 @@ public class DroneCombat extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tir de missile");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("Lance-missile tactique", "Un module lance-missile compact", "main",  10));
+        equiper( new Arme("Lance-missile tactique", "Un module lance-missile compact", "main",  10, strategy));
     }
 
     public char getChar(){

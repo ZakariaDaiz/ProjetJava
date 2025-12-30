@@ -3,6 +3,7 @@ package Controleur;
 import modele.*;
 import modele.AmbientClasses.*;
 import modele.HeroClasses.HeroFactory;
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Objet;
 import modele.ObjetClasses.Equipement;
 import modele.PNJClasses.PNJ;
@@ -11,6 +12,7 @@ import Ihm.Ihm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * La classe Controleur gère le déroulement des tours et de l'avancement dans les donjons.
@@ -356,6 +358,11 @@ public class Controleur {
         Equipement eq = equipements.get(choix - 1);
         joueur.equiper(eq);
         ihm.afficherSucces("Vous avez équipé : " + eq.getNom());
+
+        if(joueur.getArme().isLegendary()) {
+            ihm.afficherAvertissement(joueur.LegendaryPickUp());
+        }
+
     }
 
     /**
@@ -459,8 +466,28 @@ public class Controleur {
 
         PNJ cible = ennemisVivants.get(choix - 1);
         int pvAvant = cible.getPv();
-
         String resultat = joueur.attaquer(cible);
+
+        if(joueur.getArme().isLegendary()) {
+            choix = 0;
+            while (choix!= 1 && choix != 2) {
+                ihm.afficherMessage("Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?");
+                ihm.afficherMessage("1 - " + joueur.getStartingStrategy().getNomAttaque());
+                ihm.afficherMessage("2 - " + joueur.getStrategy().getNomAttaque());
+                choix = ihm.saisirChoix();
+            }
+
+            switch (choix) {
+                case 1:
+                    resultat = joueur.attaquerStartingStrategy(cible);
+                    break;
+                case 2:
+                    resultat =  joueur.attaquer(cible);
+            }
+
+        }
+
+
 
         // Affichage précis de l'évolution
         ihm.afficherMessage(resultat);

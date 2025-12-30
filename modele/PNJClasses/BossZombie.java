@@ -1,4 +1,5 @@
 package modele.PNJClasses;
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.Personnage;
 import modele.StrategyAttack.AttaqueMagique;
@@ -20,7 +21,7 @@ public class BossZombie extends PNJ{
         super.strategy = new AttaquePhysique("Morsure nécrotique");
         strategy2 = new AttaqueMagique("Cri d'épouvante");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Griffes putrides", "Ongles décomposés suintant un poison mortel", "main",  15));
+        equiper(new Arme("Griffes putrides", "Ongles décomposés suintant un poison mortel", "main",  15, strategy)); //A MODIFIERRRRRR
     }
     public String attaquer(Personnage cible) {
         StrategyAttaque strat;

@@ -1,6 +1,7 @@
 package modele.HeroClasses;
 
 import modele.Joueur;
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
 
@@ -16,7 +17,7 @@ public class Archer extends Joueur {
                 0,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
-        Equipement armePrincipale = new Equipement("Arc basique", "Un arc de débutant", "main", 15);
+        Equipement armePrincipale = new Arme("Arc basique", "Un arc de débutant", "main", 15, strategy);
         Equipement armurePrincipale = new Equipement("Cotte de mailles","Une cotte de mailles pas très protectif","corps", 6);
         Equipement bottes = new Equipement("Bottes légères", "Pour courir vite", "pieds",  2);
 

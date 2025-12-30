@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 
@@ -16,7 +17,7 @@ public class CorbeauMutant extends PNJ{
             super.intelligence = 0;
             super.strategy = new AttaquePhysique("Attaque en piqué");
             super.equipementPorte = new HashMap<>();
-            equiper( new Equipement("Bec acéré", "Un bec piquant commant une lance", "main",  10));
+            equiper( new Arme("Bec acéré", "Un bec piquant commant une lance", "main",  10, strategy));
         }
 
         public char getChar(){

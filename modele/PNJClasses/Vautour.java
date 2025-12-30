@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.ObjetClasses.ObjetMedievalFactory;
 import modele.StrategyAttack.AttaquePhysique;
@@ -17,7 +18,7 @@ public class Vautour extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Attaque en piqué");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Serres acerees", "Des griffes tranchantes comme des rasoirs", "main",  10));
+        equiper(new Arme("Serres acerees", "Des griffes tranchantes comme des rasoirs", "main",  10, strategy));
     }
 
     public char getChar(){

@@ -2,7 +2,6 @@ package modele;
 
 import java.util.*;
 
-import modele.ObjetClasses.Equipement;
 import modele.ObjetClasses.Objet;
 import modele.StrategyAttack.StrategyAttaque;
 
@@ -11,8 +10,8 @@ public class Joueur extends Personnage {
     protected Map<Objet, Integer> inventaire;
 
     public Joueur(String nom, int pvMax, int force, int dexterite,
-                  int constitution, int intelligence, StrategyAttaque strategy) {
-        super(nom, pvMax, force, dexterite, constitution, intelligence, strategy);
+                  int constitution, int intelligence, StrategyAttaque attaque) {
+        super(nom, pvMax, force, dexterite, constitution, intelligence, attaque);
         this.inventaire = new HashMap<>();
     }
 
@@ -38,5 +37,9 @@ public class Joueur extends Personnage {
 
     public Map<Objet, Integer> getInventaire() {
         return inventaire;
+    }
+
+    public String LegendaryPickUp() {
+        return arme.getPickupMessage();
     }
 }

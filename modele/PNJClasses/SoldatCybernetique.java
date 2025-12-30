@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
 
@@ -16,7 +17,7 @@ public class SoldatCybernetique extends PNJ{
         super.intelligence = 0;
         super.strategy = new AttaqueDistante("Tirs bioniques");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("Fusil a plasma", "Une arme a energie", "main",  15));
+        equiper( new Arme("Fusil a plasma", "Une arme a energie", "main",  15, strategy));
         equiper( new Equipement("Visiere tactique", "Casque avec ATH integre", "tete",  5));
         equiper( new Equipement("Bottes gravifiques", "Bottes lourdes stabilisees", "pieds",  5));
         equiper( new Equipement("Exo-jambieres", "Renforcement mecanique des jambes", "jambes",  5));

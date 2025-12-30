@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.ObjetClasses.ObjetMedievalFactory;
 import modele.StrategyAttack.AttaqueDistante;
@@ -18,7 +19,7 @@ public class Sorciere extends PNJ {
         super.intelligence = 10;
         super.strategy = new AttaqueDistante("Lancer de sort");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("Baguette sombre", "Une baguette emanant une noirceur rare", "main",  10));
+        equiper( new Arme("Baguette sombre", "Une baguette emanant une noirceur rare", "main",  10, strategy));
     }
 
     public char getChar(){

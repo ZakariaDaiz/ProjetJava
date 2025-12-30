@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaquePhysique;
 import modele.ObjetClasses.ObjetMedievalFactory;
@@ -18,7 +19,7 @@ public class ChevalierErrant extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Coup d'épée");
         super.equipementPorte = new HashMap<>();
-        equiper( new Equipement("epee", "épée tranchante","main",15));
+        equiper( new Arme("epee", "épée tranchante","main",15, strategy));
         equiper( new Equipement("bouclier","bouclier en métal","corps",15));
     }
 

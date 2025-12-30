@@ -1,5 +1,6 @@
 package modele.PNJClasses;
 
+import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.Personnage;
 import modele.StrategyAttack.AttaquePhysique;
@@ -18,7 +19,7 @@ public class Alien extends PNJ {
         super.intelligence = 0;
         super.strategy = new AttaquePhysique("Griffure acide");
         super.equipementPorte = new HashMap<>();
-        equiper(new Equipement("Griffes Toxiques", "Des griffes empoisonnées", "main",  15));
+        equiper(new Arme("Griffes Toxiques", "Des griffes empoisonnées", "main",  15, strategy));
     }
 
     public char getChar(){
