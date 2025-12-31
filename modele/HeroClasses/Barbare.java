@@ -1,11 +1,14 @@
 package modele.HeroClasses;
 
+
+import java.util.Arrays;
 import modele.Joueur;
 import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueMagique;
 import modele.StrategyAttack.AttaquePhysique;
 import modele.StrategyAttack.StrategyAttaque;
+import modele.CompetencePassive.*;
 
 public class Barbare extends Joueur {
 
@@ -20,6 +23,11 @@ public class Barbare extends Joueur {
                 new AttaquePhysique()
         );
 
+        ajouterCompetence(new Regeneration());
+        ajouterCompetence(new PeauDure());
+        ajouterCompetence(new ContreAttaque());
+        ajouterCompetence(new CriDeGuerre());
+
         Equipement startingEquipement = new Arme("Hache ebrechée", "Une hache ayant vu maintes batailles", "main",  30, strategy);
         Equipement armurePrincipale = new Equipement("Armure de fer","Une armure de fer très protectif","corps", 10);
         Equipement casque = new Equipement("Casque à cornes", "Un casque effrayant", "tete",  5);
@@ -31,11 +39,11 @@ public class Barbare extends Joueur {
         equiper(bottes);
 
         StrategyAttaque Legend = new AttaqueMagique("Flammes des Ténèbres");
-        Equipement legendary = new Arme("\u001B[33m"+"Grimoire Antique" + "\u001B[0m", "Un grimoire a l'aura menaçante", "main",  30, Legend, "Le grimoire vous envoute, vous obtenez les pouvoirs du sorcier maléfique en plus de votre classe actuelle.");
+        Equipement legendary = new Arme("\u001B[33m"+"Grimoire Antique  " + "\u001B[0m", "Un grimoire a l'aura menaçante", "main",  300, Legend, "Le grimoire vous envoute, vous obtenez les pouvoirs du sorcier maléfique en plus de votre classe actuelle.", Arrays.asList(new BouclierMagique()));
         inventaire.put(startingEquipement, 1);
         inventaire.put(armurePrincipale, 1);
         inventaire.put(casque, 1);
-        inventaire.put(bottes, 1);
+        inventaire.put(bottes, 1);  
         inventaire.put(legendary, 1);
     }
 }

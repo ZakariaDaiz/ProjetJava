@@ -4,6 +4,7 @@ import modele.Joueur;
 import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueDistante;
+import modele.CompetencePassive.*;
 
 public class Archer extends Joueur {
 
@@ -17,6 +18,11 @@ public class Archer extends Joueur {
                 0,          // Intelligence
                 new AttaqueDistante() // Tir a l'arc
         );
+        
+        ajouterCompetence(new Regeneration());
+        ajouterCompetence(new PeauDure());
+        ajouterCompetence(new Adrenaline());
+
         Equipement armePrincipale = new Arme("Arc basique", "Un arc de débutant", "main", 15, strategy);
         Equipement armurePrincipale = new Equipement("Cotte de mailles","Une cotte de mailles pas très protectif","corps", 6);
         Equipement bottes = new Equipement("Bottes légères", "Pour courir vite", "pieds",  2);

@@ -2,12 +2,16 @@ package modele;
 
 import java.util.*;
 
+import modele.CompetencePassive.EvenementJeu;
+import modele.CompetencePassive.ICompetencePassive;
+import modele.CompetencePassive.TypeEvenement;
 import modele.ObjetClasses.Objet;
 import modele.StrategyAttack.StrategyAttaque;
 
 public class Joueur extends Personnage {
 
     protected Map<Objet, Integer> inventaire;
+
 
     public Joueur(String nom, int pvMax, int force, int dexterite,
                   int constitution, int intelligence, StrategyAttaque attaque) {
@@ -22,6 +26,7 @@ public class Joueur extends Personnage {
     public void utiliserObjet(Objet obj) {
         if (inventaire.containsKey(obj)) {
             obj.utiliser(this);
+            notifierCompetences(new EvenementJeu(TypeEvenement.UTILISATION_OBJET, this, this, 0, obj));
             int quantite = inventaire.get(obj) - 1;
             if (quantite <= 0) {
                 inventaire.remove(obj);

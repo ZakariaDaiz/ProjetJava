@@ -4,6 +4,7 @@ import modele.Joueur;
 import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.AttaqueMagique;
+import modele.CompetencePassive.*;
 
 public class Sorcier extends Joueur {
 
@@ -18,6 +19,10 @@ public class Sorcier extends Joueur {
 
                 new AttaqueMagique() // Sort de feu
         );
+        
+        ajouterCompetence(new Regeneration());
+        ajouterCompetence(new BouclierMagique());
+
         Equipement startingEquipement = new Arme("Baton en bouleau", "une baguette fragile en bouleau", "main", 30, strategy);
         Equipement chapeau = new Equipement("Chapeau pointu", "Un chapeau de sorcier classique", "tete",  2);
 

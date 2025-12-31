@@ -8,6 +8,7 @@ import modele.ObjetClasses.Objet;
 import modele.ObjetClasses.Equipement;
 import modele.PNJClasses.PNJ;
 import modele.ThemeClasses.*;
+import modele.CompetencePassive.*;
 import Ihm.Ihm;
 
 import java.util.ArrayList;
@@ -63,11 +64,11 @@ public class Controleur {
             ihm.afficherSucces("Personnage créé : " + joueur.getNom() + " (" + classeChoisie + ")");
 
             //Choix du Thème
-            ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
+            ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste\n3. Horror Fantasy");
             int choixTheme = ihm.saisirChoix();
 
-            while(choixTheme!=1 && choixTheme!=2 ) {
-                ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste");
+            while(choixTheme!=1 && choixTheme!=2 && choixTheme!=3 ) {
+                ihm.afficherMessage("Choix du thème :\n1. Médiéval\n2. Futuriste\n3. Horror Fantasy");
                 choixTheme=ihm.saisirChoix();
             }
 
@@ -75,9 +76,12 @@ public class Controleur {
             if (choixTheme == 1) {
                 themeFactory = new ThemeMedievalFactory();
                 ihm.afficherInfo("Thème médiéval sélectionné !");
-            } else {
+            } else if (choixTheme == 2){
                 themeFactory = new ThemeFuturisteFactory();
                 ihm.afficherInfo("Thème futuriste sélectionné !");
+            }else{
+                themeFactory = new ThemeHorreurFactory();
+                ihm.afficherInfo("Thème horror-fantasy sélectionné !");
             }
 
             //Menu AVANT d'entrer dans le donjon
@@ -371,9 +375,12 @@ public class Controleur {
      * Tous les PNJ attaquent si le joueur a attaqué un des PNJ
      */
     private boolean gererCombat(Joueur joueur, Salle salle) {
+        joueur.notifierCompetences(new EvenementJeu(TypeEvenement.DEBUT_COMBAT, joueur, joueur, 0, null));
         boolean combatProvoque = false;
 
         while (!joueur.estMort() && !salle.estNettoye()) {
+            joueur.notifierCompetences(new EvenementJeu(TypeEvenement.DEBUT_TOUR, joueur, joueur, 0, null));
+
             ihm.afficherEtatCombat(joueur, salle.getEnnemies());
 
             // Afficher les effets actifs
@@ -427,6 +434,7 @@ public class Controleur {
                         ihm.afficherMessage("   " + ihm.afficherBarreVie(joueur.getPv(), joueur.getPvMax()));
 
                         if (joueur.estMort()) {
+                            joueur.notifierCompetences(new EvenementJeu(TypeEvenement.FIN_COMBAT, joueur, joueur, 0, null));
                             return false;
                         }
                     }
@@ -434,6 +442,7 @@ public class Controleur {
             }
         }
 
+        joueur.notifierCompetences(new EvenementJeu(TypeEvenement.FIN_COMBAT, joueur, joueur, 0, null));
         return !joueur.estMort();
     }
 
@@ -466,9 +475,10 @@ public class Controleur {
 
         PNJ cible = ennemisVivants.get(choix - 1);
         int pvAvant = cible.getPv();
-        String resultat = joueur.attaquer(cible);
+        boolean isLegendary = (joueur.getArme() != null && joueur.getArme().isLegendary());
 
-        if(joueur.getArme().isLegendary()) {
+        String resultat = "";
+        if(isLegendary) {
             choix = 0;
             while (choix!= 1 && choix != 2) {
                 ihm.afficherMessage("Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?");
@@ -485,6 +495,8 @@ public class Controleur {
                     resultat =  joueur.attaquer(cible);
             }
 
+        } else {
+            resultat = joueur.attaquer(cible);
         }
 
 

@@ -3,8 +3,13 @@ package modele;
 import modele.ObjetClasses.Arme;
 import modele.ObjetClasses.Equipement;
 import modele.StrategyAttack.StrategyAttaque;
+import modele.CompetencePassive.EvenementJeu;
+import modele.CompetencePassive.ICompetencePassive;
+import modele.CompetencePassive.TypeEvenement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -25,6 +30,9 @@ public abstract class Personnage {
     protected int toursForce = 0;
     protected int toursResistance = 0;
     protected int toursDexterite = 0;
+
+    protected List<ICompetencePassive> competences = new ArrayList<>();
+
 
     public Personnage() {
         equipementPorte = new HashMap<>();
@@ -62,39 +70,76 @@ public abstract class Personnage {
                 constitution+=eq.getBonus();
             }
         }
+        // On gere les armes, mais aussi les Passives des armes legendaries
         else {
+            
+            // On enleve les passives de l'ancienne arme
+            if(this.arme != null && this.arme.getCompetences() != null) {
+                competences.removeAll(this.arme.getCompetences());
+            }
             equipementPorte.put(eq.getTypeSlot(), eq);
             arme = (Arme) eq;
             strategy = ((Arme) eq).getStrategyAttaque();
-        }
 
+            // On ajoute les passives de la nouvelle arme
+            if (arme.getCompetences() != null) {
+                this.competences.addAll(arme.getCompetences());
+            }
+        }
     }
 
+    public void ajouterCompetence(ICompetencePassive competence) {
+        this.competences.add(competence);
+    }
+
+    public void notifierCompetences(EvenementJeu event) {
+        for (ICompetencePassive competence : competences) {
+            competence.reagir(this, event);
+        }
+    }
 
     public String attaquer(Personnage cible) {
         int degats = strategy.calculerDegats(this, cible);
-        cible.subirDegats(degats);
+        
+        EvenementJeu event = new EvenementJeu(TypeEvenement.ATTAQUE_EFFECTUEE, this, cible, degats, null);
+        notifierCompetences(event);
+
+        int degatsFinaux = event.getValeur();
+        
+        cible.subirDegats(degatsFinaux, this);
+        
         return nom + " utilise " + strategy.getNomAttaque()
-                + " et inflige " + degats + " dégâts à " + cible.getNom();
+                + " et inflige " + degatsFinaux + " dégâts à " + cible.getNom();
     }
 
     public String attaquerStartingStrategy(Personnage cible) {
         int degats = startingStrategy.calculerDegats(this, cible);
-        cible.subirDegats(degats);
+        
+        EvenementJeu event = new EvenementJeu(TypeEvenement.ATTAQUE_EFFECTUEE, this, cible, degats, null);
+        notifierCompetences(event);
+
+        int degatsFinaux = event.getValeur();
+
+        cible.subirDegats(degatsFinaux, this);
         return nom + " utilise " + startingStrategy.getNomAttaque()
-                + " et inflige " + degats + " dégâts à " + cible.getNom();
+                + " et inflige " + degatsFinaux + " dégâts à " + cible.getNom();
     }
 
 
     public void subirDegats(int degats) {
-        int degatsFinaux = degats;
-
-        // Appliquer la réduction si résistance active
+        subirDegats(degats, null);
+    }
+    
+    public void subirDegats(int degats, Personnage attaquant) {
+        EvenementJeu event = new EvenementJeu(TypeEvenement.ATTAQUE_SUBIE, attaquant, this, degats, null);
+        notifierCompetences(event);
+        
+        int degatsApresPassif = event.getValeur();
         if (toursResistance > 0) {
-            degatsFinaux = (int) (degats * 0.8); 
+            degatsApresPassif = (int) (degatsApresPassif * 0.8); 
         }
 
-        pv -= degatsFinaux;
+        pv -= degatsApresPassif;
         if (pv < 0) {
             pv = 0;
         }
@@ -179,6 +224,13 @@ public abstract class Personnage {
         if (toursDexterite > 0) {
             effets += "Dèxterotè (" + toursDexterite + " tour(s)) ";
         }
+        
+        if (!competences.isEmpty()) {
+             effets += " | Passifs: ";
+             for (ICompetencePassive c : competences) {
+                 effets += c.getNom() + " ";
+             }
+        }
 
         return effets.isEmpty() ? "Aucun effet actif" : effets;
     }
@@ -226,6 +278,10 @@ public abstract class Personnage {
 
     public void setForce(int i) {
         this.force = i;
+    }
+    
+    public void setConstitution(int i) {
+        this.constitution = i;
     }
 
     public int getToursBoostForce() {
