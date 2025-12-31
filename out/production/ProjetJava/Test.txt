@@ -1,0 +1,517 @@
+
+C:\Users\zakar\.jdks\openjdk-23.0.2\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.4\lib\idea_rt.jar=62268:C:\Program Files\JetBrains\IntelliJ IDEA 2024.2.4\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\zakar\Desktop\Projet\out\production\Projet Main.Main
+
+==================================================
+             BIENVENUE DANS LE DONJON
+==================================================
+1. Nouvelle partie
+2. Quitter
+==================================================
+
+Votre choix : 1
+
+>> Entrez le nom de votre héros :
+
+Votre saisie : Tets
+
+==================================================
+              CRÉATION DE PERSONNAGE
+==================================================
+Choisissez votre classe :
+1 - Barbare - Puissant guerrier au combat rapproché
+   (PV: 2200, Force: 20, Dextérité: 10, Constitution: 35, Intelligence: 5)
+2 - Sorcier - Maître de la magie
+   (PV: 160, Force: 5, Dextérité: 8, Constitution: 12, Intelligence: 40)
+3 - Archer - Expert du tir à distance
+   (PV: 100, Force: 20, Dextérité: 23, Constitution: 20, Intelligence: 0)
+4 - Assassin - Spécialiste des attaques furtives
+   (PV: 110, Force: 50, Dextérité: 30, Constitution: 16, Intelligence: 0)
+==================================================
+
+Votre choix : 1
+
+✓ Personnage créé : Tets (barbare)
+
+>> Choix du thème :
+1. Médiéval
+2. Futuriste
+3. Horror Fantasy
+
+Votre choix : 1
+
+ℹ Thème médiéval sélectionné !
+
+==================================================
+         AVANT D'ENTRER DANS LE DONJON
+==================================================
+1. Afficher l'inventaire du personnage
+2. Se rendre dans le donjon pour se battre
+==================================================
+
+Votre choix : 2
+
+✓ Vous entrez dans le donjon...
+
+✓ Donjon généré ! 10 salles vous attendent.
+
+==================================================
+=== Salle numero 0 ===
+==================================================
+
+┌──────────────┐
+│  #  #  S  #  │
+│  #  #  O  O  │
+│  #  #  #  #  │
+│  #  #  @  #  │
+└──────────────┘
+
+Légende : @ = Vous | Lettres = Ennemis | O = Objets | B = Boss | # = Vide
+
+👹 Ennemis :
+   - Sorciere [████████████████████] 100/100 PV
+
+✦ Objets au sol :
+   - Epée : Une épée medievale
+   - Pieges : Des pieges à ours
+
+--------------------------------------------------
+Que voulez-vous faire ?
+1. Attaquer les ennemis (déclencher le combat)
+2. Ramasser un objet
+3. Afficher l'inventaire
+4. Voir les statistiques
+5. Quitter le jeu
+--------------------------------------------------
+
+Votre choix : 3
+
+==================================================
+              INVENTAIRE
+==================================================
+1. Armure de fer [Équipement] x1 - Une armure de fer très protectif
+2. Grimoire Antique   [Équipement] x1 - Un grimoire a l'aura menaçante
+3. Hache ebrechée [Équipement] x1 - Une hache ayant vu maintes batailles
+4. Casque à cornes [Équipement] x1 - Un casque effrayant
+5. Bottes de cuir [Équipement] x1 - Des bottes de cuir
+==================================================
+
+>> Que voulez-vous faire ?
+1. Consommer un objet
+2. Équiper un objet
+3. Retour
+
+Votre choix : 2
+
+>> Équipements disponibles :
+
+>> 2. Grimoire Antique   (Slot: main, Bonus: +300)
+
+Votre choix : 2
+
+✓ Vous avez équipé : Grimoire Antique  
+
+⚠ Le grimoire vous envoute, vous obtenez les pouvoirs du sorcier maléfique en plus de votre classe actuelle.
+
+--------------------------------------------------
+Que voulez-vous faire ?
+1. Attaquer les ennemis (déclencher le combat)
+2. Ramasser un objet
+3. Afficher l'inventaire
+4. Voir les statistiques
+5. Quitter le jeu
+--------------------------------------------------
+
+Votre choix : 1
+
+⚠ Vous déclenchez le combat en attaquant les ennemis !
+Tets lance un Cri de Guerre ! (Force +0, Const +2)
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. Sorciere [████████████████████] 100/100 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. Sorciere (100 PV)
+
+Votre choix : 1
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 2
+
+>> Tets utilise Flammes des Ténèbres et inflige 304 dégâts à Sorciere
+
+>>    État de l'ennemi : 100 PV → 0 PV
+
+>>    [░░░░░░░░░░░░░░░░░░░░] 0/100 PV
+
+✓ 💀 Sorciere a été vaincu.e !
+L'effet du Cri de Guerre se dissipe.
+
+✓ Vous avez vaincu tous les ennemis de cette salle !
+
+ℹ Vous pouvez maintenant avancer...
+
+==================================================
+=== Salle numero 2 ===
+==================================================
+
+┌──────────────┐
+│  #  O  #  #  │
+│  #  #  #  E  │
+│  #  S  r  #  │
+│  O  #  @  #  │
+└──────────────┘
+
+Légende : @ = Vous | Lettres = Ennemis | O = Objets | B = Boss | # = Vide
+
+👹 Ennemis :
+   - RatEnrage [████████████████████] 120/120 PV
+   - ChevalierErrant [████████████████████] 120/120 PV
+   - Sorciere [████████████████████] 100/100 PV
+
+✦ Objets au sol :
+   - Arc du Dragon : Un arc forgé dans une écaille de dragon
+   - Potion de force : Augmente la force de +5 pour 3 tours
+
+--------------------------------------------------
+Que voulez-vous faire ?
+1. Attaquer les ennemis (déclencher le combat)
+2. Ramasser un objet
+3. Afficher l'inventaire
+4. Voir les statistiques
+5. Quitter le jeu
+--------------------------------------------------
+
+Votre choix : 1
+
+⚠ Vous déclenchez le combat en attaquant les ennemis !
+Tets lance un Cri de Guerre ! (Force +0, Const +2)
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. RatEnrage [████████████████████] 120/120 PV
+   2. ChevalierErrant [████████████████████] 120/120 PV
+   3. Sorciere [████████████████████] 100/100 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. RatEnrage (120 PV)
+
+>> 2. ChevalierErrant (120 PV)
+
+>> 3. Sorciere (100 PV)
+
+Votre choix : 1
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 2
+
+>> Tets utilise Flammes des Ténèbres et inflige 299 dégâts à RatEnrage
+
+>>    État de l'ennemi : 120 PV → 0 PV
+
+>>    [░░░░░░░░░░░░░░░░░░░░] 0/120 PV
+
+✓ 💀 RatEnrage a été vaincu.e !
+
+⚠ 
+⚔ Les ennemis ripostent !
+Tets subit moins de dégâts grâce à Peau Dure ! (Réduction: 1)
+Tets riposte avec Contre-Attaque !
+Tets active Bouclier Magique ! Les dégâts sont annulés pour ce tour.
+
+>> ChevalierErrant utilise Coup d'épée et inflige 12 dégâts à Tets
+
+>>    Votre état : 2200 PV → 2200 PV
+
+>>    [████████████████████] 2200/2200 PV
+Tets subit moins de dégâts grâce à Peau Dure ! (Réduction: 0)
+Tets riposte avec Contre-Attaque !
+Tets est protégé par Bouclier Magique ! (0 dégâts)
+
+>> Sorciere utilise Lancer de sort et inflige 1 dégâts à Tets
+
+>>    Votre état : 2200 PV → 2200 PV
+
+>>    [████████████████████] 2200/2200 PV
+Tets récupère 0 PV grâce à Régénération.
+Le Bouclier Magique de Tets se dissipe.
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. ChevalierErrant [███████████████████░] 118/120 PV
+   2. Sorciere [████████████████████] 100/100 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. ChevalierErrant (118 PV)
+
+>> 2. Sorciere (100 PV)
+
+Votre choix : 2
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 1
+
+>> Tets utilise Attaque au corps à corps et inflige 319 dégâts à Sorciere
+
+>>    État de l'ennemi : 100 PV → 0 PV
+
+>>    [░░░░░░░░░░░░░░░░░░░░] 0/100 PV
+
+✓ 💀 Sorciere a été vaincu.e !
+
+⚠ 
+⚔ Les ennemis ripostent !
+Tets subit moins de dégâts grâce à Peau Dure ! (Réduction: 1)
+Tets riposte avec Contre-Attaque !
+
+>> ChevalierErrant utilise Coup d'épée et inflige 12 dégâts à Tets
+
+>>    Votre état : 2200 PV → 2189 PV
+
+>>    [███████████████████░] 2189/2200 PV
+Tets récupère 11 PV grâce à Régénération.
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. ChevalierErrant [███████████████████░] 116/120 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. ChevalierErrant (116 PV)
+
+Votre choix : 1
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 1
+
+>> Tets utilise Attaque au corps à corps et inflige 307 dégâts à ChevalierErrant
+
+>>    État de l'ennemi : 116 PV → 0 PV
+
+>>    [░░░░░░░░░░░░░░░░░░░░] 0/120 PV
+
+✓ 💀 ChevalierErrant a été vaincu.e !
+L'effet du Cri de Guerre se dissipe.
+
+✓ Vous avez vaincu tous les ennemis de cette salle !
+
+ℹ Vous pouvez maintenant avancer...
+
+==================================================
+=== Salle numero 4 ===
+==================================================
+
+┌──────────────┐
+│  #  #  #  #  │
+│  r  S  #  #  │
+│  O  #  V  #  │
+│  #  #  @  O  │
+└──────────────┘
+
+Légende : @ = Vous | Lettres = Ennemis | O = Objets | B = Boss | # = Vide
+
+👹 Ennemis :
+   - RatEnrage [████████████████████] 120/120 PV
+   - Sorciere [████████████████████] 100/100 PV
+   - Vautour [████████████████████] 120/120 PV
+
+✦ Objets au sol :
+   - Bouclier : Un bouclier en métal
+   - Potion de force : Augmente la force de +5 pour 3 tours
+
+--------------------------------------------------
+Que voulez-vous faire ?
+1. Attaquer les ennemis (déclencher le combat)
+2. Ramasser un objet
+3. Afficher l'inventaire
+4. Voir les statistiques
+5. Quitter le jeu
+--------------------------------------------------
+
+Votre choix : 1
+
+⚠ Vous déclenchez le combat en attaquant les ennemis !
+Tets lance un Cri de Guerre ! (Force +0, Const +2)
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. RatEnrage [████████████████████] 120/120 PV
+   2. Sorciere [████████████████████] 100/100 PV
+   3. Vautour [████████████████████] 120/120 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. RatEnrage (120 PV)
+
+>> 2. Sorciere (100 PV)
+
+>> 3. Vautour (120 PV)
+
+Votre choix : 2
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 2
+
+>> Tets utilise Flammes des Ténèbres et inflige 304 dégâts à Sorciere
+
+>>    État de l'ennemi : 100 PV → 0 PV
+
+>>    [░░░░░░░░░░░░░░░░░░░░] 0/100 PV
+
+✓ 💀 Sorciere a été vaincu.e !
+
+⚠ 
+⚔ Les ennemis ripostent !
+Tets subit moins de dégâts grâce à Peau Dure ! (Réduction: 1)
+Tets riposte avec Contre-Attaque !
+Tets active Bouclier Magique ! Les dégâts sont annulés pour ce tour.
+
+>> RatEnrage utilise Morsure de rage et inflige 7 dégâts à Tets
+
+>>    Votre état : 2200 PV → 2200 PV
+
+>>    [████████████████████] 2200/2200 PV
+Tets subit moins de dégâts grâce à Peau Dure ! (Réduction: 1)
+Tets riposte avec Contre-Attaque !
+Tets est protégé par Bouclier Magique ! (0 dégâts)
+
+>> Vautour utilise Attaque en piqué et inflige 7 dégâts à Tets
+
+>>    Votre état : 2200 PV → 2200 PV
+
+>>    [████████████████████] 2200/2200 PV
+Tets récupère 0 PV grâce à Régénération.
+Le Bouclier Magique de Tets se dissipe.
+
+╔════════════════════════════════════════════════╗
+║                ⚔ COMBAT EN COURS ⚔             ║
+╚════════════════════════════════════════════════╝
+
+🗡 Vous : Tets
+   [████████████████████] 2200/2200 PV
+
+👹 Ennemis hostiles :
+   1. RatEnrage [███████████████████░] 119/120 PV
+   2. Vautour [███████████████████░] 119/120 PV
+
+--------------------------------------------------
+⚔ ACTIONS DE COMBAT :
+1. Attaquer un ennemi
+2. Utiliser un objet (potion, aliment)
+--------------------------------------------------
+
+Votre choix : 1
+
+>> Quel ennemi attaquer ?
+
+>> 1. RatEnrage (119 PV)
+
+>> 2. Vautour (119 PV)
+
+Votre choix : 2
+
+>> Votre arme Légendaire se manifeste ! De quelle manière voulez vous attaquer ?
+
+>> 1 - Attaque au corps à corps
+
+>> 2 - Flammes des Ténèbres
+
+Votre choix : 

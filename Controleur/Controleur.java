@@ -194,7 +194,7 @@ public class Controleur {
 
                     // Avancer automatiquement après avoir vaincu tous les ennemis
                     if (donjon.getSalleActuelleIndex() < 9) {
-                        donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
+                        donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex());
                         ihm.afficherInfo("Vous pouvez maintenant avancer...");
                     }
                 }
