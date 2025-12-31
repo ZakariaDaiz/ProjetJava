@@ -83,12 +83,22 @@ public abstract class Personnage {
 
             // On ajoute les passives de la nouvelle arme
             if (arme.getCompetences() != null) {
-                this.competences.addAll(arme.getCompetences());
+
+                // Boucle pour eviter de dupliquer les passives
+                for (ICompetencePassive c : arme.getCompetences()) {
+                    ajouterCompetence(c);
+                }
             }
         }
     }
-
+    
+    // On ajoute une compétence passif si elle n'est pas deja presente
     public void ajouterCompetence(ICompetencePassive competence) {
+        for (ICompetencePassive c : competences) {
+            if (c.getClass().equals(competence.getClass())) {
+                return;
+            }
+        }
         this.competences.add(competence);
     }
 
@@ -106,10 +116,10 @@ public abstract class Personnage {
 
         int degatsFinaux = event.getValeur();
         
-        cible.subirDegats(degatsFinaux, this);
+        int degatsReels = cible.subirDegats(degatsFinaux, this);
         
         return nom + " utilise " + strategy.getNomAttaque()
-                + " et inflige " + degatsFinaux + " dégâts à " + cible.getNom();
+                + " et inflige " + degatsReels + " dégâts à " + cible.getNom();
     }
 
     public String attaquerStartingStrategy(Personnage cible) {
@@ -120,17 +130,17 @@ public abstract class Personnage {
 
         int degatsFinaux = event.getValeur();
 
-        cible.subirDegats(degatsFinaux, this);
+        int degatsReels = cible.subirDegats(degatsFinaux, this);
         return nom + " utilise " + startingStrategy.getNomAttaque()
-                + " et inflige " + degatsFinaux + " dégâts à " + cible.getNom();
+                + " et inflige " + degatsReels + " dégâts à " + cible.getNom();
     }
 
 
-    public void subirDegats(int degats) {
-        subirDegats(degats, null);
+    public int subirDegats(int degats) {
+        return subirDegats(degats, null);
     }
     
-    public void subirDegats(int degats, Personnage attaquant) {
+    public int subirDegats(int degats, Personnage attaquant) {
         EvenementJeu event = new EvenementJeu(TypeEvenement.ATTAQUE_SUBIE, attaquant, this, degats, null);
         notifierCompetences(event);
         
@@ -143,6 +153,7 @@ public abstract class Personnage {
         if (pv < 0) {
             pv = 0;
         }
+        return degatsApresPassif;
     }
 
     public int seDefendre() {

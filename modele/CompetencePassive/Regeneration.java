@@ -37,6 +37,6 @@ public class Regeneration implements ICompetencePassive {
 
     @Override
     public String getDescription() {
-        return "Restaure 5% des PV max au début du tour.";
+        return "Restaure 2-5% des PV max au début du tour.";
     }
 }

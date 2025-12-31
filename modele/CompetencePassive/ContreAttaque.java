@@ -10,7 +10,7 @@ public class ContreAttaque implements ICompetencePassive {
             if (attaquant != null && attaquant != perso) {
                 int degatsRecus = event.getValeur();
                 int degatsRenvoi = (int)(degatsRecus * 0.2);
-                System.out.println(perso.getNom() + " riposte avec Contre-Attaque !");
+                System.out.println(perso.getNom() + " riposte avec Contre-Attaque et inflige " + degatsRenvoi + " dégâts !");
                 attaquant.subirDegats(degatsRenvoi);
             }
         }

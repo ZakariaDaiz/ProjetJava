@@ -144,7 +144,6 @@ public class Controleur {
                                 enCombat = true;
                             } else {
                                 // Avancer vers la salle suivante
-                                donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex() + 1);
                                 ihm.afficherInfo("Vous avancez vers la salle suivante...");
                                 break;
                             }
@@ -194,7 +193,6 @@ public class Controleur {
 
                     // Avancer automatiquement après avoir vaincu tous les ennemis
                     if (donjon.getSalleActuelleIndex() < 9) {
-                        donjon.setSalleActuelleIndex(donjon.getSalleActuelleIndex());
                         ihm.afficherInfo("Vous pouvez maintenant avancer...");
                     }
                 }

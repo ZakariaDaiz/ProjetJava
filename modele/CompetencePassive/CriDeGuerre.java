@@ -12,8 +12,8 @@ public class CriDeGuerre implements ICompetencePassive {
              int f = perso.getForce();
              int c = perso.getConstitution();
              
-             bonusForce = (int)(f + f * 0.03);
-             bonusConst = (int)(c + c* 0.08);
+             bonusForce = (int)(f * 0.05);
+             bonusConst = (int)(c * 0.1);
              
              perso.setForce(f + bonusForce);
              perso.setConstitution(c + bonusConst);
