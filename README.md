@@ -230,6 +230,61 @@ for (Personnage ennemi : ennemis) {
 - Flexibilité : si nécessaire, on peut changer l'attaque d'un personnage dynamiquement (exemple : équipement spécial).
 
 
+## 4. Observer (Observateur)
+
+### *Problème initial*
+
+Le jeu propose plusieurs compétences passives (Régénération, Contre-attaque, Peau dure...) qui doivent se déclencher automatiquement selon diverses situations de jeu (début de tour, attaque subie, attaque effectuée, utilisation d'objet).
+Intégrer ces vérifications directement dans les méthodes du personnage (ex: `attaquer()`) rendrait le code illisible et difficile à maintenir à chaque ajout de nouvelle compétence.
+
+### *Solution*
+
+Le pattern Observateur permet aux compétences passives de "s'abonner" aux événements du personnage. Le personnage (Sujet) notifie simplement ses abonnés lorsqu'une action se produit, sans savoir quelles compétences spécifiques sont actives.
+Nous utilisons un **modèle Push** via la classe `EvenementJeu` qui stocke toutes les informations nécessaires et les transmet aux observateurs, leur évitant d'avoir à rappeler le sujet pour obtenir des détails.
+
+### *Structure*
+
+- **Sujet (Observable)** : La classe `Personnage` (et donc `Joueur`) maintient une liste de compétences (`competences`) et notifie les changements via la méthode `notifierCompetences(EvenementJeu event)`.
+- **Observateur** : L'interface `ICompetencePassive` définit la méthode `reagir(Personnage perso, EvenementJeu event)` que toutes les compétences concrètes implémentent.
+- **L'Événement** : La classe `EvenementJeu` encapsule les détails de l'action (Type d'événement, déclencheur, cible, valeur numérique, objet concerné).
+
+### *Applications*
+
+Lorsqu'une action importante a lieu, un événement est créé et propagé aux compétences passives.
+
+*Exemple de déclenchement dans `Personnage` :*
+```java
+public String attaquer(Personnage cible) {
+    // Calcul des dégâts initiaux
+    int degats = strategy.calculerDegats(this, cible);
+    
+    // Création et notification de l'événement
+    EvenementJeu event = new EvenementJeu(TypeEvenement.ATTAQUE_EFFECTUEE, this, cible, degats, null);
+    notifierCompetences(event); // Les observateurs peuvent modifier 'event' ou déclencher des effets
+
+    // Récupération de la valeur finale potentiellement modifiée
+    int degatsFinaux = event.getValeur();
+    cible.subirDegats(degatsFinaux, this);
+    ...
+}
+```
+
+*Exemple de réaction d'une compétence (`PeauDure`) :*
+```java
+public void reagir(Personnage perso, EvenementJeu event) {
+    if (event.getType() == TypeEvenement.ATTAQUE_SUBIE) {
+        // Réduit les dégâts reçus de 2 points
+        int nouveauxDegats = Math.max(0, event.getValeur() - 2);
+        event.setValeur(nouveauxDegats);
+    }
+}
+```
+
+### *Avantages*
+
+- **Principe ouvert/fermé** : Le personnage n'a pas besoin de connaître les compétences passives ni de les implémenter, et on peut ajouter de nouvelles compétences passives sans modifier une seule ligne de la classe `Personnage`.
+- **Simplification du traitement des événements** : L'objet `EvenementJeu` fournit tout le contexte immédiatement, simplifiant la logique des observateurs.
+
 ## Conclusion
 
 Ces quelques designs patterns vont grandement améliorer la lisibilité et l'extensibilité du code tout en respectant
