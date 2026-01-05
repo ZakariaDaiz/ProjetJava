@@ -15,7 +15,7 @@ public class Barbare extends Joueur {
     public Barbare(String nom) {
         super(
                 nom,
-                220, // PV
+                2200, // PV
                 20,  // Force
                 10,  // Dextérité
                 15,  // Constitution
@@ -38,10 +38,12 @@ public class Barbare extends Joueur {
         equiper(casque);
         equiper(bottes);
 
+        StrategyAttaque Legend = new AttaqueMagique("Flammes des Ténèbres");
+        Equipement legendary = new Arme("\u001B[33m"+"Grimoire Antique  " + "\u001B[0m", "Un grimoire a l'aura menaçante", "main",  300, Legend, "Le grimoire vous envoute, vous obtenez les pouvoirs du sorcier maléfique en plus de votre classe actuelle.", Arrays.asList(new BouclierMagique()));
         inventaire.put(startingEquipement, 1);
         inventaire.put(armurePrincipale, 1);
         inventaire.put(casque, 1);
         inventaire.put(bottes, 1);  
-
+        inventaire.put(legendary, 1);
     }
 }
