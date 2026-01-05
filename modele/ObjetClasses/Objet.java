@@ -21,4 +21,17 @@ public abstract class Objet {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Objet objet = (Objet) obj;
+        return nom.equals(objet.nom) && description.equals(objet.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, description);
+    }
 }
