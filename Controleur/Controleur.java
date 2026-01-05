@@ -506,7 +506,7 @@ public class Controleur {
 
         if (cible.estMort()) {
             ihm.afficherSucces("💀 " + cible.getNom() + " a été vaincu.e !");
-            salle.getEnnemies().remove(cible);
+            salle.getEnnemies().removeIf(PNJ::estMort);
         }
     }
 }

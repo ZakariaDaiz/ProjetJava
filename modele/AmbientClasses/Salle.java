@@ -50,7 +50,15 @@ public class Salle {
     }
 
     public boolean estNettoye() {
-        return ennemies.isEmpty();
+        if (ennemies.isEmpty()) {
+            return true;
+        }
+        for (PNJ pnj : ennemies) {
+            if (!pnj.estMort()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
